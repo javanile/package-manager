@@ -1,8 +1,6 @@
-# Base
+# Package Manager
 
-Knowledge base template for Jekyll. Browse through a [live demo](https://orange-ape.cloudvent.net/).
-
-![Base template screenshot](images/_screenshot.png)
+Knowledge base template for Jekyll. Browse through a [live demo](https://javanile.org/package-manager).
 
 Base was made by [CloudCannon](http://cloudcannon.com/), the Cloud CMS for Jekyll.
 
