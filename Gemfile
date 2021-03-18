@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'jekyll', '3.7.2'
 
 group :jekyll_plugins do
+  gem 'github-pages', '>= 167'
   gem 'jekyll-remote-theme', '~> 0.4.3'
   gem 'jekyll-archives', '2.1.1'
   gem 'jekyll-extract-element', '0.0.7'
