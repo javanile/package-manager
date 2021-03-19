@@ -46,7 +46,6 @@ exclude:
 collections:
   sets:
 
-
 jekyll-archives:
   enabled: ['categories']
 
