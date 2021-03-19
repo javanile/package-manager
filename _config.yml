@@ -5,6 +5,8 @@ title: Base
 
 theme: null
 
+destination: _site
+
 google_analytics_key:
 disqus_shortname:
 newsletter_action:
