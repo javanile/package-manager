@@ -1,6 +1,8 @@
 
 {% if site.logo %}
-	<img src="{{ site.logo }}" alt="{{ site.logo_text }}" />
-{% else %}
+	<img src="{{ site.logo }}" alt="{% if site.logo_text %}{{ site.logo_text }}{% else %}{{ site.title }}{% endif %}" />
+{% elsif site.logo_text %}
 	{{ site.logo_text }}
+{% else %}
+	<img src="/assets/images/logo.png" alt="{{ site.title }}" />
 {% endif %}
