@@ -3,13 +3,6 @@
 
 $primary-color: unquote("{{ site.primary_color }}");
 
-div.cavallo {
-  content: $primary-color;
-  color: #100;
-  background: $primary-color top;
-}
-
-
 @import "variables";
 @import "typography";
 @import "elements";

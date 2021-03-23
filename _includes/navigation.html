@@ -1,7 +1,7 @@
 <a class="nav-toggle" id="open-nav" href="#">&#9776;</a>
 <nav>
 	<a class="editor-link btn" href="cloudcannon:collections/_data/navigation.yml" class="btn" style="padding: 5px;"><strong>&#9998;</strong> Edit navigation</a>
-	{% for link in site.data.navigation %}
+	{% for link in site.navigation %}
 	{% assign class = "" %}
 		{% if link.link == page.url %}
 			{% assign class = class | append: " active" %}
