@@ -32,11 +32,7 @@
             {% include navigation.html %}
         </section>
         {% if page.url == "/" %}
-        <section class="hero_search">
-            <h1>Tutorials</h1>
-            <p>Everything you need to know about running our software.</p>
-            {% include search.html %}
-        </section>
+        {% include hero-search.html %}
         {% endif %}
     </div>
 </header>
