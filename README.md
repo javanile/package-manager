@@ -76,3 +76,8 @@ To add a tutorial/post to a series:
 ### Assets
 
 * https://feathericons.com/?query=box
+
+### Read more
+
+* <https://github.com/mmistakes/jekyll-theme-basically-basic/blob/master/_config.yml>
+* 

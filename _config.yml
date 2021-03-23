@@ -1,6 +1,7 @@
 # ----
 # Site
 
+name:
 title: Base
 url: "https://javanile.org/package-manager/"
 baseurl:
@@ -9,7 +10,7 @@ disqus_shortname:
 newsletter_action:
 
 # Values for the jekyll-seo-tag gem (https://github.com/jekyll/jekyll-seo-tag)
-logo: /siteicon.png
+logo: "https://raw.githubusercontent.com/javanile/package-manager/main/assets/images/logo.png"
 description: Knowledge base template for Jekyll.
 author:
   name:
@@ -19,6 +20,8 @@ social:
   name: Base Template
   links:
     - https://github.com/CloudCannon/base-jekyll-template
+
+primary_color: "#000"
 
 # -----
 # Build
