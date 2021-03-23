@@ -50,12 +50,7 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - LICENCE
-  - vendor
-
-collections:
-  packages:
-    output: true
-    permalink: /package/:name
+  - vendor/*
 
 jekyll-archives:
   enabled: ['categories']

@@ -1,8 +1,6 @@
 <section class="categories">
-
     {% assign categories = site.categories | sort %}
     {% for category in categories %}
-    {{ categories }}
     {% assign name = category[0] %}
     {% assign posts = category[1] %}
     {% assign size = posts | size %}
