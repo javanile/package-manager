@@ -9,7 +9,7 @@ google_analytics_key:
 disqus_shortname:
 newsletter_action:
 
-navigation:
+navigation0:
   - name: Cavallo
     link: /
   - name: Videos

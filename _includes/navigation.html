@@ -3,11 +3,30 @@
 	<a class="editor-link btn" href="cloudcannon:collections/_data/navigation.yml" class="btn" style="padding: 5px;">
 		<strong>&#9998;</strong> Edit navigation
 	</a>
-	{% for link in site.navigation %}
-	{% assign class = "" %}
-		{% if link.link == page.url %}
+	{% if site.navigation %}
+		{% assign navigation = site.navigation %}
+	{% else %}
+		{% assign navigation = "Get Started, Paul, George, Ringo" | split: ", " %}
+	{% endif %}
+
+	{% for item in navigation %}
+		{% if item.link %}
+			{% assign link = item.link %}
+		{% else %}
+			{% assign link = item | slugify %}
+		{% endif %}
+
+		{% if item.name %}
+			{% assign name = item.name %}
+		{% else %}
+			{% assign name = item %}
+		{% endif %}
+
+		{% assign class = "" %}
+		{% if link == page.url %}
 			{% assign class = class | append: " active" %}
 		{% endif %}
-		<a href="{% include relative-src.html src=link.link %}" class="{{ class }}">{{ link.name }}</a>
+
+		<a href="{% include relative-src.html src=link %}" class="{{ class }}">{{ name }}</a>
 	{% endfor %}
 </nav>

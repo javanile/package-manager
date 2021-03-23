@@ -80,4 +80,7 @@ To add a tutorial/post to a series:
 ### Read more
 
 * <https://github.com/mmistakes/jekyll-theme-basically-basic/blob/master/_config.yml>
-* 
+
+### Used by
+
+* https://github.com/javanile/bpkg.github.io/tree/package-manager
