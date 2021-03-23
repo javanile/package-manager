@@ -2,7 +2,7 @@
 # Site
 
 title: Base
-url: "https://orange-ape.cloudvent.net/"
+url: "https://javanile.org/package-manager/"
 baseurl:
 google_analytics_key:
 disqus_shortname:
@@ -37,8 +37,8 @@ plugins:
 exclude:
   - Gemfile
   - Gemfile.lock
-  - README.md
   - LICENCE
+  - vendor
 
 collections:
   sets:
@@ -90,3 +90,5 @@ types:
   - Video
 
 _comments:
+
+theme: null
