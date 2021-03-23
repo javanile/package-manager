@@ -1,7 +1,6 @@
 ---
 date: 2017-01-15
-title: Client editable Jekyll sites
-video_id: _iH8f5alzWA
+title: Client editable COOO
 description: Have non-technical people update Jekyll sites
 categories:
   - deployment1
@@ -10,7 +9,6 @@ resources:
     link: https://github.com/CloudCannon/creative-jekyll-theme/
   - name: CloudCannon
     link: https://cloudcannon.com
-order_number: 1
 ---
 Many people don’t use Jekyll for client projects as non-developers would traditionally have to learn HTML, Markdown and Liquid to update content. In this tutorial, we give non-developers an easy way to update Jekyll sites with [CloudCannon](https://cloudcannon.com).
 

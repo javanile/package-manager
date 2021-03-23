@@ -51,6 +51,7 @@ exclude:
   - Gemfile.lock
   - LICENCE
   - vendor/*
+  - packages/*
 
 jekyll-archives:
   enabled: ['categories']

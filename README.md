@@ -75,7 +75,7 @@ To add a tutorial/post to a series:
 
 ### Assets
 
-* https://feathericons.com/?query=box
+* <https://feathericons.com/?query=box>
 
 ### Read more
 
