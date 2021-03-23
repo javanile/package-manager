@@ -52,7 +52,8 @@ exclude:
   - vendor
 
 collections:
-  sets:
+  staff_members:
+    output: true
 
 jekyll-archives:
   enabled: ['categories']
