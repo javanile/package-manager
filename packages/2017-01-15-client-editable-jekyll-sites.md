@@ -1,18 +1,16 @@
 ---
 date: 2017-01-15
-title: Front matter
-video_id: 42vlM8bvrtk
-description: Use front matter to set variables on your page
+title: Client editable Jekyll sites
+video_id: _iH8f5alzWA
+description: Have non-technical people update Jekyll sites
 categories:
-  - account-settings
+  - deployment1
 resources:
-  - name: "Front matter documentation"
-    link: https://jekyllrb.com/docs/frontmatter/
-  - name: "Source code"
-    link: https://github.com/CloudCannon/bakery-store/tree/frontmatter
-type: Video
-set: getting-started
-order_number: 3
+  - name: Source code
+    link: https://github.com/CloudCannon/creative-jekyll-theme/
+  - name: CloudCannon
+    link: https://cloudcannon.com
+order_number: 1
 ---
 Many people don’t use Jekyll for client projects as non-developers would traditionally have to learn HTML, Markdown and Liquid to update content. In this tutorial, we give non-developers an easy way to update Jekyll sites with [CloudCannon](https://cloudcannon.com).
 

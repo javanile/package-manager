@@ -17,8 +17,9 @@ navigation:
   - name: FAQ
     link: /faq/
 
-# Values for the jekyll-seo-tag gem (https://github.com/jekyll/jekyll-seo-tag)
 logo: "https://raw.githubusercontent.com/javanile/package-manager/main/assets/images/logo.png"
+
+# Values for the jekyll-seo-tag gem (https://github.com/jekyll/jekyll-seo-tag)
 description: Knowledge base template for Jekyll.
 author:
   name:
@@ -52,8 +53,9 @@ exclude:
   - vendor
 
 collections:
-  staff_members:
+  packages:
     output: true
+    permalink: /package/:name
 
 jekyll-archives:
   enabled: ['categories']
