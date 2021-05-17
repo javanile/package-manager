@@ -16,4 +16,5 @@ jobs:
         uses: actions/checkout@v2
       - name: Build
         uses: jerryjvl/jekyll-build-action@v1
-        working-directory: test/remote_theme
+        with:
+          path: test/remote_theme
