@@ -1,6 +1,6 @@
 title: Remote Test
 
-repository: https://github.com/javanile/package-manager.git
+repository: javanile/package-manager
 
 plugins:
   - jekyll-remote-theme
