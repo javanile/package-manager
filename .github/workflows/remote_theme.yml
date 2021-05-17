@@ -13,8 +13,5 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - run: |
-          mv test/remote_theme /tmp/
-          rm -fr ./
-          mv test/remote_theme/* ./
+      - run: mv test/remote_theme /tmp/ && rm -fr ./* && mv test/remote_theme/* ./
       - uses: jerryjvl/jekyll-build-action@v1
