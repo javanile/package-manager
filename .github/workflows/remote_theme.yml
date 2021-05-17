@@ -12,9 +12,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-      - name: Build
-        uses: jerryjvl/jekyll-build-action@v1
-        with:
-          path: test/remote_theme
+      - uses: actions/checkout@v2
+      - run: |
+          mv test/remote_theme /tmp/
+          rm -fr ./
+          mv test/remote_theme/* ./
+      - uses: jerryjvl/jekyll-build-action@v1
