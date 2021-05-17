@@ -2,6 +2,7 @@
 ---
 
 $primary-color: unquote("{{ site.primary_color }}");
+$secondary-color: unquote("{{ site.secondary_color }}");
 
 @import "variables";
 @import "typography";

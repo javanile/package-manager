@@ -1,23 +1,15 @@
-# ----
-# Site
+---
 
-name:
-title: Base
-url: "https://javanile.org/package-manager/"
+name: package-manager
+title: Package Manager
+url: https://javanile.org/package-manager/
 baseurl:
+logo: https://raw.githubusercontent.com/javanile/package-manager/main/assets/images/logo.png
+
 google_analytics_key:
 disqus_shortname:
 newsletter_action:
 
-navigation0:
-  - name: Cavallo
-    link: /
-  - name: Videos
-    link: /videos/
-  - name: FAQ
-    link: /faq/
-
-logo: "https://raw.githubusercontent.com/javanile/package-manager/main/assets/images/logo.png"
 
 # Values for the jekyll-seo-tag gem (https://github.com/jekyll/jekyll-seo-tag)
 description: Knowledge base template for Jekyll.
@@ -31,6 +23,7 @@ social:
     - https://github.com/CloudCannon/base-jekyll-template
 
 primary_color: "#000"
+secondary_color: "#EEE"
 
 # -----
 # Build
