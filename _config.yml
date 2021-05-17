@@ -22,8 +22,8 @@ social:
   links:
     - https://github.com/CloudCannon/base-jekyll-template
 
-primary_color: "#000"
-secondary_color: "#EEE"
+#primary_color: "#000"
+#secondary_color: "#EEE"
 
 # -----
 # Build

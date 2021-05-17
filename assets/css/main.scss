@@ -1,8 +1,8 @@
 ---
 ---
 
-$primary-color: unquote("{{ site.primary_color }}");
-$secondary-color: unquote("{{ site.secondary_color }}");
+$primary-color: unquote("{{ site.primary_color | default: '#000' }}");
+$secondary-color: unquote("{{ site.secondary_color | default: '#EEE' }}");
 
 @import "variables";
 @import "typography";
