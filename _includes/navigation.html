@@ -3,6 +3,13 @@
 	<a class="editor-link btn" href="cloudcannon:collections/_data/navigation.yml" class="btn" style="padding: 5px;">
 		<strong>&#9998;</strong> Edit navigation
 	</a>
+
+	<!--
+	{% for static_file in site.static_files %}
+		{{ static_file.path }}
+	{% endfor %}
+	-->
+
 	{% if site.navigation %}
 		{% assign navigation = site.navigation %}
 	{% else %}
