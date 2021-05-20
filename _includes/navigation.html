@@ -8,6 +8,7 @@
 	{% for static_file in site.static_files %}
 		{{ static_file.path }}
 	{% endfor %}
+	{{ site.github.repository_url }}
 	-->
 
 	{% if site.navigation %}
@@ -19,6 +20,8 @@
 	{% for item in navigation %}
 		{% if item.link %}
 			{% assign link = item.link %}
+		{% elsif item == "Get Started" %}
+			{% assign link = site.github.repository_url %}
 		{% else %}
 			{% assign link = item | slugify %}
 		{% endif %}

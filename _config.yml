@@ -46,8 +46,6 @@ exclude:
   - vendor/*
   - packages/*
 
-jekyll-archives:
-  enabled: ['categories']
 
 defaults:
   -
@@ -112,3 +110,15 @@ footer_links:
     link: https://instagram.com/
     social_icon: Instagram
     new_window: true
+
+collections:
+  categories:
+    output: true
+    permalink: /:collection/:name
+
+jekyll-archives:
+  enabled:
+    - categories
+    - tags
+  permalinks:
+    category: /cat/:name/

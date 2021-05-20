@@ -3,6 +3,7 @@ date: 2017-01-15
 title: Client editable
 description: Have non-technical people update Jekyll sites
 categories:
+  - packages
   - deployment1
 resources:
   - name: Source code
