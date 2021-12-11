@@ -6,10 +6,9 @@ url: https://javanile.org/package-manager/
 baseurl:
 logo: https://raw.githubusercontent.com/javanile/package-manager/main/assets/images/logo.png
 
-google_analytics_key:
 disqus_shortname:
+google_analytics_key:
 newsletter_action:
-
 
 # Values for the jekyll-seo-tag gem (https://github.com/jekyll/jekyll-seo-tag)
 description: Knowledge base template for Jekyll.
