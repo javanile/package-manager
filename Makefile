@@ -1,10 +1,6 @@
 
-
-install:
-	bundle install
+build:
+	@docker-compose build
 
 serve:
-	bundle exec jekyll serve --verbose --trace --incremental
-
-build:
-	bundle exec jekyll build --verbose --trace --incremental
+	@docker-compose up --force-recreate

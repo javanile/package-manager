@@ -1,4 +1,11 @@
 <section class="categories">
+    AA
+
+    {% for category in site.collections %}
+    - {{ category.title }}
+    {% endfor %}
+
+
     {% assign categories = site.categories | sort %}
     {% for category in categories %}
     {% assign name = category[0] %}

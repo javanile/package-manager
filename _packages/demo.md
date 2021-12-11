@@ -1,16 +1,9 @@
 ---
 date: 2017-01-15
-title: Client editable
+title: DEMO
 description: Have non-technical people update Jekyll sites
-categories:
-  - demo1
-  - deployment1
-resources:
-  - name: Source code
-    link: https://github.com/CloudCannon/creative-jekyll-theme/
-  - name: CloudCannon
-    link: https://cloudcannon.com
-type: Docker
+categories: 
+  - docker
 ---
 Many people don’t use Jekyll for client projects as non-developers would traditionally have to learn HTML, Markdown and Liquid to update content. In this tutorial, we give non-developers an easy way to update Jekyll sites with [CloudCannon](https://cloudcannon.com).
 

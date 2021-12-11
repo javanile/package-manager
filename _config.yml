@@ -115,6 +115,9 @@ collections:
   categories:
     output: true
     permalink: /:collection/:name
+  packages:
+    output: true
+    permalink: /:collection/:name
 
 jekyll-archives:
   enabled:
