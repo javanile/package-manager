@@ -76,10 +76,12 @@
 
 	.sidebar {
 		display: none;
-		padding: 0 20px 0 0;
+		padding: 0 0 0 20px;
 		position: absolute;
-    top: 85px;
-		width: 200px;
+    	top: 0;
+		right: 0;
+		width: 300px;
+		border-left: 1px solid #e2e2e2;
 
 		@media #{$mid-point} {
 			display: block;
@@ -116,7 +118,7 @@
 		width: 100%;
 
 		@media #{$mid-point} {
-			margin-left: 230px;
+			margin-right: 320px;
 		}
 	}
 }
