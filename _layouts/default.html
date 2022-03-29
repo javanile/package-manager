@@ -40,12 +40,18 @@
     <div class="wrapper">
         {% if page.url == "/" %}
         {% include categories.html %}
+        {% elsif page.collection == "packages" %}
+        {% include package-page.html %}
+        {% elsif page.collection == "categories" %}
+        {% include category-page.html %}
         {% else %}
         {{ content }}
         {% endif %}
     </div>
 </section>
-
+<div>
+    Type: {{  }}
+</div>
 {% include footer.html %}
 <script>
     $(function() {
