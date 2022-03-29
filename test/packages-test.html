@@ -1,0 +1,11 @@
+---
+layout: test
+---
+
+<pre>Number of packages: {{ site.packages.size }}</pre>
+
+<ul>
+    {% for package in site.packages %}
+    <li>{{ package.title }}</li>
+    {% endfor %}
+</ul>
