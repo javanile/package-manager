@@ -1,0 +1,11 @@
+---
+layout: test
+---
+
+<pre>Number of categories: {{ site.categories.size }}</pre>
+
+<ul>
+    {% for category in site.categories %}
+    <li>{{ category.title }}</li>
+    {% endfor %}
+</ul>

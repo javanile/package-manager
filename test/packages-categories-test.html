@@ -1,0 +1,19 @@
+---
+layout: test
+---
+
+<ul>
+    {% for package in site.packages %}
+    <li>
+        Package: {{ package.title }}
+        <ul>
+        {% for category in package.categories %}
+            <li>
+                Category: {{ category }}
+                {% assign categories_array = categories_array | push: category | uniq %}
+            </li>
+        {% endfor %}
+        </ul>
+    </li>
+    {% endfor %}
+</ul>

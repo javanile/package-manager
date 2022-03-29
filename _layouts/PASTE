@@ -1,5 +1,0 @@
-    {% for post in site.packages %}
-    {% for category in post.categories %}
-    {% assign categories_array = categories_array | push: category | uniq %}
-    {% endfor %}
-    {% endfor %}
