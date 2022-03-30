@@ -1,3 +1,11 @@
 .align-center {
-  text-align: center;
+  text-align: center !important;
+}
+
+.text-big {
+  font-size: 10em;
+}
+
+.margin-0 {
+  margin: 0 !important;
 }

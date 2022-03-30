@@ -8,7 +8,7 @@ logo: https://raw.githubusercontent.com/javanile/package-manager/main/assets/ima
 
 alert:
   type: info
-  title: Happy News!
+  title: 🎉 Happy News!
   message: The new website is out :-) <a href="https://google.com">Google</a>
 
 disqus_shortname:
