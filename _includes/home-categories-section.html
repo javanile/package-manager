@@ -11,7 +11,7 @@ layout2: default
     {% for category in site.categories %}
     <section class="category">
         <h4 class="align-center">
-            <a href="{{ site.baseurl }}/category/{{ name | slugify }}/">
+            <a href="{{ site.baseurl }}/categories/{{ category.title | slugify }}/">
                 {{ category.title }}
             </a>
         </h4>
@@ -21,7 +21,7 @@ layout2: default
         <ul>
             {% for package in site.packages %}
             <li class="card">
-                <a href="{{ site.baseurl }}{{ tutorial.url }}">
+                <a href="{{ site.baseurl }}{{ package.url }}">
                     {% include package-icon.html icon=package.type %}{{ package.title }}
                 </a>
             </li>
