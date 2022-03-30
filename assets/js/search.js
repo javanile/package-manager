@@ -1,3 +1,7 @@
+---
+layout: none
+---
+
 (function () {
 	function getQueryVariable(variable) {
 		var query = window.location.search.substring(1),
@@ -56,7 +60,7 @@
 	}
 
 	function displaySearchResults(results, query) {
-		var searchResultsEl = document.getElementById("search-results"),
+		var searchResultsEl = document.getElementById("package-list"),
 			searchProcessEl = document.getElementById("search-process");
 
 		if (results.length) {
@@ -66,7 +70,7 @@
 					contentPreview = getPreview(query, item.content, 170),
 					titlePreview = getPreview(query, item.title);
 
-				resultsHTML += "<li><h4><a href='{{ site.baseurl }}" + item.url.trim() + "'>" + titlePreview + "</a></h4><p><small>" + contentPreview + "</small></p></li>";
+				resultsHTML += "<div><h4><a href='{{ site.baseurl }}" + item.url.trim() + "'>" + titlePreview + "</a></h4><p><small>" + contentPreview + "</small></p></div>";
 			});
 
 			searchResultsEl.innerHTML = resultsHTML;
@@ -96,5 +100,7 @@
 		window.index.add(window.data[key]);
 	}
 
-	displaySearchResults(window.index.search(query), query); // Hand the results off to be displayed
+	document.addEventListener("DOMContentLoaded", function() {
+		displaySearchResults(window.index.search(query), query); // Hand the results off to be displayed
+	});
 })();
