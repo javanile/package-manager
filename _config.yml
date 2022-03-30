@@ -6,6 +6,11 @@ url: https://javanile.org/package-manager/
 baseurl:
 logo: https://raw.githubusercontent.com/javanile/package-manager/main/assets/images/logo.png
 
+alert:
+  type: info
+  title: Happy News!
+  message: The new website is out :-) <a href="https://google.com">Google</a>
+
 disqus_shortname:
 google_analytics_key:
 newsletter_action:

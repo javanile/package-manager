@@ -27,16 +27,27 @@
 <body class="{{ page.body_class }}">
 <header>
     <div class="wrapper">
+
         <section class="top-bar">
             <div class="logo"><a href="{{ site.baseurl }}/">{% include logo.html %}</a></div>
             {% include navigation.html %}
         </section>
+
         {% if page.url == "/" %}
         {% include hero-search.html %}
         {% endif %}
     </div>
 </header>
+
+{% if site.alert.message %}
+<div class="alert alert-{{ site.alert.type }}">
+    <strong>{{ site.alert.title }}</strong>
+    {{ site.alert.message }}
+</div>
+{% endif %}
+
 <section class="content">
+
     <div class="wrapper">
         {% if page.url == "/" %}
         {% include home-categories-section.html %}
