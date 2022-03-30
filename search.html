@@ -11,6 +11,7 @@ sitemap: false
 </p>
 
 <script>
+    window.baseurl = "{{ site.baseurl }}";
 	window.data = {
 		{% for package in site.packages %}
 			{% if package.title %}
