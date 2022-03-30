@@ -9,6 +9,7 @@ $secondary-color: unquote("{{ site.secondary_color | default: '#EEE' }}");
 @import "utility";
 @import "elements";
 @import "tutorials";
+@import "package";
 @import "header";
 @import "layout";
 @import "search";
