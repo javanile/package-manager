@@ -77,9 +77,6 @@
 	.sidebar {
 		display: none;
 		padding: 0 0 0 20px;
-		position: absolute;
-    	top: 0;
-		right: 0;
 		width: 300px;
 		border-left: 1px solid #e2e2e2;
 
@@ -115,10 +112,10 @@
 	}
 
 	.tutorial-content {
-		width: 100%;
+		flex: 1 0 auto;
 
 		@media #{$mid-point} {
-			margin-right: 320px;
+			margin-right: 10px;
 		}
 	}
 }
