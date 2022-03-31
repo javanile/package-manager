@@ -50,13 +50,15 @@
 
     <div class="wrapper">
         {% if page.url == "/" %}
-        {% include home-categories-section.html %}
+            {% include home-categories-section.html %}
+        {% elsif page.url == "/404.html" %}
+            {% include error.html %}
         {% elsif page.collection == "packages" %}
-        {% include package-page.html %}
+            {% include package-page.html %}
         {% elsif page.collection == "categories" %}
-        {% include category-page.html %}
+            {% include category-page.html %}
         {% else %}
-        {{ content }}
+            {{ content }}
         {% endif %}
     </div>
 </section>
