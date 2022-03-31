@@ -20,4 +20,5 @@ $secondary-color: unquote("{{ site.secondary_color | default: '#EEE' }}");
 @import "form";
 @import "card";
 @import "alert";
+@import "keyword";
 @import "cloudcannon";
