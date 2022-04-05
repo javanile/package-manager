@@ -116,10 +116,10 @@ footer_links:
     new_window: true
 
 collections:
-  categories:
+  packages:
     output: true
     permalink: /:collection/:name
-  packages:
+  categories:
     output: true
     permalink: /:collection/:name
 
