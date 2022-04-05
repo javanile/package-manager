@@ -1,0 +1,19 @@
+
+
+
+
+{% for package in site.packages %}
+{% assign keywords = keywords | push: package.keywords | uniq %}
+{% assign keywords = keywords | push: package.categories | uniq %}
+{% assign keywords = keywords | push: package.category | uniq %}
+{% assign keywords = keywords | push: package.tags | uniq %}
+{% endfor %}
+{% assign keywords = keywords | compact | sort %}
+
+<h3>Keywords</h3>
+
+<ul>
+    {% for keyword in keywords %}
+    <li><a href="{{ site.baseurl }}/search/?q={{ keyword }}">{{ keyword }}</a></li>
+    {% endfor %}
+</ul>

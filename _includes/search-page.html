@@ -1,0 +1,50 @@
+<section class="package-list">
+    <section class="sidebar">
+        <div>
+            <strong>Package list</strong>
+        </div>
+        <div>
+            {% include keywords-navigation.html %}
+        </div>
+    </section>
+    <section class="package-list-content">
+        <h1>{{ page.title }}</h1>
+
+        <div class="tutorial-main">
+            <p>
+                <span id="search-process">Loading</span>
+                results <span id="search-query-container" style="display: none;">
+    for "<strong id="search-query"></strong>"</span>
+            </p>
+        </div>
+
+        <div id="package-list">
+
+        </div>
+    </section>
+</section>
+
+<script>
+    window.baseurl = "{{ site.baseurl }}";
+    window.data = {
+    {% for package in site.packages %}
+    {% if package.title %}
+    {% unless package.excluded_in_search %}
+    {% if added %},{% endif %}
+    {% assign added = false %}
+    "{{ package.url | slugify }}": {
+        "id": "{{ package.url | slugify }}",
+            "title": "{{ package.title | xml_escape }}",
+            "categories": "{{ package.categories | join: ", " | xml_escape }}",
+            "url": "{{ package.url | xml_escape }}",
+            "content": {{ package.content | strip_html | replace_regex: "[\s/\n]+"," " | strip | jsonify }}
+    }
+    {% assign added = true %}
+    {% endunless %}
+    {% endif %}
+    {% endfor %}
+    };
+</script>
+<script src="{{ site.baseurl }}/assets/js/lunr.min.js"></script>
+<script src="{{ site.baseurl }}/assets/js/search.js"></script>
+
