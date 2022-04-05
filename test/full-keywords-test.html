@@ -1,0 +1,20 @@
+---
+layout: test
+---
+
+{% for package in site.packages %}
+{% assign keywords = keywords | push: package.keywords | uniq %}
+{% assign keywords = keywords | push: package.categories | uniq %}
+{% assign keywords = keywords | push: package.category | uniq %}
+{% assign keywords = keywords | push: package.tags | uniq %}
+{% endfor %}
+{% assign keywords = keywords | compact | sort %}
+
+<pre>Number of keywords: {{ keywords.size }}</pre>
+
+<ul>
+    {% for keyword in keywords %}
+    <li>{{ keyword }}</li>
+    {% endfor %}
+</ul>
+

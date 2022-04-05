@@ -4,5 +4,5 @@ title: package2
 description: Have non-technical people update Jekyll sites
 categories: 
   - category1
-  - category2
+  - category5
 ---
