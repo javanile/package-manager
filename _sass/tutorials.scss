@@ -7,10 +7,10 @@
 
 .categories {
 	display: flex;
-	flex-wrap:wrap;
-	flex-direction:row;
-	justify-content:flex-start;
-	align-items:stretch;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: stretch;
 	font-size: .9em;
 
 	h3 {
@@ -27,12 +27,13 @@
 	}
 
 	@media #{$mid-point} {
-		flex: 0 0 50%;
+		flex: 0 0 49.5%;
 	}
 
 	@media #{$desktop} {
-		flex: 0 0 33%;
+		flex: 0 0 32.5%;
 	}
+
 	margin: 0 0 30px 0;
 
 	ul {
@@ -42,7 +43,8 @@
 	}
 
 	li {
-		margin-right: 15px;
+		margin-right: 0;
+
 		a {
 			padding: 2px 0;
 			display: flex;
@@ -50,18 +52,14 @@
 			align-items: center;
 
 			svg {
-				margin: 0 5px 0 0;
-				width: 25px;
-				height: 25px;
-				-webkit-transition: all .2s ease;
+				/*margin: 0 5px 0 0;*/
+				/*-webkit-transition: all .2s ease;*/
 			}
 
 			&:hover {
 				text-decoration: none;
-				svg {
-					width: 25px;
-					height: 25px;
-				}
+
+				svg {}
 			}
 		}
 	}

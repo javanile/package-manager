@@ -4,7 +4,7 @@ layout2: default
 ---
 {% endcomment %}
 
-<h3 class="align-center">Explore and discover packages</h3>
+<h3 class="align-center mb-4">Explore and discover packages</h3>
 
 <section class="categories">
 
@@ -21,8 +21,12 @@ layout2: default
         <ul>
             {% for package in site.packages %}
             <li class="card">
-                <a href="{{ site.baseurl }}{{ package.url }}">
-                    {% include package-icon.html icon=package.type %}{{ package.title }}
+                <a href="{{ site.baseurl }}{{ package.url }}" class="position-relative">
+                    <span class="align-items-center mr-2">{% include package-icon.html icon=package.type %}</span>
+                    <div>
+                        <h3 class="text-md mb-1">{{ package.title }}</h3>
+                        <p class="text-sm lh-1 m-0">{{ package.description }}</p>
+                    </div>
                 </a>
             </li>
             {% endfor %}
