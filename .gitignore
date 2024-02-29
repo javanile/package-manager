@@ -1,5 +1,6 @@
 .idea/
 _site/
+.bundle/
 .sass-cache/
 .jekyll-metadata
 vendor/

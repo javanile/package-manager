@@ -5,6 +5,7 @@ title: Package Manager
 url: https://javanile.org/package-manager/
 baseurl:
 logo: https://raw.githubusercontent.com/javanile/package-manager/main/assets/images/logo.png
+repository: javanile/package-manager
 
 alert:
   type: info
@@ -37,11 +38,11 @@ timezone: Etc/UTC
 permalink: /:categories/:title/
 
 plugins:
-  - jekyll-extract-element
-  - jekyll-sitemap
-  - jekyll-seo-tag
+  #- jekyll-extract-element
+  #- jekyll-sitemap
+  #- jekyll-seo-tag
   - jekyll-feed
-  - jekyll-archives
+  #- jekyll-archives
 
 exclude:
   - Gemfile
@@ -129,3 +130,7 @@ jekyll-archives:
     - tags
   permalinks:
     category: /cat/:name/
+
+markdown: kramdown
+kramdown:
+  input: GFM
