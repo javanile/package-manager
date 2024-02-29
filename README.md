@@ -23,7 +23,8 @@ Find more projects, themes and step-by-step tutorials at [Javanile Package Store
 
 1. Setup fresh new GitHub repository
 2. Add `_config.yml` as the follow <https://github.com/javanile/package-manager/blob/main/_config.example.yml>.
-3. Enable GitHub Pages in the repository settings
+3. Add packages into `_packages` directory as markdown files
+4. Enable GitHub Pages in the repository settings
 
 ## Develop
 
@@ -31,31 +32,28 @@ Package Manager was built with [Jekyll](http://jekyllrb.com/) version 3.4.3, but
 
 Install the dependencies and run it with Makefile based on [Docker](http://docker.com/):
 
-~~~bash
+```bash
 $ make serve
-~~~
+```
 
 ## Editing
 
-Base is already optimised for adding, updating and removing tutorials, navigation, footer and FAQ information in CloudCannon.
+Package Manager is already optimised for adding, updating and removing packages as Markdown files into the `_packages` directory.
 
-The sticky sidebar in tutorials in populated by pulling out `<h2>` elements from the content.
+The sticky sidebar in package page in populated by pulling out `<h2>` elements from the content.
 
-### Posts
+### Packages
 
-* Add, update or remove a post in the *Posts* collection.
-* The tutorials page is organised by categories.
-* Change the defaults when new posts are created in `_posts/_defaults.md`.
+* Add, update or remove a post in the *Packages* collection.
+* The package page is organised by categories.
+* Change the defaults when new packages are created in `_packages/_defaults.md`.
 
-### Post Series
-To create a new series:
+### Package Versioning
+
+To create a new version:
 
 * Add a new document to the `sets` collection.
 * Set the `title` and `description`.
-
-To add a tutorial/post to a series:
-* Add a `set` field to the tutorial front matter which points to the file name of the desired set without the `.md` extention. e.g. If I have a set at `_sets/getting-started.md` I would use this in my tutorial front matter: `set: getting-started`.
-* Add a `order_number` field to the tutorial front matter and specify a number. This is the tutorials order in the set.
 
 ### Navigation
 
@@ -78,3 +76,7 @@ To add a tutorial/post to a series:
 ### Used by
 
 * https://github.com/javanile/bpkg.github.io/tree/package-manager
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
