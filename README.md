@@ -1,29 +1,28 @@
 # Package Manager
 
-Knowledge base template for Jekyll. Browse through a [live demo](https://javanile.org/package-manager).
+Package management site template for Jekyll. Browse through a [live demo](https://javanile.org/package-manager).
 
-Base was made by [CloudCannon](http://cloudcannon.com/), the Cloud CMS for Jekyll.
+Package Manager was made by [Javanile](http://javanile.org/), an Italian Open Source Dev Community.
 
-Find more templates, themes and step-by-step Jekyll tutorials at [CloudCannon Academy](https://learn.cloudcannon.com/).
+Find more projects, themes and step-by-step tutorials at [Javanile Package Store](https://packages.javanile.org/).
 
 ## Features
 
-* Tutorials organised by category
-* Two types of tutorials - text and video
-* Ability to have a "tutorial series"
+* Packages organised by category
+* Two types of packages - application and library
+* Ability to have a "multiple" version of a package
 * FAQ section
 * Disqus comments
 * Sticky sidebar for main headings in tutorials
-* Optimised for editing in [CloudCannon](http://cloudcannon.com/)
+* Optimised for editing in local development environment
 * RSS/Atom feed
 * SEO tags
 * Google Analytics
 
 ## Setup
 
-1. Add your site and author details in `_config.yml`.
-2. Add your Google Analytics, Disqus and MailChimp keys to `_config.yml`.
-3. Get a workflow going to see your site's output (with [CloudCannon](https://app.cloudcannon.com/) or Jekyll locally).
+1. Setup fresh new GitHub repository
+2. Add `_config.yml` as the follow <>.
 
 ## Develop
 
