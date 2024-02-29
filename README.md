@@ -22,7 +22,7 @@ Find more projects, themes and step-by-step tutorials at [Javanile Package Store
 ## Setup
 
 1. Setup fresh new GitHub repository
-2. Add `_config.yml` as the follow <https://github.com/javanile/package-manager/blob/main/_config.example.yml>.
+2. Add `_config.yml` as the follow [example](https://github.com/javanile/package-manager/blob/main/_config.example.yml)
 3. Add packages into `_packages` directory as markdown files
 4. Enable GitHub Pages in the repository settings
 
