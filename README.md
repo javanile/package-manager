@@ -22,22 +22,17 @@ Find more projects, themes and step-by-step tutorials at [Javanile Package Store
 ## Setup
 
 1. Setup fresh new GitHub repository
-2. Add `_config.yml` as the follow <>.
+2. Add `_config.yml` as the follow <https://github.com/javanile/package-manager/blob/main/_config.example.yml>.
+3. Enable GitHub Pages in the repository settings
 
 ## Develop
 
-Base was built with [Jekyll](http://jekyllrb.com/) version 3.4.3, but should support newer versions as well.
+Package Manager was built with [Jekyll](http://jekyllrb.com/) version 3.4.3, but should support newer versions as well.
 
-Install the dependencies with [Bundler](http://bundler.io/):
-
-~~~bash
-$ bundle install
-~~~
-
-Run `jekyll` commands through Bundler to ensure you're using the right versions:
+Install the dependencies and run it with Makefile based on [Docker](http://docker.com/):
 
 ~~~bash
-$ bundle exec jekyll serve
+$ make serve
 ~~~
 
 ## Editing

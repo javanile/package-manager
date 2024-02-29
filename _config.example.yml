@@ -1,6 +1,10 @@
 
 title: Package Manager
+remote_theme: javanile/package-manager@main
+
 logo: https://raw.githubusercontent.com/javanile/package-manager/main/assets/images/logo.png
+primary_color: "#000"
+secondary_color: "#EEE"
 
 alert:
   type: info
@@ -10,23 +14,6 @@ alert:
 disqus_shortname:
 google_analytics_key:
 newsletter_action:
-
-# Values for the jekyll-seo-tag gem (https://github.com/jekyll/jekyll-seo-tag)
-description: Knowledge base template for Jekyll.
-author:
-  name:
-  email:
-  twitter: # twitter username without the @ symbol
-social:
-  name: Base Template
-  links:
-    - https://github.com/CloudCannon/base-jekyll-template
-
-#primary_color: "#000"
-#secondary_color: "#EEE"
-
-# -----
-# Build
 
 timezone: Etc/UTC
 
@@ -45,7 +32,6 @@ exclude:
   - LICENCE
   - vendor/*
   - packages/*
-
 
 defaults:
   -
@@ -69,9 +55,6 @@ defaults:
       path: "index.html"
     values:
       body_class: "show_hero_search"
-
-# -----------
-# CloudCannon
 
 social_icons:
   - Facebook
