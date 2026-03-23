@@ -2,6 +2,9 @@
 
 CONTAINER_NAME = package-manager-dev
 
+# Demo port mapping: add new demos here
+DEMO_PORTS = minimal:4001 bpkg:4002
+
 # -----
 # Helpers
 
@@ -16,6 +19,10 @@ define docker_serve
 		bretfisher/jekyll-serve
 endef
 
+define demo_port
+$(patsubst $(1):%,%,$(filter $(1):%,$(DEMO_PORTS)))
+endef
+
 # -----
 # Main
 
@@ -26,35 +33,25 @@ push:
 	@git push
 
 serve:
+ifdef demo
+	$(call docker_serve,package-manager-demo-$(demo),$(call demo_port,$(demo)),demo/$(demo))
+else
 	$(call docker_serve,$(CONTAINER_NAME),4000,.)
+endif
 
 restart:
+ifdef demo
+	$(call docker_serve,package-manager-demo-$(demo),$(call demo_port,$(demo)),demo/$(demo))
+else
 	$(call docker_serve,$(CONTAINER_NAME),4000,.)
-
-# -----
-# Demo: minimal (port 4001)
-# Zero-config demo — shows the template works out of the box.
-
-demo-minimal:
-	$(call docker_serve,package-manager-demo-minimal,4001,demo/minimal)
-
-restart-demo-minimal:
-	$(call docker_serve,package-manager-demo-minimal,4001,demo/minimal)
-
-# -----
-# Demo: bpkg (port 4002)
-# bpkg-style demo — bash package registry with realistic packages.
-
-demo-bpkg:
-	$(call docker_serve,package-manager-demo-bpkg,4002,demo/bpkg)
-
-restart-demo-bpkg:
-	$(call docker_serve,package-manager-demo-bpkg,4002,demo/bpkg)
+endif
 
 # -----
 # Stop all
 
 stop:
 	@docker rm -f $(CONTAINER_NAME) 2>/dev/null || true
-	@docker rm -f package-manager-demo-minimal 2>/dev/null || true
-	@docker rm -f package-manager-demo-bpkg 2>/dev/null || true
+	@for entry in $(DEMO_PORTS); do \
+		name=$$(echo $$entry | cut -d: -f1); \
+		docker rm -f package-manager-demo-$$name 2>/dev/null || true; \
+	done
