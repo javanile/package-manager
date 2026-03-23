@@ -1,102 +1,93 @@
 (function () {
+	var PKG_ICON =
+		'<svg viewBox="0 0 40 40" fill="currentColor" aria-hidden="true" style="width:28px;height:28px;flex-shrink:0;color:#888;margin-top:2px">' +
+			'<polygon points="20,4 36,13 20,22 4,13"/>' +
+			'<polygon points="4,13 4,27 20,36 20,22" opacity=".6"/>' +
+			'<polygon points="36,13 36,27 20,36 20,22" opacity=".82"/>' +
+			'<polygon points="4,13 4,15.2 20,24.2 36,15.2 36,13 20,22" fill="white" opacity=".22"/>' +
+			'<polygon points="19,22 21,22 21,36 19,36" fill="white" opacity=".18"/>' +
+		'</svg>';
+
 	function getQueryVariable(variable) {
 		var query = window.location.search.substring(1),
 			vars = query.split("&");
-
 		for (var i = 0; i < vars.length; i++) {
 			var pair = vars[i].split("=");
-
 			if (pair[0] === variable) {
 				return decodeURIComponent(pair[1].replace(/\+/g, '%20')).trim();
 			}
 		}
 	}
 
-	function getPreview(query, content, previewLength) {
-		previewLength = previewLength || (content.length * 2);
-
-		var parts = query.split(" "),
-			match = content.toLowerCase().indexOf(query.toLowerCase()),
-			matchLength = query.length,
-			preview;
-
-		// Find a relevant location in content
-		for (var i = 0; i < parts.length; i++) {
-			if (match >= 0) {
-				break;
-			}
-
-			match = content.toLowerCase().indexOf(parts[i].toLowerCase());
-			matchLength = parts[i].length;
-		}
-
-		// Create preview
-		if (match >= 0) {
-			var start = match - (previewLength / 2),
-				end = start > 0 ? match + matchLength + (previewLength / 2) : previewLength;
-
-			preview = content.substring(start, end).trim();
-
-			if (start > 0) {
-				preview = "..." + preview;
-			}
-
-			if (end < content.length) {
-				preview = preview + "...";
-			}
-
-			// Highlight query parts
-			preview = preview.replace(new RegExp("(" + parts.join("|") + ")", "gi"), "<strong>$1</strong>");
-		} else {
-			// Use start of content if no match found
-			preview = content.substring(0, previewLength).trim() + (content.length > previewLength ? "..." : "");
-		}
-
-		return preview;
+	function hl(text, query) {
+		if (!text || !query) return text || '';
+		var parts = query.trim().split(/\s+/).filter(Boolean);
+		var re = new RegExp('(' + parts.map(function(p) {
+			return p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+		}).join('|') + ')', 'gi');
+		return String(text).replace(re, '<mark style="background:none;color:#c00;font-weight:700;padding:0">$1</mark>');
 	}
 
 	function displaySearchResults(results, query) {
-		var searchResultsEl = document.getElementById("package-list"),
-			searchProcessEl = document.getElementById("search-process");
+		var listEl = document.getElementById("package-list"),
+			processEl = document.getElementById("search-process");
 
 		if (results.length) {
-			var resultsHTML = "";
+			var html = '<ul style="list-style:none;padding:0;margin:0">';
 			results.forEach(function (result) {
-				var item = window.data[result.ref],
-					contentPreview = getPreview(query, item.content, 170),
-					titlePreview = getPreview(query, item.title);
+				var item = window.data[result.ref];
+				if (!item) return;
+				var desc = (item.description || '').substring(0, 120);
+				var keywords = Array.isArray(item.keywords) ? item.keywords : [];
 
-				resultsHTML += "<div class='card'><h4><a href='" + window.baseurl + item.url.trim() + "'>" + titlePreview + "</a></h4><p><small>" + contentPreview + "</small></p></div>";
+				html += '<li class="card card--list" style="margin-bottom:.75rem">';
+				html += '<a href="' + (window.baseurl || '') + item.url.trim() + '" style="display:flex;align-items:flex-start;gap:.75rem;text-decoration:none;color:inherit">';
+				html += '<span style="display:flex;align-items:flex-start">' + PKG_ICON + '</span>';
+				html += '<div style="min-width:0;flex:1">';
+				html += '<h3 style="font-size:1em;font-weight:600;margin:0 0 .2rem;color:#222">' + hl(item.title, query) + '</h3>';
+				if (desc) {
+					html += '<p style="font-size:.82em;color:#777;margin:0 0 .25rem;line-height:1.35">' + hl(desc, query) + '</p>';
+				}
+				if (keywords.length) {
+					html += '<div class="package-keywords" style="margin-top:.2rem">';
+					keywords.slice(0, 4).forEach(function(kw) {
+						html += '<span class="keyword">' + kw + '</span>';
+					});
+					html += '</div>';
+				}
+				html += '</div></a></li>';
 			});
+			html += '</ul>';
 
-			searchResultsEl.innerHTML = resultsHTML;
-			searchProcessEl.innerText = "Showing";
+			listEl.innerHTML = html;
+			processEl.innerText = results.length + ' result' + (results.length !== 1 ? 's' : '');
 		} else {
-			searchResultsEl.style.display = "none";
-			searchProcessEl.innerText = "No";
+			listEl.innerHTML = '';
+			processEl.innerText = 'No results';
 		}
 	}
 
 	window.index = lunr(function () {
 		this.field("id");
-		this.field("title", {boost: 10});
-		this.field("categories");
+		this.field("title", { boost: 10 });
+		this.field("categories", { boost: 5 });
+		this.field("keywords", { boost: 5 });
 		this.field("url");
 		this.field("content");
 	});
 
 	var query = decodeURIComponent((getQueryVariable("q") || "").replace(/\+/g, "%20")),
-		searchQueryContainerEl = document.getElementById("search-query-container"),
-		searchQueryEl = document.getElementById("search-query");
+		queryContainerEl = document.getElementById("search-query-container"),
+		queryEl = document.getElementById("search-query");
 
-	searchQueryEl.innerText = query;
-	searchQueryContainerEl.style.display = "inline";
+	if (queryEl) queryEl.innerText = query;
+	if (queryContainerEl) queryContainerEl.style.display = "inline";
 
 	for (var key in window.data) {
 		window.index.add(window.data[key]);
 	}
 
-	document.addEventListener("DOMContentLoaded", function() {
-		displaySearchResults(window.index.search(query), query); // Hand the results off to be displayed
+	document.addEventListener("DOMContentLoaded", function () {
+		displaySearchResults(window.index.search(query), query);
 	});
 })();

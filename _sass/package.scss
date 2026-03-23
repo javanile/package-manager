@@ -807,3 +807,20 @@
 .package .package-main pre {
 	overflow-x: auto;
 }
+
+// ─── GitHub icon in sidebar links ───────────────────────────────────────────
+.sidebar-gh-link {
+	display: inline-flex;
+	align-items: center;
+	gap: .3rem;
+	font-size: .88em;
+	word-break: break-word;
+
+	.gh-icon {
+		flex-shrink: 0;
+		width: 14px;
+		height: 14px;
+		position: relative;
+		top: -1px;
+	}
+}

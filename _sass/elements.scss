@@ -46,32 +46,75 @@ code, pre, tt {
 	padding: 1px 4px;
 }
 
-// Fenced code blocks — collapse double padding from div.highlight + pre
-.package-main {
-	// Hide the h1 that package authors put at the top of their markdown
-	> .highlight:first-child,
-	> h1:first-child {
-		display: none;
+// Hide h1 that package authors put at the top of their own markdown
+.package-main > h1:first-child {
+	display: none;
+}
+
+// Block code — both wrapper divs + pre get the same dark bg (no color gaps)
+.highlighter-rouge {
+	margin: .5rem 0 1rem;
+	border-radius: 5px;
+	overflow: hidden;
+	background: #1a1a1a;
+
+	.highlight {
+		background: #1a1a1a;
+		margin: 0;
+		border-radius: 0;
 	}
 
-	div.highlight {
-		margin: .4rem 0;
-		border-radius: 4px;
-		overflow: hidden;
+	pre.highlight {
+		margin: 0;
+		padding: .55rem .9rem;
+		background: #1a1a1a;
+		border-radius: 0;
+		font-size: .84em;
+		line-height: 1.6;
+		overflow-x: auto;
+		white-space: pre;
+		-webkit-overflow-scrolling: touch;
 
-		pre.highlight {
-			margin: 0;
-			padding: .5rem .75rem;
-			background: #1c1c1c;
-			border-radius: 4px;
-
-			code {
-				padding: 0;
-				background: none;
-				font-size: .85em;
-				line-height: 1.55;
-			}
+		code {
+			padding: 0;
+			background: none;
+			color: #d4d4d4;
+			font-size: 1em;
+			line-height: inherit;
+			white-space: pre;
 		}
+	}
+}
+
+// Table styles for package content
+.package-main table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: .88em;
+	margin: 1rem 0 1.5rem;
+
+	th {
+		background: #f6f6f6;
+		font-weight: 600;
+		text-align: left;
+		padding: .45rem .8rem;
+		border-bottom: 2px solid #e0e0e0;
+		color: #333;
+	}
+
+	td {
+		padding: .4rem .8rem;
+		border-bottom: 1px solid #eee;
+		color: #444;
+		vertical-align: top;
+	}
+
+	tr:last-child td {
+		border-bottom: 0;
+	}
+
+	tr:hover td {
+		background: #fafafa;
 	}
 }
 
