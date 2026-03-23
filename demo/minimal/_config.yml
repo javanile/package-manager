@@ -1,1 +1,4 @@
 remote_theme: javanile/package-manager@main
+
+plugins:
+  - jekyll-remote-theme
