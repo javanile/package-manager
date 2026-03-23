@@ -1,14 +1,23 @@
-{% assign _total_cats = site.categories.size %}
-{% if _total_cats <= 3 %}
+{% include packages-assign.html %}
+{% assign packages_sorted = packages | sort: home_packages_sort | reverse %}
+
+{% assign _nonempty_cats = 0 %}
+{% for _cat in site.categories %}
+  {% assign _cslug = _cat.title | slugify %}
+  {% for _pkg in packages_sorted %}
+    {% if _pkg.categories == _cslug or _pkg.categories contains _cslug %}
+      {% assign _nonempty_cats = _nonempty_cats | plus: 1 %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+{% endfor %}
+{% if _nonempty_cats <= 3 %}
   {% assign home_categories_limit = site.home_categories_limit | default: 3 %}
 {% else %}
   {% assign home_categories_limit = site.home_categories_limit | default: 6 %}
 {% endif %}
 {% assign home_packages_limit = site.home_packages_limit | default: 3 %}
 {% assign home_packages_sort = site.home_packages_sort | default: "date" %}
-
-{% include packages-assign.html %}
-{% assign packages_sorted = packages | sort: home_packages_sort | reverse %}
 
 <h3 class="align-center mb-4">Explore and discover packages</h3>
 
@@ -17,7 +26,6 @@
     {% assign categories_shown = 0 %}
     {% for category in site.categories %}
     {% if categories_shown >= home_categories_limit %}{% break %}{% endif %}
-    {% assign categories_shown = categories_shown | plus: 1 %}
 
     {% assign cat_slug = category.title | slugify %}
     {% assign cat_packages = "" | split: "" %}
@@ -26,6 +34,9 @@
         {% assign cat_packages = cat_packages | push: pkg %}
       {% endif %}
     {% endfor %}
+
+    {% if cat_packages.size == 0 %}{% continue %}{% endif %}
+    {% assign categories_shown = categories_shown | plus: 1 %}
 
     <section class="category">
         <h4 class="align-center">
