@@ -77,6 +77,15 @@ h6 {
 	font-size: 2rem
 }
 
+// Package content headings: 25% smaller than globals
+.package-main {
+	h2 { font-size: 2.7rem; letter-spacing: -.5px }
+	h3 { font-size: 2.25rem }
+	h4 { font-size: 1.875rem }
+	h5 { font-size: 1.5rem }
+	h6 { font-size: 1.5rem }
+}
+
 a {
 	color: $link-color;
 	transition: color 0.3s ease;
