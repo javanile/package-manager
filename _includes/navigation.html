@@ -11,11 +11,8 @@
 			{% assign link = item.link %}
 
 		{% elsif item == "Get Started" %}
-			{% if site.repository %}
-				{% assign link = "https://github.com/" | append: site.repository %}
-			{% else %}
-				{% assign link = "#" %}
-			{% endif %}
+			{% capture link %}{% include get-started-link.html %}{% endcapture %}
+			{% assign link = link | strip %}
 
 		{% elsif item == "Packages" %}
 			{% assign link = "packages" %}

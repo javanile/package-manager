@@ -1,2 +1,7 @@
-{% assign packages = site.packages %}
+{% if site.packages %}
+  {% assign packages = site.packages %}
+{% else %}
+  {% assign packages = "" | split: "" %}
+{% endif %}
 {% if packages.size == 0 %}{% assign packages = site.posts %}{% endif %}
+{% unless packages %}{% assign packages = "" | split: "" %}{% endunless %}

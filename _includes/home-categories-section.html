@@ -1,4 +1,9 @@
-{% assign home_categories_limit = site.home_categories_limit | default: 6 %}
+{% assign _total_cats = site.categories.size %}
+{% if _total_cats <= 3 %}
+  {% assign home_categories_limit = site.home_categories_limit | default: 3 %}
+{% else %}
+  {% assign home_categories_limit = site.home_categories_limit | default: 6 %}
+{% endif %}
 {% assign home_packages_limit = site.home_packages_limit | default: 3 %}
 {% assign home_packages_sort = site.home_packages_sort | default: "date" %}
 

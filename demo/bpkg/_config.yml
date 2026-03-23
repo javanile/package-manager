@@ -1,7 +1,8 @@
 ---
 
 name: bpkg
-title: bpkg
+title: BPKG
+tagline: Lightweight Shell Package Manager
 description: Easily install and manage bash packages. Like npm, but for bash scripts.
 url: https://bpkg.sh
 
