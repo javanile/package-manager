@@ -1,0 +1,87 @@
+.tutorial {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	gap: 2rem;
+	align-items: start;
+}
+
+@media (min-width: 750px) {
+	.tutorial {
+		grid-template-columns: minmax(0, 1fr) clamp(17rem, 28vw, 20rem);
+		gap: clamp(1.5rem, 3vw, 2.5rem);
+	}
+}
+
+.tutorial .sidebar {
+	padding: 0;
+	width: auto;
+	border-left: 0;
+}
+
+.tutorial .tutorial-content,
+.tutorial .tutorial-main {
+	min-width: 0;
+	max-width: 100%;
+}
+
+.tutorial .tutorial-main pre,
+.tutorial .tutorial-main code,
+.tutorial .tutorial-main table,
+.tutorial .tutorial-main blockquote {
+	max-width: 100%;
+}
+
+.tutorial .tutorial-main pre {
+	overflow-x: auto;
+}
+
+.tutorial .sidebar.sticky {
+	@media (min-width: 750px) {
+		position: sticky;
+		top: 2rem;
+	}
+}
+
+.tutorial .sidebar > div {
+	margin-bottom: 1rem;
+	padding: 1rem 1.1rem;
+	border: 1px solid rgba(45, 45, 45, 0.08);
+	border-radius: 16px;
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(246, 246, 246, 0.98) 100%);
+	box-shadow: 0 14px 32px rgba(34, 34, 34, 0.06);
+}
+
+.tutorial .sidebar > div:last-child {
+	margin-bottom: 0;
+}
+
+.tutorial .sidebar strong {
+	display: block;
+	margin-bottom: 0.45rem;
+	font-size: 0.78em;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: #666;
+}
+
+.tutorial .sidebar pre {
+	background: #222;
+	border: 0;
+	border-radius: 12px;
+	padding: 0.85rem 1rem;
+	font-size: 0.84em;
+	line-height: 1.5;
+	white-space: pre-wrap;
+	word-break: break-word;
+	margin: 0.25rem 0 0;
+}
+
+.tutorial .sidebar a {
+	color: #4A4A4A;
+	word-break: break-word;
+}
+
+.tutorial .sidebar ul {
+	padding-left: 1rem;
+	margin: 0.35rem 0 0;
+}

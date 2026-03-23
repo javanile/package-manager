@@ -81,48 +81,60 @@
 
 // Package detail page sidebar
 .tutorial .sidebar {
-  width: 280px;
-  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  align-self: start;
+
+  &.sticky {
+    @media #{$mid-point} {
+      position: sticky;
+      top: 2rem;
+    }
+  }
 
   > div {
-    margin-bottom: 1.2rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid #f0f0f0;
+    margin-bottom: 1rem;
+    padding: 1rem 1.1rem;
+    border: 1px solid rgba(34, 34, 34, .08);
+    border-radius: 16px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, .98) 0%, rgba(246, 246, 246, .98) 100%);
+    box-shadow: 0 14px 32px rgba(34, 34, 34, .06);
 
     &:last-child {
-      border-bottom: none;
+      margin-bottom: 0;
     }
   }
 
   strong {
     display: block;
-    margin-bottom: .4rem;
-    font-size: .85em;
+    margin-bottom: .45rem;
+    font-size: .78em;
     text-transform: uppercase;
-    letter-spacing: .05em;
+    letter-spacing: .08em;
     color: $medium-grey;
   }
 
   pre {
-    background: #f6f6f6;
-    border: 1px solid #e2e2e2;
-    border-radius: 4px;
-    padding: .5rem .75rem;
-    font-size: .85em;
+    background: #222;
+    border: 0;
+    border-radius: 12px;
+    padding: .85rem 1rem;
+    font-size: .84em;
+    line-height: 1.5;
     white-space: pre-wrap;
-    word-break: break-all;
+    word-break: break-word;
     margin: .25rem 0 0;
   }
 
   a {
     color: $link-color;
     font-size: .9em;
-    word-break: break-all;
+    word-break: break-word;
   }
 
   ul {
     padding-left: 1rem;
-    margin: .25rem 0 0;
+    margin: .35rem 0 0;
     font-size: .9em;
   }
 }

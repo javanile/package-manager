@@ -62,7 +62,15 @@
 }
 
 .tutorial {
-	display: flex;
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	gap: 2rem;
+	align-items: start;
+
+	@media #{$mid-point} {
+		grid-template-columns: minmax(0, 1fr) clamp(17rem, 28vw, 20rem);
+		gap: clamp(1.5rem, 3vw, 2.5rem);
+	}
 
 	h2 {
 		margin-top: 40px;
@@ -70,9 +78,9 @@
 
 	.sidebar {
 		display: none;
-		padding: 0 0 0 20px;
-		width: 300px;
-		border-left: 1px solid #e2e2e2;
+		padding: 0;
+		width: auto;
+		border-left: 0;
 
 		@media #{$mid-point} {
 			display: block;
@@ -106,10 +114,26 @@
 	}
 
 	.tutorial-content {
-		flex: 1 0 auto;
+		min-width: 0;
+		max-width: 100%;
 
 		@media #{$mid-point} {
-			margin-right: 10px;
+			margin-right: 0;
+		}
+	}
+
+	.tutorial-main {
+		min-width: 0;
+
+		pre,
+		code,
+		table,
+		blockquote {
+			max-width: 100%;
+		}
+
+		pre {
+			overflow-x: auto;
 		}
 	}
 }
