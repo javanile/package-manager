@@ -22,7 +22,7 @@
         <h1 class="margin-0">{{ page.title }}</h1>
 
         {% if page.keywords %}
-        <div class="package-keywords" style="margin: .5rem 0 1rem -4px; ">
+        <div class="package-keywords" style="margin: .5rem 0 1rem;">
             {% for keyword in page.keywords %}
             <a href="{{ site.baseurl }}/search/?q={{ keyword | url_encode }}" class="keyword">{{ keyword }}</a>
             {% endfor %}

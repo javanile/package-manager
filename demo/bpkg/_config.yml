@@ -35,6 +35,14 @@ collections:
     output: true
     permalink: /:collection/:name
 
+navigation:
+  - name: Get Started
+    link: /packages/
+  - name: Packages
+    link: /packages/
+  - name: Contribute
+    link: https://github.com/bpkg/bpkg/blob/main/CONTRIBUTING.md
+
 defaults:
   - scope:
       path: ""
@@ -44,3 +52,7 @@ defaults:
       path: "index.html"
     values:
       body_class: "show_hero_search"
+  - scope:
+      type: "categories"
+    values:
+      body_class: "page-packages"

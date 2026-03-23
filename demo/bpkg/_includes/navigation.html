@@ -1,0 +1,50 @@
+<a class="nav-toggle" id="open-nav" href="#">&#9776;</a>
+<nav>
+	{% if site.navigation %}
+		{% assign navigation = site.navigation %}
+	{% else %}
+		{% assign navigation = "Get Started, Packages, Contribute" | split: ", " %}
+	{% endif %}
+
+	{% for item in navigation %}
+		{% if item.link %}
+			{% assign link = item.link %}
+
+		{% elsif item == "Get Started" %}
+			{% capture link %}{% include get-started-link.html %}{% endcapture %}
+			{% assign link = link | strip %}
+
+		{% elsif item == "Packages" %}
+			{% assign link = "/packages/" %}
+
+		{% elsif item == "Contribute" %}
+			{% assign _cp = site.pages | where: "url", "/contribute/" | first %}
+			{% unless _cp %}{% assign _cp = site.pages | where: "url", "/contribute.html" | first %}{% endunless %}
+			{% if _cp %}
+				{% assign link = "/contribute/" %}
+			{% elsif site.repository %}
+				{% assign link = "https://github.com/" | append: site.repository | append: "/blob/main/CONTRIBUTING.md" %}
+			{% else %}
+				{% assign link = "#" %}
+			{% endif %}
+
+		{% else %}
+			{% assign link = item | slugify %}
+		{% endif %}
+
+		{% if item.name %}
+			{% assign name = item.name %}
+		{% else %}
+			{% assign name = item %}
+		{% endif %}
+
+		{% assign class = "" %}
+		{% if link == page.url %}
+			{% assign class = class | append: " active" %}
+		{% endif %}
+
+		<a href="{% include relative-src.html src=link %}" class="{{ class }}">{{ name }}</a>
+	{% endfor %}
+
+	{% include search.html %}
+</nav>
