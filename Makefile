@@ -3,7 +3,7 @@
 CONTAINER_NAME = package-manager-dev
 
 # Demo port mapping: add new demos here
-DEMO_PORTS = minimal:4001 bpkg:4002
+DEMO_PORTS = minimal:4001 bpkg:4002 docker:4003
 
 # -----
 # Helpers

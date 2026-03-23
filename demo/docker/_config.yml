@@ -1,0 +1,35 @@
+---
+
+name: docker-images
+title: MyOrg Docker Images
+description: The official Docker image registry for MyOrg. Pull production-ready images for all your infrastructure needs.
+
+primary_color: "#2496ED"
+secondary_color: "#FFF"
+
+plugins:
+  - jekyll-remote-theme
+
+remote_theme: javanile/package-manager@main
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+
+collections:
+  packages:
+    output: true
+    permalink: /:collection/:name
+  categories:
+    output: true
+    permalink: /:collection/:name
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+  - scope:
+      path: "index.html"
+    values:
+      body_class: "show_hero_search"
