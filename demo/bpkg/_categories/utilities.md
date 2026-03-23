@@ -1,4 +1,4 @@
 ---
 title: Utilities
-description: General purpose bash utilities and helpers.
+description: General purpose command line utilities and helpers.
 ---

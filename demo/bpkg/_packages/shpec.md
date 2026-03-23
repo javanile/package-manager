@@ -1,0 +1,114 @@
+---
+title: shpec
+description: Test your shell scripts
+categories: testing
+keywords:
+  - bash
+  - testing
+  - bdd
+---
+
+This package provides a command for testing your shell scripts.
+
+## Using shpec
+
+[shpec's repo](https://github.com/rylnd/shpec) itself is using shpec, so feel free to use it as an example.
+
+Here is the basic structure that you'll want:
+
+    └── shpec
+        └── an_example_shpec.sh
+        └── another_shpec.sh
+
+Then to run your tests:
+
+```bash
+shpec [shpec_files]
+```
+
+If you'd like your tests to run automatically when they change, we recommend the [entr](http://entrproject.org/) utility:
+
+```bash
+find . -name "*_shpec.sh" | entr shpec
+```
+
+### Examples
+
+[shpec's own tests](https://github.com/rylnd/shpec/tree/master/shpec/shpec_shpec.sh)
+are a great place to start. For more examples, see the [wiki page](https://github.com/rylnd/shpec/wiki/Examples)
+
+### Matchers
+
+The general format is:
+
+    assert matcher arguments
+
+where `matcher` is one of the following:
+
+#### Binary Matchers
+
+```bash
+equal         # equality
+unequal       # inequality
+gt            # algebraic '>'
+lt            # algebraic '<'
+match         # regex match
+no_match      # lack of regex match
+```
+
+#### Unary Matchers
+
+```bash
+present       # string presence
+blank         # string absence
+file_present  # file presence
+file_absent   # file absence
+symlink       # tests a symlink's target
+test          # evaluates a test string
+```
+
+#### Custom Matchers
+
+Custom matchers are loaded from `shpec/matchers/*.sh`.
+
+For example, here's how you'd create a `still_alive` matcher:
+
+```bash
+# in shpec/matchers/network.sh
+still_alive() {
+  ping -oc1 "$1" > /dev/null 2>&1
+  assert equal "$?" 0
+}
+```
+
+Then you can use that matcher like any other:
+
+```bash
+# in shpec/network_shpec.sh
+describe "my server"
+  it "serves responses"
+    assert still_alive "my-site.com"
+  end
+end
+```
+
+## Installation
+
+You can either install with bpkg
+```bash
+$ bpkg install rylnd/shpec
+```
+
+or with curl
+
+```bash
+sh -c "`curl -L https://raw.github.com/rylnd/shpec/master/install.sh`"
+```
+
+or with [antigen](https://github.com/zsh-users/antigen) for zsh by
+putting `antigen bundle rylnd/shpec` in your `.zshrc`
+
+## Links
+
+* [Source Code (GitHub)](https://github.com/rylnd/shpec)
+* Author: [Ryland Herrick](https://github.com/rylnd)

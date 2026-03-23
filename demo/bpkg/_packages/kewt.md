@@ -1,0 +1,16 @@
+---
+title: kewt
+description: A minimalist static site generator inspired by werc
+categories: utilities
+keywords:
+  - markdown
+  - bash
+  - templates
+---
+
+## Links
+
+- [Project Homepage][https://kewt.krzak.org]
+- [Source Code (GitHub)][https://github.com/n0va-bot/kewt]
+- [Source Code (Home)[https://git.krzak.org/N0VA/kewt]
+- [Author: N0\A](https://n0va.nekoweb.org)

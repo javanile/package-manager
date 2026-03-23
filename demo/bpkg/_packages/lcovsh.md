@@ -1,0 +1,35 @@
+---
+title: lcov.sh
+description: Coverage framework for Shell projects
+categories: bash
+keywords:
+  - cli
+---
+
+Coverage framework for Shell projects
+
+## Usage
+
+Add the following code `[[ -z "${LCOV_DEBUG}" ]] || set -x` on top of source file you want in a coverage report, see below example:
+
+```bash
+#!/bin/bash
+[[ -z "${LCOV_DEBUG}" ]] || set -x
+
+welcome () {
+    echo "Hi $1, I'm testable code"
+}
+
+welcome "John"
+```
+
+Now, run from command line the following command:
+
+```bash
+lcov.sh FILE...
+```
+
+## Links
+
+* [Source Code (GitHub)](https://github.com/javanile/lcov.sh)
+* Author: [Francesco Bianco](https://github.com/francescobianco)

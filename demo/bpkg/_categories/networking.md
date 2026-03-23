@@ -1,4 +1,4 @@
 ---
 title: Networking
-description: Tools for networking, HTTP requests and connectivity checks.
+description: Tools for SSH, TCP, HTTP and network connectivity.
 ---

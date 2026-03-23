@@ -1,0 +1,22 @@
+---
+title: bdo-cli
+description: bdo-cli provides a collection of helpful shell scripts for Git, GitHub, and development workflows.
+categories: bash
+keywords:
+  - github
+---
+
+## Usage
+
+- `bdo help` - Show all available commands
+- `bdo create <repo-name>` - Create and initialize a new repository
+- `bdo push` - Add, commit, and push changes
+- `bdo branch <branch-name>` - Create and push a new branch
+- `bdo checkout` - Reset to match remote main branch
+- `bdo remove` - Uninstall bdo-cli from your system
+
+
+## Links
+
+* [Source Code](https://github.com/hellobdo/bdo-cli)
+* [Author: bdo](https://github.com/hellobdo)

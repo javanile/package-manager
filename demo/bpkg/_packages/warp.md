@@ -1,0 +1,30 @@
+---
+title: warp
+description: File manipulation across terminals sessions made easy
+categories: bash
+keywords:
+  - utility
+  - files
+---
+
+Tired of figuring out the relative path to a file, so you can copy it?
+Tire no more! Warp is a small bash tool to move or copy a file from one location to another.
+
+## Basic Usage
+
+To copy a file in a directory in one terminal, to the directory of another terminal, first warp in the file
+
+```bash
+warp in foo.txt
+```
+
+In the other terminal, warp copy it
+
+```bash
+warp cp .
+```
+
+## Links
+
+* [Source Code (GitHub)](https://github.com/nathan-abercrombie/bash-file-warp)
+* Author: [Nathan Abercrombie](mailto:abercrombie.nathan@gmail.com)

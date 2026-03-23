@@ -1,0 +1,146 @@
+---
+title: bash-backup
+description: Simple backup shell script by bash v4.*
+categories: utilities
+keywords:
+  - backup
+  - s3
+---
+
+## Usage
+
+```bash
+$ git clone git@github.com:newsdict/bash-backup.git
+$ cd bash-backup
+$ cp env-example .env
+```
+
+Edit `.env` file
+
+```bash
+$ bash backup.sh [--debug]
+```
+
+### Multiple Targets
+
+```bash
+$ git clone git@github.com:newsdict/bash-backup.git
+$ cd bash-backup
+$ cp env-example .env-sample1
+```
+
+Edit `.env-sample1` file
+
+```bash
+$ cp env-example .env-sample2
+```
+
+Edit `.env-sample2` file
+
+```bash
+$ sh backup.sh [--debug] sample1
+$ sh backup.sh [--debug] sample2
+```
+
+## Flow
+
+1. Archive the datas. (tar.gz or tar.bz2 or zip)
+2. mysqldump - only mysql yet....
+3. Rearchive the 1 and 2 (tar.gz or tar.bz2 or zip)
+4. Upload to S3. (Generation management) - only s3 yet.......
+
+## Environments
+
+### Temporary Directory
+
+```bash
+temporary_directory=tmp
+```
+
+### log name
+
+```bash
+log_name=logs/backup.$now.log
+```
+
+### backup filename
+
+```bash
+backup_filename=backup
+```
+
+### display messages
+
+```bash
+display_messages=1
+```
+
+### Execute archive
+
+```bash
+archive=1
+```
+
+### Archive paths or files
+
+```bash
+declare -a archive_paths=(
+    "/var/www/html"
+    "/etc/nginx"
+)
+```
+
+### Compression type of backup
+
+```bash
+commpression_type=gzip
+```
+
+* _gzip: *.tar.gz_
+* _zip: *.zip_
+* _bzip2: *.tar.bz2_
+
+### Execute database
+
+```bash
+database=1
+```
+
+### Database Type for Dump
+
+```bash
+declare -A database_conf=(
+    ["engine"]="mysql" # mysql only
+    ["name"]="sample1_database" # database name
+    ["username"]="user1" # username
+    ["password"]="pass" # password
+    ["host"]="127.0.0.1" # host
+    ["port"]=3306 # port
+)
+```
+
+### Storage type for backup files
+
+```bash
+storage_type=s3
+```
+
+* _`s3` only_
+
+### s3 info
+
+```bash
+declare -A s3_conf=(
+    ["keep"]=5
+    ["access_key"]=""
+    ["secret"]=""
+    ["bucket"]="backup"
+    ["path"]="test"
+    ["region"]="ap-northeast-1"
+)
+```
+
+## Links
+
+* [Source Code (GitHub)](https://github.com/newsdict/bash-backup)
+* Author: [yubele](httphttps://github.com/yubele)
