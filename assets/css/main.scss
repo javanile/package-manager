@@ -21,4 +21,4 @@ $secondary-color: unquote("{{ site.secondary_color | default: '#EEE' }}");
 @import "card";
 @import "alert";
 @import "keyword";
-@import "cloudcannon";
+@import "Javanile";

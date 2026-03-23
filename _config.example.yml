@@ -78,15 +78,15 @@ theme: null
 
 footer_links:
   - name:
-    link: https://facebook.com/cloudcannon
+    link: https://facebook.com/Javanile
     social_icon: Facebook
     new_window: true
   - name:
-    link: https://twitter.com/cloudcannon
+    link: https://twitter.com/Javanile
     social_icon: Twitter
     new_window: true
   - name:
-    link: https://youtube.com/c/cloudcannon
+    link: https://youtube.com/c/Javanile
     social_icon: YouTube
     new_window: true
   - name:
