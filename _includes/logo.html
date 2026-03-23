@@ -1,8 +1,8 @@
 
 {% if site.logo %}
-	<img src="{{ site.logo }}" alt="{% if site.logo_text %}{{ site.logo_text }}{% else %}{{ site.title }}{% endif %}" />
+	<img src="{{ site.logo }}" alt="{% if site.logo_text %}{{ site.logo_text }}{% else %}{% include site-title.html %}{% endif %}" />
 {% elsif site.logo_text %}
 	{{ site.logo_text }}
 {% else %}
-	<img src="/assets/images/logo.png" alt="{{ site.title }}" />
+	<img src="{{ site.baseurl }}/assets/images/logo.png" alt="{% include site-title.html %}" />
 {% endif %}

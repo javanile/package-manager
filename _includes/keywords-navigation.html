@@ -2,7 +2,8 @@
 
 
 
-{% for package in site.packages %}
+{% include packages-assign.html %}
+{% for package in packages %}
 {% assign keywords = keywords | push: package.keywords | uniq %}
 {% assign keywords = keywords | push: package.categories | uniq %}
 {% assign keywords = keywords | push: package.category | uniq %}

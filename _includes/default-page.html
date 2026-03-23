@@ -54,7 +54,7 @@
         {% include search-page.html %}
         {% elsif page.url == "/404.html" %}
         {% include error.html %}
-        {% elsif page.collection == "packages" %}
+        {% elsif page.collection == "packages" or page.collection == "posts" %}
         {% include package-page.html %}
         {% elsif page.collection == "categories" %}
         {% include category-page.html %}

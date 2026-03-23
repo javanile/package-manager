@@ -1,0 +1,47 @@
+---
+
+name: bpkg
+title: bpkg — Bash Package Manager
+description: Easily install and manage bash packages. Like npm, but for bash scripts.
+url: https://bpkg.sh
+baseurl:
+
+repository: bpkg/bpkg
+
+alert:
+  type: info
+  title: Welcome to bpkg!
+  message: The community bash package registry. Find and install bash packages with ease.
+
+plugins:
+  - jekyll-remote-theme
+
+remote_theme: javanile/package-manager@main
+
+footer_links:
+  - name: GitHub
+    link: https://github.com/bpkg/bpkg
+    social_icon: GitHub
+    new_window: true
+  - name: Twitter
+    link: https://twitter.com/bpkgsh
+    social_icon: Twitter
+    new_window: true
+
+collections:
+  packages:
+    output: true
+    permalink: /:collection/:name
+  categories:
+    output: true
+    permalink: /:collection/:name
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+  - scope:
+      path: "index.html"
+    values:
+      body_class: "show_hero_search"

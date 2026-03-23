@@ -6,6 +6,8 @@ layout2: default
 
 <h3 class="align-center mb-4">Explore and discover packages</h3>
 
+{% include packages-assign.html %}
+
 <section class="categories">
 
     {% for category in site.categories %}
@@ -19,7 +21,7 @@ layout2: default
             {{ category.description }}
         </p>
         <ul>
-            {% for package in site.packages %}
+            {% for package in packages %}
             <li class="card">
                 <a href="{{ site.baseurl }}{{ package.url }}" class="position-relative">
                     <span class="align-items-center mr-2">{% include package-icon.html icon=package.type %}</span>

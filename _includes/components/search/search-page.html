@@ -27,7 +27,8 @@
 <script>
     window.baseurl = "{{ site.baseurl }}";
     window.data = {
-    {% for package in site.packages %}
+    {% include packages-assign.html %}
+    {% for package in packages %}
     {% if package.title %}
     {% unless package.excluded_in_search %}
     {% if added %},{% endif %}
