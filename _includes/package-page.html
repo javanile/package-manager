@@ -2,6 +2,22 @@
 {% assign install_cmd = install_cmd | replace: "{package}", page.title %}
 {% assign _content_has_h1 = content | contains: "<h1" %}
 
+{% comment %} Resolve author avatar {% endcomment %}
+{% if page.author_github %}
+  {% assign _avatar_url = "https://github.com/" | append: page.author_github | append: ".png?size=64" %}
+  {% assign _author_url = page.author_url | default: "https://github.com/" | append: page.author_github %}
+  {% assign _author_name = page.author | default: page.author_github %}
+{% elsif page.author_email %}
+  {% assign _avatar_hash = page.author_email | downcase | sha256 %}
+  {% assign _avatar_url = "https://www.gravatar.com/avatar/" | append: _avatar_hash | append: "?s=64&d=mp" %}
+  {% assign _author_url = page.author_url | default: "" %}
+  {% assign _author_name = page.author | default: "Anonymous" %}
+{% else %}
+  {% assign _avatar_url = "https://www.gravatar.com/avatar/?d=mp&s=64" %}
+  {% assign _author_url = page.author_url | default: "" %}
+  {% assign _author_name = page.author | default: "Anonymous" %}
+{% endif %}
+
 <section class="tutorial">
     <section class="tutorial-content">
         {% unless _content_has_h1 %}<h1 class="margin-0">{{ page.title }}</h1>{% endunless %}
@@ -20,6 +36,7 @@
     </section>
 
     <section class="sidebar sticky">
+
         <div>
             <strong>Install</strong>
             <pre>{{ install_cmd }}</pre>
@@ -28,18 +45,14 @@
         {% if page.repository %}
         <div>
             <strong>Repository</strong>
-            <div>
-                <a href="{{ page.repository }}">{{ page.repository | remove: "https://" }}</a>
-            </div>
+            <div><a href="{{ page.repository }}">{{ page.repository | remove: "https://" }}</a></div>
         </div>
         {% endif %}
 
         {% if page.homepage %}
         <div>
             <strong>Homepage</strong>
-            <div>
-                <a href="{{ page.homepage }}">{{ page.homepage | remove: "https://" }}</a>
-            </div>
+            <div><a href="{{ page.homepage }}">{{ page.homepage | remove: "https://" }}</a></div>
         </div>
         {% endif %}
 
@@ -57,19 +70,6 @@
         </div>
         {% endif %}
 
-        {% if page.author %}
-        <div>
-            <strong>Author</strong>
-            <div>
-                {% if page.author_url %}
-                <a href="{{ page.author_url }}">{{ page.author }}</a>
-                {% else %}
-                {{ page.author }}
-                {% endif %}
-            </div>
-        </div>
-        {% endif %}
-
         {% if page.categories %}
         <div>
             <strong>Category</strong>
@@ -80,29 +80,47 @@
         </div>
         {% endif %}
 
-        {% if page.dependencies %}
-        <div>
+        <div class="package-author">
+            <strong>Author</strong>
+            <div class="package-author__card">
+                <img src="{{ _avatar_url }}" alt="{{ _author_name }}" class="package-author__avatar" width="40" height="40">
+                <div class="package-author__info">
+                    {% if _author_url != "" %}
+                    <a href="{{ _author_url }}" class="package-author__name">{{ _author_name }}</a>
+                    {% else %}
+                    <span class="package-author__name">{{ _author_name }}</span>
+                    {% endif %}
+                    {% if page.author_email %}<small class="package-author__email">{{ page.author_email }}</small>{% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="package-dependencies">
             <strong>Dependencies</strong>
-            <ul style="padding-left: 1rem; margin: .25rem 0 0;">
+            {% if page.dependencies and page.dependencies.size > 0 %}
+            <ul>
                 {% for dep in page.dependencies %}
-                <li style="margin-bottom: .25rem;">
-                    <a href="{{ site.baseurl }}/search/?q={{ dep | url_encode }}">{{ dep }}</a>
-                </li>
+                <li><a href="{{ site.baseurl }}/search/?q={{ dep | url_encode }}">{{ dep }}</a></li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p class="package-dependencies__none">No explicit dependencies.</p>
+            {% endif %}
+        </div>
+
+        {% assign _headings = content | split: "<h2" %}
+        {% if _headings.size > 1 %}
+        <div>
+            <strong>On this page</strong>
+            <ul>
+                {% for _section in _headings offset: 1 %}
+                    {% assign _heading_text = _section | split: "</h2>" | first | split: ">" | last %}
+                    {% assign _heading_id = _heading_text | slugify %}
+                    <li><a href="#{{ _heading_id }}">{{ _heading_text }}</a></li>
                 {% endfor %}
             </ul>
         </div>
         {% endif %}
 
-        <div>
-            <strong>Navigation</strong>
-            <ul>
-                {% assign headings = content | split: "<h2" %}
-                {% for section in headings offset: 1 %}
-                    {% assign heading_text = section | split: "</h2>" | first | split: ">" | last %}
-                    {% assign heading_id = heading_text | slugify %}
-                    <li><a href="#{{ heading_id }}">{{ heading_text }}</a></li>
-                {% endfor %}
-            </ul>
-        </div>
     </section>
 </section>

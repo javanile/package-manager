@@ -19,6 +19,66 @@
   }
 }
 
+.package-author {
+  &__card {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    margin-top: .4rem;
+  }
+
+  &__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #e2e2e2;
+    flex-shrink: 0;
+    background: #f0f0f0;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  &__name {
+    font-size: .9em;
+    font-weight: 600;
+    color: $link-color;
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__email {
+    font-size: .75em;
+    color: $medium-grey;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.package-dependencies {
+  &__none {
+    font-size: .85em;
+    color: $medium-grey;
+    margin: .25rem 0 0;
+    font-style: italic;
+  }
+
+  ul {
+    padding-left: 1rem;
+    margin: .25rem 0 0;
+    font-size: .9em;
+  }
+}
+
 // Package detail page sidebar
 .tutorial .sidebar {
   width: 280px;

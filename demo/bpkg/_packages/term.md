@@ -5,6 +5,9 @@ categories: utilities
 keywords:
   - animation
   - color
+author: Joseph Werle
+author_github: jwerle
+repository: https://github.com/bpkg/term
 ---
 
 This package allows you to manipulate colors, cursor position and make animations on the terminal.
