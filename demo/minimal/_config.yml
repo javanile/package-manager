@@ -1,4 +1,6 @@
 remote_theme: javanile/package-manager@main
 
+tagline: A simple package registry. Zero configuration required.
+
 plugins:
   - jekyll-remote-theme

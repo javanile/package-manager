@@ -3,6 +3,7 @@
 name: docker-images
 title: MyOrg Docker Images
 description: The official Docker image registry for MyOrg. Pull production-ready images for all your infrastructure needs.
+tagline: Production-ready Docker images. Pull and go.
 
 suggested_command: "docker pull {package}"
 
