@@ -2,8 +2,8 @@
 layout: default
 ---
 
-<section class="tutorial">
-	<section class="tutorial-content">
+<section class="package">
+	<section class="package-content">
 		<h1>{{ page.title }}</h1>
 
 		{% if page.type == "Video" %}
@@ -20,10 +20,10 @@ layout: default
 			{% endif %}
 		{% endif %}
 		
-		<div class="tutorial-main">
+		<div class="package-main">
 			{{ content }}
 		</div>
-		<div class="tutorial-share">
+		<div class="package-share">
 			<a class="modalOpen no-smooth" href="#subscribe">{% include social-icon.html icon="Email" %} Subscribe</a>
 			<a class="modalOpen no-smooth" href="#share">{% include social-icon.html icon="Share" %} Share</a>
 		</div>
@@ -42,7 +42,7 @@ layout: default
 	{% assign set_file_name = "_sets/" | append: page.set | append: ".md" %}
 	{% assign set = site.sets | where: "path", set_file_name | first %}
 	{% assign series_posts = site.posts | where: "set", page.set | sort: "order_number" %}
-	<div class="tutorial-series">
+	<div class="package-series">
 		<h3>{{ set.title }} - Series</h3>
 		<p>{{ set.description }}</p>
 

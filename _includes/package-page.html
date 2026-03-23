@@ -18,8 +18,8 @@
   {% assign _author_name = page.author | default: "Anonymous" %}
 {% endif %}
 
-<section class="tutorial">
-    <section class="tutorial-content">
+<section class="package">
+    <section class="package-content">
         {% unless _content_has_h1 %}<h1 class="margin-0">{{ page.title }}</h1>{% endunless %}
 
         {% if page.keywords %}
@@ -30,7 +30,7 @@
         </div>
         {% endif %}
 
-        <div class="tutorial-main margin-top-1">
+        <div class="package-main margin-top-1">
             {{ content }}
         </div>
     </section>
