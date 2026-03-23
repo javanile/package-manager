@@ -38,11 +38,44 @@ code, pre, tt {
 	font-family: Inconsolata,Consolas,Courier,"Courier New","Liberation Mono",monospace;
 	font-size: .9em;
 	white-space: pre-wrap;
-	border-radius: 2px;
+	border-radius: 3px;
 	line-height: 1.4;
 	font-weight: 400;
 	background-color: #404145;
 	color: #FAFAFA;
-	border-radius: 2px;
-	padding: 2px 5px;
+	padding: 1px 4px;
+}
+
+// Fenced code blocks — collapse double padding from div.highlight + pre
+.package-main {
+	// Hide the h1 that package authors put at the top of their markdown
+	> .highlight:first-child,
+	> h1:first-child {
+		display: none;
+	}
+
+	div.highlight {
+		margin: .4rem 0;
+		border-radius: 4px;
+		overflow: hidden;
+
+		pre.highlight {
+			margin: 0;
+			padding: .5rem .75rem;
+			background: #1c1c1c;
+			border-radius: 4px;
+
+			code {
+				padding: 0;
+				background: none;
+				font-size: .85em;
+				line-height: 1.55;
+			}
+		}
+	}
+}
+
+// Hide nav search bar on /packages/ page
+body.page-packages header nav form {
+	display: none !important;
 }

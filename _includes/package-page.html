@@ -1,6 +1,5 @@
 {% assign install_cmd = site.suggested_command | default: "install {package}" %}
 {% assign install_cmd = install_cmd | replace: "{package}", page.title %}
-{% assign _content_has_h1 = content | contains: "<h1" %}
 
 {% comment %} Resolve author avatar {% endcomment %}
 {% if page.author_github %}
@@ -20,7 +19,7 @@
 
 <section class="package">
     <section class="package-content">
-        {% unless _content_has_h1 %}<h1 class="margin-0">{{ page.title }}</h1>{% endunless %}
+        <h1 class="margin-0">{{ page.title }}</h1>
 
         {% if page.keywords %}
         <div class="package-keywords" style="margin: .5rem 0 1rem;">

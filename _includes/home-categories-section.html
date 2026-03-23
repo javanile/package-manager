@@ -1,4 +1,5 @@
 {% include packages-assign.html %}
+{% assign home_packages_sort = site.home_packages_sort | default: "date" %}
 {% assign packages_sorted = packages | sort: home_packages_sort | reverse %}
 
 {% assign _nonempty_cats = 0 %}
@@ -16,8 +17,25 @@
 {% else %}
   {% assign home_categories_limit = site.home_categories_limit | default: 6 %}
 {% endif %}
-{% assign home_packages_limit = site.home_packages_limit | default: 3 %}
-{% assign home_packages_sort = site.home_packages_sort | default: "date" %}
+
+{% comment %} Pass 1: find minimum package count across first N non-empty categories (cap at 3) {% endcomment %}
+{% assign _pass1_shown = 0 %}
+{% assign _pkg_limit = 3 %}
+{% for _cat in site.categories %}
+  {% if _pass1_shown >= home_categories_limit %}{% break %}{% endif %}
+  {% assign _cslug = _cat.title | slugify %}
+  {% assign _ccount = 0 %}
+  {% for _pkg in packages_sorted %}
+    {% if _pkg.categories == _cslug or _pkg.categories contains _cslug %}
+      {% assign _ccount = _ccount | plus: 1 %}
+      {% if _ccount >= 3 %}{% break %}{% endif %}
+    {% endif %}
+  {% endfor %}
+  {% if _ccount == 0 %}{% continue %}{% endif %}
+  {% assign _pass1_shown = _pass1_shown | plus: 1 %}
+  {% assign _ccount_capped = _ccount | at_most: 3 %}
+  {% if _ccount_capped < _pkg_limit %}{% assign _pkg_limit = _ccount_capped %}{% endif %}
+{% endfor %}
 
 <h3 class="align-center mb-4">Explore and discover packages</h3>
 
@@ -39,34 +57,34 @@
     {% assign categories_shown = categories_shown | plus: 1 %}
 
     <section class="category">
-        <h4 class="align-center">
-            <a href="{{ site.baseurl }}/categories/{{ cat_slug }}/">
-                {{ category.title }}
-            </a>
-        </h4>
-        <p class="align-center lh-1">
-            {{ category.description }}
-        </p>
+        <div class="category__head">
+            <h4>
+                <a href="{{ site.baseurl }}/categories/{{ cat_slug }}/">{{ category.title }}</a>
+            </h4>
+            {% if category.description %}
+            <p>{{ category.description }}</p>
+            {% endif %}
+        </div>
         <ul>
-            {% for package in cat_packages limit: home_packages_limit %}
+            {% for package in cat_packages limit: _pkg_limit %}
             <li class="card">
-                <a href="{{ site.baseurl }}{{ package.url }}" class="position-relative">
-                    <span class="align-items-center mr-2">{% include package-icon.html icon=package.type %}</span>
-                    <div>
-                        <h3 class="text-md mb-1">{{ package.title }}</h3>
-                        <p class="text-sm lh-1 m-0">{{ package.description }}</p>
+                <a href="{{ site.baseurl }}{{ package.url }}">
+                    <span class="cat-icon">{% include package-icon.html icon=package.type %}</span>
+                    <div class="cat-pkg-text">
+                        <h3>{{ package.title }}</h3>
+                        <p>{{ package.description }}</p>
                     </div>
                 </a>
             </li>
             {% endfor %}
-            {% if cat_packages.size > home_packages_limit %}
-            <li class="card card--more">
-                <a href="{{ site.baseurl }}/categories/{{ cat_slug }}/">
-                    +{{ cat_packages.size | minus: home_packages_limit }} more in {{ category.title }}
-                </a>
-            </li>
-            {% endif %}
         </ul>
+        {% if cat_packages.size > _pkg_limit %}
+        <div class="cat-more">
+            <a href="{{ site.baseurl }}/categories/{{ cat_slug }}/">
+                +{{ cat_packages.size | minus: _pkg_limit }} more in {{ category.title }}
+            </a>
+        </div>
+        {% endif %}
     </section>
     {% endfor %}
 </section>

@@ -2,9 +2,6 @@
 
 <section class="packages-page">
     <aside class="packages-sidebar">
-        <div class="packages-sidebar__search">
-            {% include search.html %}
-        </div>
 
         {% if site.categories.size > 0 %}
         <div class="packages-sidebar__section">
@@ -35,7 +32,9 @@
     </aside>
 
     <section class="packages-list">
-        <h1>{{ page.title | default: "Packages" }}</h1>
+        <div class="packages-list__search">
+            {% include search.html %}
+        </div>
         <p class="packages-list__count">{{ packages.size }} packages available</p>
         <ul>
             {% assign packages_sorted = packages | sort: "date" | reverse %}
