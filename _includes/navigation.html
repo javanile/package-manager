@@ -1,27 +1,36 @@
 <a class="nav-toggle" id="open-nav" href="#">&#9776;</a>
 <nav>
-	<a class="editor-link btn" href="cloudcannon:collections/_data/navigation.yml" class="btn" style="padding: 5px;">
-		<strong>&#9998;</strong> Edit navigation
-	</a>
-
-	<!--
-	{% for static_file in site.static_files %}
-		{{ static_file.path }}
-	{% endfor %}
-	{{ site.github.repository_url }}
-	-->
-
 	{% if site.navigation %}
 		{% assign navigation = site.navigation %}
 	{% else %}
-		{% assign navigation = "Get Started, Packages, Guides, Contribute" | split: ", " %}
+		{% assign navigation = "Get Started, Packages, Contribute" | split: ", " %}
 	{% endif %}
 
 	{% for item in navigation %}
 		{% if item.link %}
 			{% assign link = item.link %}
+
 		{% elsif item == "Get Started" %}
-			{% assign link = site.github.repository_url %}
+			{% if site.repository %}
+				{% assign link = "https://github.com/" | append: site.repository %}
+			{% else %}
+				{% assign link = "#" %}
+			{% endif %}
+
+		{% elsif item == "Packages" %}
+			{% assign link = "packages" %}
+
+		{% elsif item == "Contribute" %}
+			{% assign _cp = site.pages | where: "url", "/contribute/" | first %}
+			{% unless _cp %}{% assign _cp = site.pages | where: "url", "/contribute.html" | first %}{% endunless %}
+			{% if _cp %}
+				{% assign link = "/contribute/" %}
+			{% elsif site.repository %}
+				{% assign link = "https://github.com/" | append: site.repository | append: "/blob/main/CONTRIBUTING.md" %}
+			{% else %}
+				{% assign link = "#" %}
+			{% endif %}
+
 		{% else %}
 			{% assign link = item | slugify %}
 		{% endif %}

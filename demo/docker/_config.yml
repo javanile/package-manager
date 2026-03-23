@@ -4,6 +4,8 @@ name: docker-images
 title: MyOrg Docker Images
 description: The official Docker image registry for MyOrg. Pull production-ready images for all your infrastructure needs.
 
+suggested_command: "docker pull {package}"
+
 primary_color: "#2496ED"
 secondary_color: "#FFF"
 

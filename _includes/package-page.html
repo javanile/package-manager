@@ -1,242 +1,106 @@
-{% comment %}
-<!--
-
-
--->
-{% endcomment %}
+{% assign install_cmd = site.suggested_command | default: "install {package}" %}
+{% assign install_cmd = install_cmd | replace: "{package}", page.title %}
 
 <section class="tutorial">
     <section class="tutorial-content">
         <h1 class="margin-0">{{ page.title }}</h1>
-        <div>
+
+        {% if page.keywords %}
+        <div class="package-keywords" style="margin: .5rem 0 1rem;">
             {% for keyword in page.keywords %}
-            <span class="keyword">{{ keyword }}</span>
+            <a href="{{ site.baseurl }}/search/?q={{ keyword | url_encode }}" class="keyword">{{ keyword }}</a>
             {% endfor %}
         </div>
-
+        {% endif %}
 
         <div class="tutorial-main margin-top-1">
             {{ content }}
         </div>
-        <div>
-
-            <div class="l-colspan--l colspan--l--has-border">
-                <div class="gem__intro">
-                    <div id="markup" class="gem__desc">
-                        <p>A fast chess library that use bitboards to play chess with Ruby.</p>
-                    </div>
-                </div>
-
-                <div class="l-half--l">
-                    <div class="versions">
-                        <h3 class="t-list__heading">Versions:</h3>
-                        <ol class="gem__versions t-list__items">
-                            <li class="gem__version-wrap">
-                                <a class="t-list__item" href="/gems/chess/versions/0.3.2">0.3.2</a>
-                                <small class="gem__version__date">- January 28, 2021</small>
-
-                                <span class="gem__version__date">(431 KB)</span>
-                            </li>
-                            <li class="gem__version-wrap">
-                                <a class="t-list__item" href="/gems/chess/versions/0.3.1">0.3.1</a>
-                                <small class="gem__version__date">- June 16, 2019</small>
-
-                                <span class="gem__version__date">(356 KB)</span>
-                            </li>
-                            <li class="gem__version-wrap">
-                                <a class="t-list__item" href="/gems/chess/versions/0.3.0">0.3.0</a>
-                                <small class="gem__version__date">- June 16, 2019</small>
-
-                                <span class="gem__version__date">(356 KB)</span>
-                            </li>
-                            <li class="gem__version-wrap">
-                                <a class="t-list__item" href="/gems/chess/versions/0.2.2">0.2.2</a>
-                                <small class="gem__version__date">- January 11, 2018</small>
-
-                                <span class="gem__version__date">(355 KB)</span>
-                            </li>
-                            <li class="gem__version-wrap">
-                                <a class="t-list__item" href="/gems/chess/versions/0.2.1">0.2.1</a>
-                                <small class="gem__version__date">- November 01, 2017</small>
-
-                                <span class="gem__version__date">(355 KB)</span>
-                            </li>
-
-                        </ol>
-                        <a class="gem__see-all-versions t-link--gray t-link--has-arrow" href="https://rubygems.org/gems/chess/versions">Show all versions (21 total)</a>
-                    </div>
-                </div>
-
-                <div class="l-half--l">
-
-                    <div class="t-list__items">
-                        <div class="dependencies" id="development_dependencies">
-                            <h3 class="t-list__heading">Development Dependencies (11):</h3>
-                            <div class="t-list__items">
-                                <li class="gem__requirement-wrap">
-                                    <a class="t-list__item push--top-s" href="/gems/bundler">
-                                        <strong>bundler</strong>
-                                    </a>              ~&gt; 2
-                                </li>
-                                <li class="gem__requirement-wrap">
-                                    <a class="t-list__item push--top-s" href="/gems/byebug">
-                                        <strong>byebug</strong>
-                                    </a>              ~&gt; 11
-                                </li>
-                                <li class="gem__requirement-wrap">
-                                    <a class="t-list__item push--top-s" href="/gems/codecov">
-                                        <strong>codecov</strong>
-                                    </a>              ~&gt; 0.4
-                                </li>
-                                <li class="gem__requirement-wrap">
-                                    <a class="t-list__item push--top-s" href="/gems/minitest">
-                                        <strong>minitest</strong>
-                                    </a>              ~&gt; 5
-                                </li>
-                                <li class="gem__requirement-wrap">
-                                    <a class="t-list__item push--top-s" href="/gems/rake">
-                                        <strong>rake</strong>
-                                    </a>              ~&gt; 13
-                                </li>
-                                <li class="gem__requirement-wrap">
-                                    <a class="t-list__item push--top-s" href="/gems/rubocop">
-                                        <strong>rubocop</strong>
-                                    </a>              ~&gt; 1
-                                </li>
-                                <li class="gem__requirement-wrap">
-                                    <a class="t-list__item push--top-s" href="/gems/rubocop-minitest">
-                                        <strong>rubocop-minitest</strong>
-                                    </a>              ~&gt; 0.10
-                                </li>
-                                <li class="gem__requirement-wrap">
-                                    <a class="t-list__item push--top-s" href="/gems/rubocop-performance">
-                                        <strong>rubocop-performance</strong>
-                                    </a>              ~&gt; 1
-                                </li>
-                                <li class="gem__requirement-wrap">
-                                    <a class="t-list__item push--top-s" href="/gems/rubocop-rake">
-                                        <strong>rubocop-rake</strong>
-                                    </a>              ~&gt; 0.5
-                                </li>
-                                <li class="gem__requirement-wrap">
-                                    <a class="t-list__item push--top-s" href="/gems/simplecov">
-                                        <strong>simplecov</strong>
-                                    </a>              ~&gt; 0.21
-                                </li>
-                                <li class="gem__requirement-wrap">
-                                    <a class="t-list__item push--top-s" href="/gems/yard">
-                                        <strong>yard</strong>
-                                    </a>              ~&gt; 0.9
-                                </li>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="dependencies_list">
-                        <a class="gem__see-all-versions t-link--gray t-link--has-arrow push--s" href="/gems/chess/versions/0.3.2/dependencies">Show all transitive dependencies</a>
-                    </div>
-                </div>
-
-
-                <div class="gem__members">
-                    <h3 class="t-list__heading">Owners:</h3>
-                    <div class="gem__users">
-                        <a alt="pioz" title="pioz" href="/profiles/pioz"><img id="gravatar-44088" width="48" height="48" src="https://secure.gravatar.com/avatar/a6db4a0de1908da674969b77fc975e40.png?d=retro&amp;r=PG&amp;s=48"></a>
-                    </div>
-
-
-                    <h3 class="t-list__heading">Pushed by:</h3>
-                    <div class="gem__users">
-                        <a alt="pioz" title="pioz" href="/profiles/pioz"><img id="gravatar-44088" width="48" height="48" src="https://secure.gravatar.com/avatar/a6db4a0de1908da674969b77fc975e40.png?d=retro&amp;r=PG&amp;s=48"></a>
-                    </div>
-
-
-                    <h3 class="t-list__heading">Authors:</h3>
-                    <ul class="t-list__items">
-                        <li class="t-list__item">
-                            <p>Enrico Pilotto</p>
-                        </li>
-                    </ul>
-
-                    <h3 class="t-list__heading">SHA 256 checksum:</h3>
-                    <div class="gem__sha">
-                        a17f62c88f4dbf1473eb957bfa0f9dcffe54d3b141e03d25772f1d979c0d28c7
-                    </div>
-
-                </div>
-
-                <div class="gem__navigation">
-                    <a class="gem__previous__version" href="/gems/chess/versions/0.3.1">← Previous version</a>
-
-                </div>
-
-            </div>
-
-        </div>
     </section>
+
     <section class="sidebar sticky">
         <div>
             <strong>Install</strong>
-            <pre>bpkg install term</pre>
+            <pre>{{ install_cmd }}</pre>
         </div>
+
+        {% if page.repository %}
         <div>
             <strong>Repository</strong>
             <div>
-                <svg fill="#000000" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 50 50" width="24px" height="24px"><path d="M 46.792969 22.089844 L 27.910156 3.207031 C 27.109375 2.402344 26.054688 2 25 2 C 23.945313 2 22.890625 2.402344 22.089844 3.207031 L 18.355469 6.941406 L 22.976563 11.5625 C 24.511719 10.660156 26.511719 10.855469 27.828125 12.171875 C 29.144531 13.488281 29.335938 15.488281 28.433594 17.019531 L 32.976563 21.5625 C 34.511719 20.660156 36.511719 20.855469 37.828125 22.171875 C 39.390625 23.734375 39.390625 26.265625 37.828125 27.828125 C 36.265625 29.390625 33.734375 29.390625 32.171875 27.828125 C 30.855469 26.511719 30.660156 24.511719 31.5625 22.976563 L 27.019531 18.433594 C 26.695313 18.625 26.355469 18.765625 26 18.855469 L 26 31.140625 C 27.722656 31.585938 29 33.136719 29 35 C 29 37.210938 27.210938 39 25 39 C 22.789063 39 21 37.210938 21 35 C 21 33.136719 22.277344 31.585938 24 31.140625 L 24 18.855469 C 23.332031 18.683594 22.695313 18.351563 22.171875 17.828125 C 20.855469 16.511719 20.664063 14.511719 21.566406 12.980469 L 16.941406 8.355469 L 3.207031 22.089844 C 1.597656 23.695313 1.597656 26.304688 3.207031 27.910156 L 22.089844 46.792969 C 22.890625 47.597656 23.945313 48 25 48 C 26.054688 48 27.109375 47.597656 27.910156 46.792969 L 46.792969 27.910156 C 48.402344 26.304688 48.402344 23.695313 46.792969 22.089844 Z"/></svg>
-                <a href="#{{ item.id }}">github.com/bermi/password-generator</a>
+                <a href="{{ page.repository }}">{{ page.repository | remove: "https://" }}</a>
             </div>
         </div>
+        {% endif %}
+
+        {% if page.homepage %}
         <div>
             <strong>Homepage</strong>
             <div>
-                <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <g id="Dribbble-Light-Preview" transform="translate(-380.000000, -3279.000000)" fill="#000000">
-                            <g id="icons" transform="translate(56.000000, 160.000000)">
-                                <path d="M342.238743,3120.76128 C339.890401,3118.41291 336.082738,3118.41291 333.734396,3120.76128 L331.165552,3123.33016 L332.582776,3124.7474 L335.15162,3122.17852 C336.718184,3120.61194 339.253953,3120.61194 340.821519,3122.17852 C342.384074,3123.7421 342.384074,3126.28491 340.821519,3127.84849 L338.252675,3130.41737 L339.669899,3131.83461 L342.238743,3129.26573 C344.587086,3126.91736 344.587086,3123.10965 342.238743,3120.76128 L342.238743,3120.76128 Z M332.84838,3135.82073 C332.091659,3136.57846 331.084367,3136.99541 330.013932,3136.99541 C328.943496,3136.99541 327.936205,3136.57846 327.179483,3135.82073 C325.615926,3134.25815 325.615926,3131.71433 327.179483,3130.15176 L329.748327,3127.58288 L328.330101,3126.16464 L325.761257,3128.73352 C323.412914,3131.08189 323.412914,3134.8896 325.761257,3137.23897 C326.935929,3138.41266 328.474429,3139 330.013932,3139 C331.553434,3139 333.091934,3138.41266 334.266607,3137.23897 L336.835451,3134.6701 L335.417224,3133.25185 L332.84838,3135.82073 Z M336.263149,3125.31971 L337.680373,3126.73695 L331.721817,3132.69558 L330.304593,3131.27834 L336.263149,3125.31971 Z" id="link_round-[#1110]"></path>
-                            </g>
-                        </g>
-                    </g>
-                </svg>
-                <a href="#{{ item.id }}">github.com/bermi/password-generator</a>
+                <a href="{{ page.homepage }}">{{ page.homepage | remove: "https://" }}</a>
             </div>
         </div>
-        <div>
-            <strong>LICENSE:</strong>
-            <div>
-                LGPLV3
-            </div>
-        </div>
+        {% endif %}
 
+        {% if page.license %}
         <div>
-            <strong>
-                REQUIRED BPKG VERSION:</strong>
+            <strong>License</strong>
+            <div>{{ page.license }}</div>
+        </div>
+        {% endif %}
+
+        {% if page.version %}
+        <div>
+            <strong>Version</strong>
+            <div>{{ page.version }}</div>
+        </div>
+        {% endif %}
+
+        {% if page.author %}
+        <div>
+            <strong>Author</strong>
             <div>
-                >= 2.5
+                {% if page.author_url %}
+                <a href="{{ page.author_url }}">{{ page.author }}</a>
+                {% else %}
+                {{ page.author }}
+                {% endif %}
             </div>
         </div>
+        {% endif %}
+
+        {% if page.categories %}
         <div>
-            <strong>Other info</strong>
-            <ul>
-                {% assign sub_navigation = content | extract_element: 'h2' %}
-                {% for item in sub_navigation %}
-                <li><a href="#{{ item.id }}">{{ item.text }}</a></li>
+            <strong>Category</strong>
+            <div>
+                {% assign cat_slug = page.categories | first | default: page.categories | slugify %}
+                <a href="{{ site.baseurl }}/categories/{{ cat_slug }}/">{{ page.categories }}</a>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if page.dependencies %}
+        <div>
+            <strong>Dependencies</strong>
+            <ul style="padding-left: 1rem; margin: .25rem 0 0;">
+                {% for dep in page.dependencies %}
+                <li style="margin-bottom: .25rem;">
+                    <a href="{{ site.baseurl }}/search/?q={{ dep | url_encode }}">{{ dep }}</a>
+                </li>
                 {% endfor %}
             </ul>
         </div>
+        {% endif %}
 
         <div>
-            <strong>Links</strong>
+            <strong>Navigation</strong>
             <ul>
-                <a href="">Homepage</a>
-                <a href="">Documentation</a>
-                <a href="">Download</a>
-                <a href="">Review changes</a>
-                <a href="">Badge</a>
-                <a href="">Subscribe</a>
-                <a href="">RSS</a>
-                <a href="">Report abuse</a>
-                <a href="">Reverse dependencies</a>
+                {% assign headings = content | split: "<h2" %}
+                {% for section in headings offset: 1 %}
+                    {% assign heading_text = section | split: "</h2>" | first | split: ">" | last %}
+                    {% assign heading_id = heading_text | slugify %}
+                    <li><a href="#{{ heading_id }}">{{ heading_text }}</a></li>
+                {% endfor %}
             </ul>
         </div>
     </section>
