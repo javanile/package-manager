@@ -1,9 +1,10 @@
 {% assign install_cmd = site.suggested_command | default: "install {package}" %}
 {% assign install_cmd = install_cmd | replace: "{package}", page.title %}
+{% assign _content_has_h1 = content | contains: "<h1" %}
 
 <section class="tutorial">
     <section class="tutorial-content">
-        <h1 class="margin-0">{{ page.title }}</h1>
+        {% unless _content_has_h1 %}<h1 class="margin-0">{{ page.title }}</h1>{% endunless %}
 
         {% if page.keywords %}
         <div class="package-keywords" style="margin: .5rem 0 1rem;">

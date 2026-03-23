@@ -5,5 +5,17 @@
   font-size: 12px;
   border-radius: 3px;
   padding: 4px 14px;
+  display: inline-block;
+  margin: 2px 2px;
+  white-space: nowrap;
 }
 
+a.keyword {
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    background: #e0e0e0;
+    color: #111;
+  }
+}

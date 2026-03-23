@@ -15,7 +15,7 @@
 			{% assign link = link | strip %}
 
 		{% elsif item == "Packages" %}
-			{% assign link = "packages" %}
+			{% assign link = "/packages/" %}
 
 		{% elsif item == "Contribute" %}
 			{% assign _cp = site.pages | where: "url", "/contribute/" | first %}
