@@ -87,6 +87,37 @@
         event.preventDefault();
         document.body.classList.toggle("nav-open");
     });
+
+    (function() {
+        var btn = document.getElementById("theme-toggle");
+        var body = document.body;
+        if (!btn) return;
+
+        function setTheme(dark) {
+            if (dark) {
+                body.classList.add("dark-theme");
+                document.getElementById("theme-icon-moon").style.display = "none";
+                document.getElementById("theme-icon-sun").style.display = "block";
+            } else {
+                body.classList.remove("dark-theme");
+                document.getElementById("theme-icon-moon").style.display = "block";
+                document.getElementById("theme-icon-sun").style.display = "none";
+            }
+        }
+
+        var saved = localStorage.getItem("theme");
+        if (saved === "dark") {
+            setTheme(true);
+        } else if (!saved && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            setTheme(true);
+        }
+
+        btn.addEventListener("click", function() {
+            var isDark = body.classList.contains("dark-theme");
+            setTheme(!isDark);
+            localStorage.setItem("theme", isDark ? "light" : "dark");
+        });
+    })();
 </script>
 </body>
 </html>

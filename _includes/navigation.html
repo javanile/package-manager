@@ -47,4 +47,9 @@
 	{% endfor %}
 
 	{% include search.html %}
+
+	<button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle dark/light theme">
+		<svg id="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+		<svg id="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" style="display:none"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+	</button>
 </nav>
