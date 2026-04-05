@@ -90,6 +90,24 @@ Most of the visible site behavior is intentionally configurable from `_config.ym
 
 The demos exist specifically to validate these configuration combinations.
 
+### Get Started Navigation Fallback
+
+The top navigation item `Get Started` follows this order:
+
+- If a real `/get-started/` page exists, the nav item points to that page.
+- If `site.get_started_url` is defined, the nav item points there.
+- If neither exists, the nav item must not fall back to the repository home page.
+
+Instead, the fallback is the home page hash `/#get-started`.
+
+When the user lands on that hash:
+
+- the home page hides the categories section
+- the home page shows a `Get Started` panel instead
+- that panel currently contains a default message pointing to the repository `README.md`
+
+The `README.md` link is derived from `site.repository` using the same repository URL logic already used elsewhere in the theme.
+
 ## Repository Notes
 
 - The root theme is the source of truth.

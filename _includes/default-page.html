@@ -118,6 +118,21 @@
             localStorage.setItem("theme", isDark ? "light" : "dark");
         });
     })();
+
+    (function() {
+        var categories = document.getElementById("home-categories");
+        var getStarted = document.getElementById("get-started");
+        if (!categories || !getStarted) return;
+
+        function syncHomePanels() {
+            var showGetStarted = window.location.hash === "#get-started";
+            categories.classList.toggle("is-hidden", showGetStarted);
+            getStarted.classList.toggle("is-hidden", !showGetStarted);
+        }
+
+        syncHomePanels();
+        window.addEventListener("hashchange", syncHomePanels);
+    })();
 </script>
 </body>
 </html>

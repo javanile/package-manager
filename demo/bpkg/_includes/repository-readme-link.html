@@ -1,0 +1,5 @@
+{% if site.repository %}
+  {{ "https://github.com/" | append: site.repository | append: "/blob/main/README.md" }}
+{% else %}
+  {{ site.baseurl | append: "/" }}
+{% endif %}

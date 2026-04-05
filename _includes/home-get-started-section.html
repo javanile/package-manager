@@ -1,0 +1,13 @@
+{% capture _readme_link %}{% include repository-readme-link.html %}{% endcapture %}
+{% assign _readme_link = _readme_link | strip %}
+
+<section id="get-started" class="home-panel home-panel-get-started is-hidden">
+	<h3 class="align-center mb-4">Get Started</h3>
+	<div class="card home-get-started-card">
+		<p class="m-0 align-center">
+			Per maggiori informazioni sul progetto visita il
+			<a href="{% include relative-src.html src=_readme_link %}">README.md</a>
+			sulla nostra repository.
+		</p>
+	</div>
+</section>

@@ -1,3 +1,5 @@
+{% include home-get-started-section.html %}
+<section id="home-categories" class="home-panel home-panel-categories">
 {% include packages-assign.html %}
 {% assign home_packages_sort = site.home_packages_sort | default: "date" %}
 {% assign packages_sorted = packages | sort: home_packages_sort | reverse %}
@@ -91,4 +93,5 @@
         {% endif %}
     </section>
     {% endfor %}
+</section>
 </section>

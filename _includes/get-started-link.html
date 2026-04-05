@@ -4,8 +4,6 @@
   {{ "/get-started/" }}
 {% elsif site.get_started_url %}
   {{ site.get_started_url }}
-{% elsif site.repository %}
-  {{ "https://github.com/" | append: site.repository }}
 {% else %}
-  {{ site.baseurl | append: "/packages/" }}
+  {{ site.baseurl | append: "/#get-started" }}
 {% endif %}

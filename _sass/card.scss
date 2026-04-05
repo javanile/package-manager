@@ -3,6 +3,11 @@
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
 
+.home-get-started-card {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
 // Category cards: tighter padding, hover lift
 .category > ul > li.card {
   padding: .7rem .85rem;
