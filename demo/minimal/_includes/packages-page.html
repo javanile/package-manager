@@ -1,0 +1,61 @@
+{% include packages-assign.html %}
+
+<section class="packages-page">
+    <aside class="packages-sidebar">
+
+        {% if site.categories.size > 0 %}
+        <div class="packages-sidebar__section">
+            <strong>Categories</strong>
+            <ul>
+                <li><a href="{{ site.baseurl }}/packages/">All packages <span class="count">({{ packages.size }})</span></a></li>
+                {% for category in site.categories %}
+                {% assign cat_slug = category.title | slugify %}
+                {% assign cat_count = 0 %}
+                {% for pkg in packages %}
+                  {% if pkg.categories == cat_slug or pkg.categories contains cat_slug %}
+                    {% assign cat_count = cat_count | plus: 1 %}
+                  {% endif %}
+                {% endfor %}
+                <li>
+                    <a href="{{ site.baseurl }}/search/?q={{ category.title | url_encode }}" class="{% if page.title == category.title %}active{% endif %}">
+                        {{ category.title }} <span class="count">({{ cat_count }})</span>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <div class="packages-sidebar__section">
+            {% include keywords-navigation.html %}
+        </div>
+    </aside>
+
+    <section class="packages-list">
+        <div class="packages-list__search">
+            {% include search.html %}
+        </div>
+        <p class="packages-list__count">{{ packages.size }} packages available</p>
+        <ul>
+            {% assign packages_sorted = packages | sort: "date" | reverse %}
+            {% for package in packages_sorted %}
+            <li class="card card--list">
+                <a href="{{ site.baseurl }}{{ package.url }}">
+                    <span class="align-items-center mr-2">{% include package-icon.html icon=package.type %}</span>
+                    <div>
+                        <h3 class="text-md mb-1">{{ package.title }}</h3>
+                        <p class="text-sm lh-1 m-0">{{ package.description }}</p>
+                        {% if package.keywords %}
+                        <div class="package-keywords">
+                            {% for kw in package.keywords limit: 4 %}
+                            <span class="keyword">{{ kw }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+</section>

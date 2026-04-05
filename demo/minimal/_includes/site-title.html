@@ -1,0 +1,1 @@
+{% if site.title %}{{ site.title }}{% elsif site.remote_theme %}{% assign _rt = site.remote_theme | split: "/" | last | split: "@" | first %}{{ _rt | replace: "-", " " | replace: "_", " " | capitalize }}{% else %}Package Manager{% endif %}

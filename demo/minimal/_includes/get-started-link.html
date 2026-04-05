@@ -1,0 +1,11 @@
+{% assign _gs_page = site.pages | where: "url", "/get-started/" | first %}
+{% unless _gs_page %}{% assign _gs_page = site.pages | where: "url", "/get-started.html" | first %}{% endunless %}
+{% if _gs_page %}
+  {{ "/get-started/" }}
+{% elsif site.get_started_url %}
+  {{ site.get_started_url }}
+{% elsif site.repository %}
+  {{ "https://github.com/" | append: site.repository }}
+{% else %}
+  {{ site.baseurl | append: "/packages/" }}
+{% endif %}

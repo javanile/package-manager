@@ -1,0 +1,15 @@
+{% comment %}
+
+{% endcomment %}
+
+{% assign title = page.title %}
+{% assign description = page.description %}
+{% if page.url == "/404.html" %}
+	{% assign title = "404" %}
+	{% assign description = "Page not found" %}
+{% endif %}
+
+<section class="align-center">
+	<h1 class="text-big margin-0">{{ title }}</h1>
+	<p>{{ description }}</p>
+</section>

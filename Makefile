@@ -34,19 +34,25 @@ push:
 
 serve:
 ifdef demo
-	@bash scripts/sync-local-theme.sh $(demo)
-	$(call docker_serve,package-manager-demo-$(demo),$(call demo_port,$(demo)),demo/$(demo))
+	@bash scripts/stage-demo.sh $(demo)
+	$(call docker_serve,package-manager-demo-$(demo),$(call demo_port,$(demo)),.demo-build/$(demo))
 else
 	$(call docker_serve,$(CONTAINER_NAME),4000,.)
 endif
 
 restart:
 ifdef demo
-	@bash scripts/sync-local-theme.sh $(demo)
-	$(call docker_serve,package-manager-demo-$(demo),$(call demo_port,$(demo)),demo/$(demo))
+	@bash scripts/stage-demo.sh $(demo)
+	$(call docker_serve,package-manager-demo-$(demo),$(call demo_port,$(demo)),.demo-build/$(demo))
 else
 	$(call docker_serve,$(CONTAINER_NAME),4000,.)
 endif
+
+restart-demos:
+	@for entry in $(DEMO_PORTS); do \
+		name=$$(echo $$entry | cut -d: -f1); \
+		$(MAKE) restart demo=$$name; \
+	done
 
 # -----
 # Stop all

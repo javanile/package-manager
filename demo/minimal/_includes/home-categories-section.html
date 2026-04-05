@@ -1,0 +1,94 @@
+{% include packages-assign.html %}
+{% assign home_packages_sort = site.home_packages_sort | default: "date" %}
+{% assign packages_sorted = packages | sort: home_packages_sort | reverse %}
+
+{% assign _nonempty_cats = 0 %}
+{% for _cat in site.categories %}
+  {% assign _cslug = _cat.title | slugify %}
+  {% for _pkg in packages_sorted %}
+    {% if _pkg.categories == _cslug or _pkg.categories contains _cslug %}
+      {% assign _nonempty_cats = _nonempty_cats | plus: 1 %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+{% endfor %}
+{% if site.home_categories_limit %}
+  {% assign home_categories_limit = site.home_categories_limit %}
+{% elsif _nonempty_cats >= 6 %}
+  {% assign home_categories_limit = 6 %}
+{% elsif _nonempty_cats >= 3 %}
+  {% assign home_categories_limit = 3 %}
+{% else %}
+  {% assign home_categories_limit = _nonempty_cats %}
+{% endif %}
+
+{% comment %} Pass 1: find minimum package count across first N non-empty categories (cap at 3) {% endcomment %}
+{% assign _pass1_shown = 0 %}
+{% assign _pkg_limit = 3 %}
+{% for _cat in site.categories %}
+  {% if _pass1_shown >= home_categories_limit %}{% break %}{% endif %}
+  {% assign _cslug = _cat.title | slugify %}
+  {% assign _ccount = 0 %}
+  {% for _pkg in packages_sorted %}
+    {% if _pkg.categories == _cslug or _pkg.categories contains _cslug %}
+      {% assign _ccount = _ccount | plus: 1 %}
+      {% if _ccount >= 3 %}{% break %}{% endif %}
+    {% endif %}
+  {% endfor %}
+  {% if _ccount == 0 %}{% continue %}{% endif %}
+  {% assign _pass1_shown = _pass1_shown | plus: 1 %}
+  {% assign _ccount_capped = _ccount | at_most: 3 %}
+  {% if _ccount_capped < _pkg_limit %}{% assign _pkg_limit = _ccount_capped %}{% endif %}
+{% endfor %}
+
+<h3 class="align-center mb-4">Explore and discover packages</h3>
+
+<section class="categories">
+
+    {% assign categories_shown = 0 %}
+    {% for category in site.categories %}
+    {% if categories_shown >= home_categories_limit %}{% break %}{% endif %}
+
+    {% assign cat_slug = category.title | slugify %}
+    {% assign cat_packages = "" | split: "" %}
+    {% for pkg in packages_sorted %}
+      {% if pkg.categories == cat_slug or pkg.categories contains cat_slug %}
+        {% assign cat_packages = cat_packages | push: pkg %}
+      {% endif %}
+    {% endfor %}
+
+    {% if cat_packages.size == 0 %}{% continue %}{% endif %}
+    {% assign categories_shown = categories_shown | plus: 1 %}
+
+    <section class="category">
+        <div class="category__head">
+            <h4>
+                <a href="{{ site.baseurl }}/categories/{{ cat_slug }}/">{{ category.title }}</a>
+            </h4>
+            {% if category.description %}
+            <p>{{ category.description }}</p>
+            {% endif %}
+        </div>
+        <ul>
+            {% for package in cat_packages limit: _pkg_limit %}
+            <li class="card">
+                <a href="{{ site.baseurl }}{{ package.url }}">
+                    <span class="cat-icon">{% include package-icon.html icon=package.type %}</span>
+                    <div class="cat-pkg-text">
+                        <h3>{{ package.title }}</h3>
+                        <p>{{ package.description }}</p>
+                    </div>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% if cat_packages.size > _pkg_limit %}
+        <div class="cat-more">
+            <a href="{{ site.baseurl }}/categories/{{ cat_slug }}/">
+                +{{ cat_packages.size | minus: _pkg_limit }} more in {{ category.title }}
+            </a>
+        </div>
+        {% endif %}
+    </section>
+    {% endfor %}
+</section>

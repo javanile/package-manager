@@ -1,0 +1,25 @@
+---
+layout: default
+---
+
+<section class="package-list">
+    <section class="sidebar">
+        <div>
+            <strong>Package list</strong>
+        </div>
+        <div>
+            {% include keywords-navigation.html %}
+        </div>
+    </section>
+    <section class="package-list-content">
+        <h1>{{ page.title }}</h1>
+
+        <div class="package-main">
+            {{ content }}
+        </div>
+
+        <div id="package-list">
+
+        </div>
+    </section>
+</section>

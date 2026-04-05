@@ -1,0 +1,31 @@
+$success: #2ecc71;
+$warning: #e67e22;
+$danger: #e74c34;
+$grey: #cccccc;
+$info: #31708f;
+
+.alert {
+  font-family: "Open Sans", sans-serif;
+  text-rendering: geometricPrecision;
+  text-align: center;
+  box-sizing: border-box;
+  color: white;
+  font-size: 1.1em;
+  padding: 0.5em;
+  width: 100%;
+
+  a {
+    color: #ffffff;
+  }
+}
+
+@each $name, $color in(
+  'success': $success,
+  'warning': $warning,
+  'danger': $danger,
+  'info': $info
+) {
+  .alert-#{$name} {
+    background-color: $color;
+  }
+}

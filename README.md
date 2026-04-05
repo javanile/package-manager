@@ -1,82 +1,101 @@
 # Package Manager
 
-Package management site template for Jekyll. Browse through a [live demo](https://javanile.org/package-manager).
+Package Manager is a Jekyll site template for package registries and package catalogs. It is designed to be heavily driven by `_config.yml`, so branding, navigation, footer links, colors, command snippets, and collection behavior can be changed without rewriting the theme.
 
-Package Manager was made by [Javanile](http://javanile.org/), an Italian Open Source Dev Community.
-
-Find more projects, themes and step-by-step tutorials at [Javanile Package Store](https://packages.javanile.org/).
+Browse the public demo at <https://javanile.org/package-manager>.
 
 ## Features
 
-* Packages organised by category
-* Two types of packages - application and library
-* Ability to have a "multiple" version of a package
-* FAQ section
-* Disqus comments
-* Sticky sidebar for main headings in tutorials
-* Optimised for editing in local development environment
-* RSS/Atom feed
-* SEO tags
-* Google Analytics
+- Package listings grouped by category
+- Package detail pages with sticky metadata sidebar
+- Search pages and search autocomplete
+- Light and dark theme support
+- Configurable branding, navigation, footer links, colors, repository links, and suggested install command
+- RSS/Atom support
+- SEO-friendly Jekyll structure
+- Demo configurations for different product shapes
 
-## Setup
+## Quick Start
 
-1. Setup fresh new GitHub repository
-2. Add `_config.yml` as the follow [example](https://github.com/javanile/package-manager/blob/main/_config.example.yml)
-3. Add packages into `_packages` directory as markdown files
-4. Enable GitHub Pages in the repository settings
+1. Create a new repository from this template.
+2. Add a project `_config.yml`, starting from [`_config.example.yml`](_config.example.yml).
+3. Add package entries in `_packages/`.
+4. Add categories in `_categories/` if needed.
+5. Serve locally with `make serve`.
 
-## Develop
+## Local Development
 
-Package Manager was built with [Jekyll](http://jekyllrb.com/) version 3.4.3, but should support newer versions as well.
-
-Install the dependencies and run it with Makefile based on [Docker](http://docker.com/):
+The project is developed and previewed through Docker:
 
 ```bash
-$ make serve
+make serve
 ```
 
-## Editing
+This starts the main site on `http://localhost:4000/`.
 
-Package Manager is already optimised for adding, updating and removing packages as Markdown files into the `_packages` directory.
+## Demo Workflow
 
-The sticky sidebar in package page in populated by pulling out `<h2>` elements from the content.
+The demos are not meant to be separate theme forks. They exist as a local playground to verify how far the project can be configured from each demo `_config.yml`.
 
-### Packages
+The intended rule is:
 
-* Add, update or remove a post in the *Packages* collection.
-* The package page is organised by categories.
-* Change the defaults when new packages are created in `_packages/_defaults.md`.
+- The theme implementation lives in the root project.
+- Each demo describes a scenario through its own `_config.yml` plus demo-specific content.
+- Local demo builds should always render the current checkout of the theme, not an older remote copy.
 
-### Package Versioning
+For that reason, `make serve demo=<name>` and `make restart demo=<name>` now stage a temporary local build in `.demo-build/<name>` by combining:
 
-To create a new version:
+- the current root theme files
+- the selected demo `_config.yml`
+- the selected demo content
 
-* Add a new document to the `sets` collection.
-* Set the `title` and `description`.
+This keeps the demos useful as configuration test benches while ensuring they reflect the latest local theme changes.
 
-### Navigation
+Important: because a demo runs from the staged snapshot in `.demo-build/<name>`, changes to the root theme are not reflected in an already running demo container until you restart that demo.
 
-* Exposed as a data file to give clients better access.
-* Set in the *Data* / *Navigation* section.
+Use:
 
-### Footer
+- `make restart demo=minimal`
+- `make restart demo=bpkg`
+- `make restart demo=docker`
+- `make restart-demos` to refresh all demo snapshots after a theme change
 
-* Exposed as a data file to give clients better access.
-* Set in the *Data* / *Footer* section.
+Available demo ports:
 
-### Assets
+- `make serve demo=minimal` -> `http://localhost:4001/`
+- `make serve demo=bpkg` -> `http://localhost:4002/`
+- `make serve demo=docker` -> `http://localhost:4003/`
 
-* <https://feathericons.com/?query=box>
+## Editing Content
 
-### Read more
+Package Manager is optimized for editing package data as Markdown files.
 
-* <https://github.com/mmistakes/jekyll-theme-basically-basic/blob/master/_config.yml>
+- Add, update, or remove package entries in `_packages/`.
+- Organize packages through `_categories/`.
+- Use page front matter and `_config.yml` to control layout behavior.
+- The package page sidebar is populated from package metadata and page structure.
 
-### Used by
+## Configuration Notes
 
-* https://github.com/javanile/bpkg.github.io/tree/package-manager
+Most of the visible site behavior is intentionally configurable from `_config.yml`, including:
+
+- site title and tagline
+- repository links
+- navigation items
+- footer links
+- suggested install command
+- collection output and permalinks
+- per-page default body classes
+- brand colors and visual identity
+
+The demos exist specifically to validate these configuration combinations.
+
+## Repository Notes
+
+- The root theme is the source of truth.
+- Demo-specific theme copies should not be treated as canonical implementation.
+- `.demo-build/` is generated locally and ignored by git.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+This project is licensed under the MIT License. See [LICENSE](LICENSE).

@@ -1,0 +1,80 @@
+{% include packages-assign.html %}
+
+<section class="packages-page">
+    <aside class="packages-sidebar">
+
+        {% if site.categories.size > 0 %}
+        <div class="packages-sidebar__section">
+            <strong>Categories</strong>
+            <ul>
+                <li><a href="{{ site.baseurl }}/packages/">All packages <span class="count">({{ packages.size }})</span></a></li>
+                {% for category in site.categories %}
+                {% assign cat_slug = category.title | slugify %}
+                {% assign cat_count = 0 %}
+                {% for pkg in packages %}
+                  {% if pkg.categories == cat_slug or pkg.categories contains cat_slug %}
+                    {% assign cat_count = cat_count | plus: 1 %}
+                  {% endif %}
+                {% endfor %}
+                <li>
+                    <a href="{{ site.baseurl }}/search/?q={{ category.title | url_encode }}">
+                        {{ category.title }} <span class="count">({{ cat_count }})</span>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <div class="packages-sidebar__section">
+            {% include keywords-navigation.html %}
+        </div>
+    </aside>
+
+    <section class="packages-list">
+        <div class="packages-list__search">
+            {% include search.html %}
+        </div>
+
+        <p class="packages-list__count">
+            <span id="search-process">Searching</span>
+            <span id="search-query-container">for "<strong id="search-query"></strong>"</span>
+        </p>
+
+        <div id="package-list"></div>
+    </section>
+</section>
+
+<script>
+    window.baseurl = "{{ site.baseurl }}";
+    window.data = {
+    {% assign _search_added = false %}
+    {% for package in packages %}
+    {% if package.title %}
+    {% unless package.excluded_in_search %}
+    {% if _search_added %},{% endif %}
+    "{{ package.url | slugify }}": {
+        "id":          "{{ package.url | slugify }}",
+        "title":       {{ package.title | xml_escape | jsonify }},
+        "description": {{ package.description | xml_escape | jsonify }},
+        "categories":  {{ package.categories | join: ", " | xml_escape | jsonify }},
+        "keywords":    {{ package.keywords | jsonify }},
+        "url":         "{{ package.url | xml_escape }}",
+        "content":     {{ package.content | strip_html | replace: "\n", " " | replace: "  ", " " | strip | jsonify }}
+    }
+    {% assign _search_added = true %}
+    {% endunless %}
+    {% endif %}
+    {% endfor %}
+    };
+</script>
+<script src="{{ site.baseurl }}/assets/js/lunr.min.js"></script>
+<script src="{{ site.baseurl }}/assets/js/search.js"></script>
+<script>
+    // Pre-fill search input with query from URL
+    (function() {
+        var q = new URLSearchParams(window.location.search).get('q') || '';
+        var input = document.querySelector('.packages-list__search input[type=search]');
+        if (input && q) input.value = q;
+    })();
+</script>

@@ -1,0 +1,70 @@
+{% include packages-assign.html %}
+
+{% assign cat_slug = page.title | slugify %}
+{% assign cat_packages = "" | split: "" %}
+{% for pkg in packages %}
+  {% if pkg.categories == cat_slug or pkg.categories contains cat_slug %}
+    {% assign cat_packages = cat_packages | push: pkg %}
+  {% endif %}
+{% endfor %}
+{% assign cat_packages = cat_packages | sort: "date" | reverse %}
+
+<section class="packages-page">
+    <aside class="packages-sidebar">
+
+        {% if site.categories.size > 0 %}
+        <div class="packages-sidebar__section">
+            <strong>Categories</strong>
+            <ul>
+                <li><a href="{{ site.baseurl }}/packages/">All packages <span class="count">({{ packages.size }})</span></a></li>
+                {% for category in site.categories %}
+                {% assign cslug = category.title | slugify %}
+                {% assign ccount = 0 %}
+                {% for pkg in packages %}
+                  {% if pkg.categories == cslug or pkg.categories contains cslug %}
+                    {% assign ccount = ccount | plus: 1 %}
+                  {% endif %}
+                {% endfor %}
+                <li>
+                    <a href="{{ site.baseurl }}/categories/{{ cslug }}/"
+                       class="{% if cslug == cat_slug %}active{% endif %}">
+                        {{ category.title }} <span class="count">({{ ccount }})</span>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <div class="packages-sidebar__section">
+            {% include keywords-navigation.html %}
+        </div>
+    </aside>
+
+    <section class="packages-list">
+        <div class="packages-list__search">
+            {% include search.html %}
+        </div>
+        <p class="packages-list__count">{{ cat_packages.size }} package{% if cat_packages.size != 1 %}s{% endif %} in <strong>{{ page.title }}</strong></p>
+        <ul>
+            {% for package in cat_packages %}
+            <li class="card card--list">
+                <a href="{{ site.baseurl }}{{ package.url }}">
+                    <span class="align-items-center mr-2">{% include package-icon.html icon=package.type %}</span>
+                    <div>
+                        <h3 class="text-md mb-1">{{ package.title }}</h3>
+                        <p class="text-sm lh-1 m-0">{{ package.description }}</p>
+                        {% if package.keywords %}
+                        <div class="package-keywords">
+                            {% for kw in package.keywords limit: 4 %}
+                            <span class="keyword">{{ kw }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+</section>
