@@ -160,7 +160,8 @@ header {
 
 	@media #{$mid-point} {
 		order: 3;
-		gap: 0;
+		gap: 12px;
+		padding-left: 16px;
 	}
 }
 
@@ -180,10 +181,6 @@ header {
 	align-items: center;
 	justify-content: center;
 	flex-shrink: 0;
-
-	@media #{$mid-point} {
-		margin-left: 10px;
-	}
 
 	&:hover {
 		border-color: rgba(255, 255, 255, 0.5);
