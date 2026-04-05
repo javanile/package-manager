@@ -124,6 +124,7 @@
         var categories = document.getElementById("home-categories");
         var getStarted = document.getElementById("get-started");
         var contribute = document.getElementById("contribute");
+        var navPanelLinks = document.querySelectorAll("[data-nav-panel]");
         if (!categories || !getStarted || !contribute) return;
 
         function syncHomePanels() {
@@ -138,6 +139,10 @@
             categories.classList.toggle("is-hidden", showAltPanel);
             getStarted.classList.toggle("is-hidden", panelId !== "get-started");
             contribute.classList.toggle("is-hidden", panelId !== "contribute");
+
+            navPanelLinks.forEach(function(link) {
+                link.classList.toggle("active", link.getAttribute("data-nav-panel") === panelId);
+            });
         }
 
         syncHomePanels();

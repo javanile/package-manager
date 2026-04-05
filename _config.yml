@@ -2,6 +2,7 @@
 
 name: package-manager
 title: Package Manager
+tagline: I'm the demo of a package manager website
 url: https://javanile.org/package-manager/
 baseurl:
 logo: https://raw.githubusercontent.com/javanile/package-manager/main/assets/images/logo.png

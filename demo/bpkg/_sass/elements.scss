@@ -214,10 +214,10 @@ body.dark-theme {
 	}
 
 	.package .sidebar {
-		border-left-color: #333;
+		border-left-color: rgba(255,255,255,.11);
 
 		> div {
-			border-bottom-color: #2f2f2f;
+			border-bottom-color: rgba(255,255,255,.08);
 		}
 
 		strong {

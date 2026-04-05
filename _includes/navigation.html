@@ -40,7 +40,14 @@
 			{% assign class = class | append: " active" %}
 		{% endif %}
 
-		<a href="{% include relative-src.html src=link %}" class="{{ class }}">{{ name }}</a>
+		{% assign nav_panel = "" %}
+		{% if link == "/#get-started" %}
+			{% assign nav_panel = "get-started" %}
+		{% elsif link == "/#contribute" %}
+			{% assign nav_panel = "contribute" %}
+		{% endif %}
+
+		<a href="{% include relative-src.html src=link %}" class="{{ class }}"{% if nav_panel != "" %} data-nav-panel="{{ nav_panel }}"{% endif %}>{{ name }}</a>
 	{% endfor %}
 
 	{% include search.html %}

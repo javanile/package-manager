@@ -28,6 +28,18 @@
 		return String(text).replace(re, '<mark>$1</mark>');
 	}
 
+	function esc(text) {
+		return String(text || '').replace(/[&<>"']/g, function(ch) {
+			return {
+				'&': '&amp;',
+				'<': '&lt;',
+				'>': '&gt;',
+				'"': '&quot;',
+				"'": '&#39;'
+			}[ch];
+		});
+	}
+
 	function displaySearchResults(results, query) {
 		var listEl = document.getElementById("package-list"),
 			processEl = document.getElementById("search-process");
@@ -41,9 +53,10 @@
 				var keywords = Array.isArray(item.keywords) ? item.keywords : [];
 
 				html += '<li class="card card--list" style="margin-bottom:.75rem">';
-				html += '<a href="' + (window.baseurl || '') + item.url.trim() + '" style="display:flex;align-items:flex-start;gap:.75rem;text-decoration:none;color:inherit">';
-				html += '<span style="display:flex;align-items:flex-start">' + PKG_ICON + '</span>';
-				html += '<div style="min-width:0;flex:1">';
+				html += '<a class="card--list__link" href="' + (window.baseurl || '') + item.url.trim() + '" aria-label="Open ' + esc(item.title) + '"></a>';
+				html += '<div class="card--list__content">';
+				html += '<span class="align-items-center mr-2">' + PKG_ICON + '</span>';
+				html += '<div>';
 				html += '<h3 class="text-md mb-1">' + hl(item.title, query) + '</h3>';
 				if (desc) {
 					html += '<p class="text-sm m-0" style="margin-bottom:.25rem">' + hl(desc, query) + '</p>';
@@ -51,11 +64,11 @@
 				if (keywords.length) {
 					html += '<div class="package-keywords" style="margin-top:.2rem">';
 					keywords.slice(0, 4).forEach(function(kw) {
-						html += '<span class="keyword">' + kw + '</span>';
+						html += '<a class="keyword" href="' + (window.baseurl || '') + '/search/?q=' + encodeURIComponent(kw) + '">' + esc(kw) + '</a>';
 					});
 					html += '</div>';
 				}
-				html += '</div></a></li>';
+				html += '</div></div></li>';
 			});
 			html += '</ul>';
 

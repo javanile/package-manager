@@ -9,10 +9,22 @@ $info: #5b4d91;
   text-rendering: geometricPrecision;
   text-align: center;
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
   color: white;
   font-size: 1.1em;
-  padding: 0.5em;
+  line-height: 1.4;
+  padding: 0.65em 1em;
   width: 100%;
+
+  strong {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1.2;
+  }
 
   a {
     color: #ffffff;

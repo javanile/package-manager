@@ -582,10 +582,10 @@
 				position: relative;
 				z-index: 2;
 				pointer-events: none;
+			}
 
-				&:hover h3 {
-					color: $link-color;
-				}
+			.card--list__link:hover + .card--list__content h3 {
+				color: $link-color;
 			}
 
 			svg.pkg-icon {
@@ -738,7 +738,7 @@
 	width: 100%;
 	max-width: 100%;
 	align-self: start;
-	border-left: 1px solid #d7d7d7;
+	border-left: 1px solid rgba(80, 88, 96, .14);
 	padding-left: 1.5rem;
 
 	&.sticky {
@@ -750,7 +750,7 @@
 
 	> div {
 		padding: 1rem 0;
-		border-bottom: 1px solid #e2e2e2;
+		border-bottom: 1px solid rgba(80, 88, 96, .12);
 
 		&:first-child {
 			padding-top: 0;
@@ -855,10 +855,11 @@
 	align-items: center;
 	gap: .4rem;
 	font-size: .88em;
-	line-height: 1.35;
+	line-height: 1.2;
 	word-break: break-word;
 
 	.gh-icon {
+		display: block;
 		flex-shrink: 0;
 		width: 14px;
 		height: 14px;
