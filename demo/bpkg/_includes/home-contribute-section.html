@@ -1,0 +1,16 @@
+{% capture _contributing_link %}{% include repository-contributing-link.html %}{% endcapture %}
+{% assign _contributing_link = _contributing_link | strip %}
+
+<section id="contribute" class="home-panel home-panel-contribute is-hidden">
+	<h3 class="align-center mb-4">Contribute</h3>
+	<div class="card home-get-started-card">
+		<p class="align-center">
+			The {{ site.title | default: "Package Manager" }} project can be adapted to many different package catalog scenarios, and contributions help improve both the theme and its configuration model.
+		</p>
+		<p class="m-0 align-center">
+			If you would like to contribute, review the
+			<a href="{% include relative-src.html src=_contributing_link %}">CONTRIBUTING.md</a>
+			file in our repository for guidelines, workflow, and contribution details.
+		</p>
+	</div>
+</section>

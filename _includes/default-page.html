@@ -120,14 +120,24 @@
     })();
 
     (function() {
+        var heroSearch = document.getElementById("hero-search");
         var categories = document.getElementById("home-categories");
         var getStarted = document.getElementById("get-started");
-        if (!categories || !getStarted) return;
+        var contribute = document.getElementById("contribute");
+        if (!categories || !getStarted || !contribute) return;
 
         function syncHomePanels() {
-            var showGetStarted = window.location.hash === "#get-started";
-            categories.classList.toggle("is-hidden", showGetStarted);
-            getStarted.classList.toggle("is-hidden", !showGetStarted);
+            var panelId = null;
+            if (window.location.hash === "#get-started") panelId = "get-started";
+            if (window.location.hash === "#contribute") panelId = "contribute";
+            var showAltPanel = panelId !== null;
+
+            if (heroSearch) {
+                heroSearch.classList.toggle("is-hidden", showAltPanel);
+            }
+            categories.classList.toggle("is-hidden", showAltPanel);
+            getStarted.classList.toggle("is-hidden", panelId !== "get-started");
+            contribute.classList.toggle("is-hidden", panelId !== "contribute");
         }
 
         syncHomePanels();

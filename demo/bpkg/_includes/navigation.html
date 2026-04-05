@@ -21,10 +21,8 @@
 			{% unless _cp %}{% assign _cp = site.pages | where: "url", "/contribute.html" | first %}{% endunless %}
 			{% if _cp %}
 				{% assign link = "/contribute/" %}
-			{% elsif site.repository %}
-				{% assign link = "https://github.com/" | append: site.repository | append: "/blob/main/CONTRIBUTING.md" %}
 			{% else %}
-				{% assign link = "#" %}
+				{% assign link = "/#contribute" %}
 			{% endif %}
 
 		{% else %}

@@ -564,16 +564,25 @@
 
 		.card--list {
 			margin-bottom: .75rem;
+			position: relative;
 
-			a {
+			.card--list__link {
+				position: absolute;
+				inset: 0;
+				z-index: 1;
+				border-radius: 5px;
+			}
+
+			.card--list__content {
 				display: flex;
 				align-items: flex-start;
 				gap: .75rem;
-				text-decoration: none;
-				color: inherit;
+				position: relative;
+				z-index: 2;
+				pointer-events: none;
 
 				&:hover h3 {
-					text-decoration: underline;
+					color: $link-color;
 				}
 			}
 
@@ -585,17 +594,26 @@
 				margin-top: .15rem;
 			}
 
+			h3 {
+				margin-bottom: .45rem !important;
+				line-height: 1.3;
+			}
+
 			p {
 				display: -webkit-box;
 				-webkit-line-clamp: 2;
 				-webkit-box-orient: vertical;
 				overflow: hidden;
-				min-height: calc(2 * 1.2em);
+				line-height: 1.45 !important;
+				min-height: calc(2 * 1.45em);
 			}
 
 			.package-keywords {
 				margin-top: .3rem;
 				margin-left: -4px;
+				position: relative;
+				z-index: 3;
+				pointer-events: auto;
 			}
 		}
 	}
@@ -753,6 +771,8 @@
 	}
 
 	pre {
+		display: inline-block;
+		max-width: 100%;
 		background: #1c1c1c;
 		border: 0;
 		border-radius: 4px;
@@ -831,15 +851,14 @@
 .sidebar-gh-link {
 	display: inline-flex;
 	align-items: center;
-	gap: .3rem;
+	gap: .4rem;
 	font-size: .88em;
+	line-height: 1.35;
 	word-break: break-word;
 
 	.gh-icon {
 		flex-shrink: 0;
 		width: 14px;
 		height: 14px;
-		position: relative;
-		top: -1px;
 	}
 }

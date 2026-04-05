@@ -25,7 +25,7 @@
 		var re = new RegExp('(' + parts.map(function(p) {
 			return p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 		}).join('|') + ')', 'gi');
-		return String(text).replace(re, '<mark style="background:none;color:#c00;font-weight:700;padding:0">$1</mark>');
+		return String(text).replace(re, '<mark>$1</mark>');
 	}
 
 	function displaySearchResults(results, query) {
@@ -44,9 +44,9 @@
 				html += '<a href="' + (window.baseurl || '') + item.url.trim() + '" style="display:flex;align-items:flex-start;gap:.75rem;text-decoration:none;color:inherit">';
 				html += '<span style="display:flex;align-items:flex-start">' + PKG_ICON + '</span>';
 				html += '<div style="min-width:0;flex:1">';
-				html += '<h3 style="font-size:1em;font-weight:600;margin:0 0 .2rem;color:#222">' + hl(item.title, query) + '</h3>';
+				html += '<h3 class="text-md mb-1">' + hl(item.title, query) + '</h3>';
 				if (desc) {
-					html += '<p style="font-size:.82em;color:#777;margin:0 0 .25rem;line-height:1.35">' + hl(desc, query) + '</p>';
+					html += '<p class="text-sm m-0" style="margin-bottom:.25rem">' + hl(desc, query) + '</p>';
 				}
 				if (keywords.length) {
 					html += '<div class="package-keywords" style="margin-top:.2rem">';

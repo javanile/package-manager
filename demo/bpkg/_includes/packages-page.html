@@ -40,7 +40,8 @@
             {% assign packages_sorted = packages | sort: "date" | reverse %}
             {% for package in packages_sorted %}
             <li class="card card--list">
-                <a href="{{ site.baseurl }}{{ package.url }}">
+                <a class="card--list__link" href="{{ site.baseurl }}{{ package.url }}" aria-label="Open {{ package.title }}"></a>
+                <div class="card--list__content">
                     <span class="align-items-center mr-2">{% include package-icon.html icon=package.type %}</span>
                     <div>
                         <h3 class="text-md mb-1">{{ package.title }}</h3>
@@ -48,12 +49,12 @@
                         {% if package.keywords %}
                         <div class="package-keywords">
                             {% for kw in package.keywords limit: 4 %}
-                            <span class="keyword">{{ kw }}</span>
+                            <a href="{{ site.baseurl }}/search/?q={{ kw | url_encode }}" class="keyword">{{ kw }}</a>
                             {% endfor %}
                         </div>
                         {% endif %}
                     </div>
-                </a>
+                </div>
             </li>
             {% endfor %}
         </ul>

@@ -96,9 +96,12 @@
 
 	mark {
 		background: transparent;
-		color: #c00;
-		font-weight: 700;
+		color: #8d5a18;
+		font-weight: inherit;
 		padding: 0;
+		text-decoration: underline;
+		text-decoration-thickness: .08em;
+		text-underline-offset: .12em;
 	}
 }
 
@@ -112,8 +115,11 @@
 
 	mark {
 		background: transparent;
-		color: #c00;
-		font-weight: 600;
+		color: #8a6b3a;
+		font-weight: inherit;
 		padding: 0;
+		text-decoration: underline;
+		text-decoration-thickness: .08em;
+		text-underline-offset: .12em;
 	}
 }
