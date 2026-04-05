@@ -11,14 +11,16 @@ if [[ -z "$DEMO_NAME" ]]; then
 fi
 
 DEMO_DIR="$ROOT_DIR/demo/$DEMO_NAME"
-BUILD_DIR="$ROOT_DIR/.demo-build/$DEMO_NAME"
+BUILD_ROOT="$ROOT_DIR/.demo-build"
+BUILD_DIR="$BUILD_ROOT/$DEMO_NAME-$(date +%s)"
+CURRENT_LINK="$BUILD_ROOT/$DEMO_NAME-current"
 
 if [[ ! -d "$DEMO_DIR" ]]; then
 	echo "demo not found: $DEMO_NAME" >&2
 	exit 1
 fi
 
-rm -rf "$BUILD_DIR"
+mkdir -p "$BUILD_ROOT"
 mkdir -p "$BUILD_DIR"
 
 copy_if_exists() {
@@ -78,3 +80,5 @@ if [[ ! -f "$BUILD_DIR/_config.yml" ]]; then
 	echo "missing demo config: $DEMO_DIR/_config.yml" >&2
 	exit 1
 fi
+
+ln -sfn "$BUILD_DIR" "$CURRENT_LINK"

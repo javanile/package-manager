@@ -35,7 +35,7 @@ push:
 serve:
 ifdef demo
 	@bash scripts/stage-demo.sh $(demo)
-	$(call docker_serve,package-manager-demo-$(demo),$(call demo_port,$(demo)),.demo-build/$(demo))
+	$(call docker_serve,package-manager-demo-$(demo),$(call demo_port,$(demo)),.demo-build/$(demo)-current)
 else
 	$(call docker_serve,$(CONTAINER_NAME),4000,.)
 endif
@@ -43,7 +43,7 @@ endif
 restart:
 ifdef demo
 	@bash scripts/stage-demo.sh $(demo)
-	$(call docker_serve,package-manager-demo-$(demo),$(call demo_port,$(demo)),.demo-build/$(demo))
+	$(call docker_serve,package-manager-demo-$(demo),$(call demo_port,$(demo)),.demo-build/$(demo)-current)
 else
 	$(call docker_serve,$(CONTAINER_NAME),4000,.)
 endif
