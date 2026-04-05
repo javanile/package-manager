@@ -14,10 +14,14 @@ header {
 	color: #fff;
 
 	.top-bar {
+		position: relative;
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		min-height: 56px;
+
 		@media #{$mid-point} {
-			display: flex;
 			align-items: stretch;
-			min-height: 56px;
 		}
 
 		.logo {
@@ -47,12 +51,14 @@ header {
 
 	nav {
 		display: none;
+		order: 3;
 
 		@media #{$mid-point} {
 			flex: 1;
 			margin: 0 0 0 24px;
 			display: flex;
 			align-items: center;
+			order: 2;
 
 			form {
 				position: relative;
@@ -141,6 +147,19 @@ header {
 	}
 }
 
+.top-bar-actions {
+	margin-left: auto;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	order: 2;
+
+	@media #{$mid-point} {
+		order: 3;
+		gap: 0;
+	}
+}
+
 .nav-open header nav {
 	display: block;
 }
@@ -153,14 +172,13 @@ header {
 	border-radius: 4px;
 	padding: 5px 7px;
 	line-height: 1;
-	display: none;
+	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	margin-left: 10px;
 	flex-shrink: 0;
 
 	@media #{$mid-point} {
-		display: inline-flex;
+		margin-left: 10px;
 	}
 
 	&:hover {
@@ -178,14 +196,13 @@ header {
 }
 
 .nav-toggle {
-	position: absolute;
-	right: 25px;
 	font-size: 1.5em;
 	line-height: 1em;
 	text-decoration: none;
 	color: rgba(255, 255, 255, 0.85);
-	top: 50%;
-	transform: translateY(-50%);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 
 	@media #{$mid-point} {
 		display: none;

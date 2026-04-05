@@ -1,3 +1,18 @@
+html,
+body {
+	min-height: 100vh;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+}
+
+header,
+footer {
+	flex-shrink: 0;
+}
+
 .wrapper {
 	max-width: 900px;
 	margin: 0 auto;
@@ -14,6 +29,7 @@
 .content {
 	background: #fff;
 	padding: 60px 0;
+	flex: 1 0 auto;
 }
 
 dt, h2 {
