@@ -34,6 +34,7 @@ push:
 
 serve:
 ifdef demo
+	@bash scripts/sync-local-theme.sh $(demo)
 	$(call docker_serve,package-manager-demo-$(demo),$(call demo_port,$(demo)),demo/$(demo))
 else
 	$(call docker_serve,$(CONTAINER_NAME),4000,.)
@@ -41,6 +42,7 @@ endif
 
 restart:
 ifdef demo
+	@bash scripts/sync-local-theme.sh $(demo)
 	$(call docker_serve,package-manager-demo-$(demo),$(call demo_port,$(demo)),demo/$(demo))
 else
 	$(call docker_serve,$(CONTAINER_NAME),4000,.)

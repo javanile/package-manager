@@ -176,10 +176,33 @@ body.dark-theme {
 		}
 	}
 
+	.package .sidebar {
+		strong {
+			color: #cfcfcf;
+		}
+	}
+
 	header nav form input[type=search] {
 		background: rgba(255,255,255,.08);
 		color: #eee;
 		border-color: rgba(255,255,255,.15);
+	}
+
+	.packages-list__search form {
+		input[type=search] {
+			background: #252525;
+			color: #eee;
+			border-color: #333;
+
+			&:focus {
+				background: #2a2a2a;
+				border-color: #4a4a4a;
+			}
+		}
+
+		svg {
+			fill: #aaa;
+		}
 	}
 
 	#theme-icon-moon { display: none; }
