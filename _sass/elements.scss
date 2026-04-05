@@ -228,6 +228,19 @@ body.dark-theme {
 			background: #2b2d31;
 			color: #d4d4d4;
 		}
+
+		> div > div,
+		> div > p {
+			color: #c9c9c9;
+		}
+
+		a {
+			color: #bcc6d1;
+
+			&:hover {
+				color: #d9e0e7;
+			}
+		}
 	}
 
 	.package-author__avatar--fallback {

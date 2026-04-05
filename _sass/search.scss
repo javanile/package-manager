@@ -23,6 +23,26 @@
 	font-weight: bold;
 }
 
+.packages-list .card--list {
+	h3 mark {
+		background: transparent;
+		color: inherit;
+		font-weight: inherit;
+		padding: 0;
+		text-decoration: none;
+	}
+
+	p mark {
+		background: transparent;
+		color: #8d5a18;
+		font-weight: inherit;
+		padding: 0;
+		text-decoration: underline;
+		text-decoration-thickness: .08em;
+		text-underline-offset: .12em;
+	}
+}
+
 // ─── autocomplete dropdown ───────────────────────────────────────────────
 
 // Ensure the form is a positioning context for the dropdown
@@ -121,5 +141,25 @@
 		text-decoration: underline;
 		text-decoration-thickness: .08em;
 		text-underline-offset: .12em;
+	}
+}
+
+body.dark-theme {
+	.packages-list .card--list {
+		h3 mark {
+			color: inherit;
+			text-decoration: none;
+		}
+
+		p mark {
+			color: #9daabb;
+			text-decoration-color: rgba(157, 170, 187, .42);
+		}
+	}
+
+	.pkgac-title mark,
+	.pkgac-desc mark {
+		color: #9daabb;
+		text-decoration-color: rgba(157, 170, 187, .42);
 	}
 }

@@ -563,7 +563,7 @@
 		}
 
 		.card--list {
-			margin-bottom: .75rem;
+			margin-bottom: 1.1rem;
 			position: relative;
 
 			.card--list__link {
@@ -580,10 +580,6 @@
 				position: relative;
 				z-index: 2;
 				pointer-events: none;
-			}
-
-			.card--list__link:hover + .card--list__content h3 {
-				color: $link-color;
 			}
 
 			svg.pkg-icon {

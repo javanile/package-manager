@@ -52,7 +52,7 @@
 				var desc = (item.description || '').substring(0, 120);
 				var keywords = Array.isArray(item.keywords) ? item.keywords : [];
 
-				html += '<li class="card card--list" style="margin-bottom:.75rem">';
+				html += '<li class="card card--list">';
 				html += '<a class="card--list__link" href="' + (window.baseurl || '') + item.url.trim() + '" aria-label="Open ' + esc(item.title) + '"></a>';
 				html += '<div class="card--list__content">';
 				html += '<span class="align-items-center mr-2">' + PKG_ICON + '</span>';
