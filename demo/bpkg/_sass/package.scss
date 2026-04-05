@@ -852,16 +852,18 @@
 // ─── GitHub icon in sidebar links ───────────────────────────────────────────
 .sidebar-gh-link {
 	display: inline-flex;
-	align-items: center;
-	gap: .4rem;
+	align-items: baseline;
+	gap: .45rem;
 	font-size: .88em;
-	line-height: 1.2;
+	line-height: 1.3;
 	word-break: break-word;
 
 	.gh-icon {
-		display: block;
+		display: inline-block;
 		flex-shrink: 0;
-		width: 14px;
-		height: 14px;
+		width: .95em;
+		height: .95em;
+		position: relative;
+		top: .08em;
 	}
 }
