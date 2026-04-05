@@ -17,6 +17,10 @@
   {% assign _author_name = page.author | default: "Anonymous" %}
 {% endif %}
 {% assign _avatar_fallback = "https://www.gravatar.com/avatar/?d=mp&s=64" %}
+{% assign _avatar_class = "package-author__avatar" %}
+{% unless page.author_github or page.author_email %}
+  {% assign _avatar_class = _avatar_class | append: " package-author__avatar--fallback" %}
+{% endunless %}
 
 <section class="package">
     <section class="package-content">
@@ -101,7 +105,7 @@
         <div class="package-author">
             <strong>Author</strong>
             <div class="package-author__card">
-                <img src="{{ _avatar_url }}" alt="{{ _author_name }}" class="package-author__avatar" width="40" height="40" onerror="this.onerror=null;this.src='{{ _avatar_fallback }}';">
+                <img src="{{ _avatar_url }}" alt="{{ _author_name }}" class="{{ _avatar_class }}" width="40" height="40" onerror="this.onerror=null;this.classList.add('package-author__avatar--fallback');this.src='{{ _avatar_fallback }}';">
                 <div class="package-author__info">
                     {% if _author_url != "" %}
                     <a href="{{ _author_url }}" class="package-author__name">{{ _author_name }}</a>

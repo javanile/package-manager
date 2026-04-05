@@ -688,6 +688,10 @@
 		background: #f0f0f0;
 	}
 
+	&__avatar--fallback {
+		opacity: .96;
+	}
+
 	&__info {
 		display: flex;
 		flex-direction: column;

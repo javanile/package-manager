@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Anonymous avatar">
+  <style>
+    .bg { fill: #eef2f5; }
+    .fg { fill: #8b96a3; }
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #2b2d31; }
+      .fg { fill: #b8c0c8; }
+    }
+  </style>
+  <rect class="bg" width="64" height="64" rx="32"/>
+  <circle class="fg" cx="32" cy="24" r="12"/>
+  <path class="fg" d="M32 39c-10.58 0-19 6.3-19 14v1h38v-1c0-7.7-8.42-14-19-14z"/>
+</svg>

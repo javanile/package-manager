@@ -230,6 +230,11 @@ body.dark-theme {
 		}
 	}
 
+	.package-author__avatar--fallback {
+		filter: brightness(.82) saturate(.88);
+		opacity: .9;
+	}
+
 	header nav form input[type=search] {
 		background: rgba(255,255,255,.08);
 		color: #eee;
