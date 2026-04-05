@@ -291,6 +291,14 @@ body.dark-theme {
 		color: #cfcfcf;
 	}
 
+	.packages-sidebar__show-more {
+		color: #aab4bf;
+
+		&:hover {
+			color: #d9e0e7;
+		}
+	}
+
 	.packages-sidebar {
 		border-right-color: #333 !important;
 	}

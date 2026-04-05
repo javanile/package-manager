@@ -10,11 +10,16 @@
 {% assign keywords = keywords | push: package.tags | uniq %}
 {% endfor %}
 {% assign keywords = keywords | compact | sort %}
+{% assign keywords_limit = site.keywords_sidebar_limit | default: 24 %}
+{% assign keywords_limit = keywords_limit | plus: 0 %}
 
 <strong>Keywords</strong>
 
 <ul>
     {% for keyword in keywords %}
-    <li><a href="{{ site.baseurl }}/search/?q={{ keyword }}">{{ keyword }}</a></li>
+    <li{% if forloop.index > keywords_limit %} class="packages-sidebar__keyword-extra is-hidden"{% endif %}><a href="{{ site.baseurl }}/search/?q={{ keyword }}">{{ keyword }}</a></li>
     {% endfor %}
 </ul>
+{% if keywords.size > keywords_limit %}
+<a href="#" class="packages-sidebar__show-more" data-show-more="keywords">Show more...</a>
+{% endif %}

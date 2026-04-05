@@ -509,6 +509,19 @@
 					}
 				}
 			}
+
+			.packages-sidebar__show-more {
+				display: inline-block;
+				margin-top: .45rem;
+				font-size: .86em;
+				color: $medium-grey;
+				text-decoration: none;
+
+				&:hover {
+					color: $link-color;
+					text-decoration: underline;
+				}
+			}
 		}
 	}
 

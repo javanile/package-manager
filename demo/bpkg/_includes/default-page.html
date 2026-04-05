@@ -148,6 +148,20 @@
         syncHomePanels();
         window.addEventListener("hashchange", syncHomePanels);
     })();
+
+    (function() {
+        document.querySelectorAll("[data-show-more='keywords']").forEach(function(toggle) {
+            toggle.addEventListener("click", function(event) {
+                event.preventDefault();
+                var section = toggle.closest(".packages-sidebar__section");
+                if (!section) return;
+                section.querySelectorAll(".packages-sidebar__keyword-extra").forEach(function(item) {
+                    item.classList.remove("is-hidden");
+                });
+                toggle.remove();
+            });
+        });
+    })();
 </script>
 </body>
 </html>

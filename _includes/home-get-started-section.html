@@ -2,15 +2,13 @@
 {% assign _readme_link = _readme_link | strip %}
 
 <section id="get-started" class="home-panel home-panel-get-started is-hidden">
-	<h3 class="align-center mb-4">Get Started</h3>
-	<div class="card home-get-started-card">
-		<p class="align-center">
-			This is the {{ site.title | default: "Package Manager" }} project space, where packages, categories, and project resources can be organized in a simple and configurable way.
-		</p>
-		<p class="m-0 align-center">
-			To learn more about the project, its installation flow, and the available configuration options, visit the
-			<a href="{% include relative-src.html src=_readme_link %}">README.md</a>
-			in our repository.
-		</p>
-	</div>
+	<h3>Get Started</h3>
+	<p>
+		This is the {{ site.title | default: "Package Manager" }} project space, where packages, categories, and project resources can be organized in a simple and configurable way.
+	</p>
+	<p>
+		To learn more about the project, its installation flow, and the available configuration options, visit the
+		<a href="{% include relative-src.html src=_readme_link %}">README.md</a>
+		in our repository.
+	</p>
 </section>
