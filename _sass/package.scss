@@ -297,11 +297,16 @@
 	min-height: 1.2em;
 	max-height: 2.4em;
 	overflow: hidden;
+	display: block;
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
 	-webkit-line-clamp: 2;
 	line-clamp: 2;
 	white-space: normal;
+}
+
+.package-card__description:empty::before {
+	content: "\00a0";
 }
 
 .package-share {
@@ -601,10 +606,22 @@
 			.card--list__content {
 				display: flex;
 				align-items: flex-start;
-				gap: .75rem;
+				gap: .5rem;
 				position: relative;
 				z-index: 2;
 				pointer-events: none;
+
+				> span {
+					margin-right: 0 !important;
+				}
+
+				> div {
+					flex: 1;
+					min-width: 0;
+					display: flex;
+					flex-direction: column;
+					gap: .15rem;
+				}
 			}
 
 			svg.pkg-icon {
@@ -616,21 +633,24 @@
 			}
 
 			h3 {
-				margin-bottom: .45rem !important;
+				margin-bottom: 0 !important;
 				line-height: 1.3;
 			}
 
-			p {
+			.packages-page & .package-card__description,
+			.package-card__description {
 				display: -webkit-box;
 				-webkit-line-clamp: 2;
 				-webkit-box-orient: vertical;
 				overflow: hidden;
-				line-height: 1.45 !important;
-				min-height: calc(2 * 1.45em);
+				margin: 0 !important;
+				line-height: 1.2em !important;
+				min-height: 1.2em;
+				max-height: calc(2 * 1.2em);
 			}
 
 			.package-keywords {
-				margin-top: .3rem;
+				margin-top: 0;
 				margin-left: -4px;
 				position: relative;
 				z-index: 3;

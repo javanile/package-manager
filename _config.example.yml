@@ -5,6 +5,8 @@ remote_theme: javanile/package-manager@main
 logo: https://raw.githubusercontent.com/javanile/package-manager/main/assets/images/logo.png
 primary_color: "#000"
 secondary_color: "#EEE"
+dark_theme_primary_color: "#111"
+dark_theme_secondary_color: "#1e1e1e"
 enable_dark_theme: true
 
 alert:

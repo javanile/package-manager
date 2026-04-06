@@ -31,6 +31,8 @@ social:
 
 #primary_color: "#000"
 #secondary_color: "#EEE"
+#dark_theme_primary_color: "#111"
+#dark_theme_secondary_color: "#1e1e1e"
 
 # -----
 # Build

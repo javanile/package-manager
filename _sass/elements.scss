@@ -149,12 +149,20 @@ body.page-packages header nav form {
 // ─── Dark theme ──────────────────────────────────────────────────────────────
 
 body.dark-theme {
-	background: #1a1a1a;
+	background: darken($dark-theme-secondary-color, 3%);
 	color: #ccc;
 
 	.content {
-		background: #1e1e1e;
+		background: $dark-theme-secondary-color;
 		color: #ccc;
+	}
+
+	header {
+		background: $dark-header-color;
+	}
+
+	footer {
+		background: $dark-footer-color;
 	}
 
 	h1, h2, h3, h4, h5, h6 {
@@ -194,13 +202,13 @@ body.dark-theme {
 	}
 
 	.card, .listing, .package-card {
-		background: #252525;
+		background: lighten($dark-theme-secondary-color, 4%);
 		border-color: #333;
 		color: #ccc;
 	}
 
 	.package-main table {
-		background: #252525;
+		background: lighten($dark-theme-secondary-color, 4%);
 		border-color: #333;
 
 		th {
