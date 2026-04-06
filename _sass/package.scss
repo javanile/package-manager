@@ -294,7 +294,6 @@
 
 .package-card__description {
 	line-height: 1.2em;
-	min-height: 1.2em;
 	max-height: 2.4em;
 	overflow: hidden;
 	display: block;
@@ -645,8 +644,7 @@
 				overflow: hidden;
 				margin: 0 !important;
 				line-height: 1.2em !important;
-				min-height: 1.2em;
-				max-height: calc(2 * 1.2em);
+				max-height: 2.4em;
 			}
 
 			.package-keywords {
