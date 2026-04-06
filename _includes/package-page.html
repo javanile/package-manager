@@ -1,5 +1,23 @@
 {% assign install_cmd = site.suggested_command | default: "install {package}" %}
 {% assign install_cmd = install_cmd | replace: "{package}", page.title %}
+{% assign repository_url = page.repository | default: "" %}
+{% assign repository_path = page.repository_path | default: "" | append: "" %}
+{% assign repository_path = repository_path | remove_first: "/" %}
+{% assign repository_path = repository_path | remove_first: "./" %}
+{% assign repository_path = repository_path | replace: "//", "/" %}
+{% assign github_repo_base = repository_url | remove: ".git" | replace: "http://github.com/", "https://github.com/" | replace: "https://www.github.com/", "https://github.com/" %}
+{% assign repository_default_ref = "main" %}
+{% if page.versions contains "main" %}
+  {% assign repository_default_ref = "main" %}
+{% elsif page.versions contains "master" %}
+  {% assign repository_default_ref = "master" %}
+{% endif %}
+{% assign repository_tree_base = github_repo_base | append: "/tree/" | append: repository_default_ref %}
+{% if repository_path != "" %}
+  {% assign repository_page_url = repository_tree_base | append: "/" | append: repository_path %}
+{% else %}
+  {% assign repository_page_url = repository_url %}
+{% endif %}
 
 {% comment %} Resolve author avatar {% endcomment %}
 {% if page.author_github %}
@@ -70,13 +88,17 @@
                 {% endif %}
                 <li>
                     {% if page.repository and page.repository contains "github.com" %}
-                        {% assign repo_base = page.repository | remove: ".git" | replace: "http://github.com/", "https://github.com/" | replace: "https://www.github.com/", "https://github.com/" %}
-                        {% if is_semver %}
-                            {% assign version_url = repo_base | append: "/releases/tag/" | append: version_name | url_encode %}
-                        {% else %}
-                            {% assign version_url = repo_base | append: "/tree/" | append: version_name | url_encode %}
+                        {% assign encoded_version_name = version_name | url_encode %}
+                        {% assign version_url = github_repo_base | append: "/tree/" | append: encoded_version_name %}
+                        {% if repository_path != "" %}
+                            {% assign version_url = version_url | append: "/" | append: repository_path %}
                         {% endif %}
-                        <a href="{{ version_url }}" target="_blank" rel="noopener noreferrer">{{ version_name }}</a>
+                        {% if is_semver %}
+                            {% assign version_label = version_name %}
+                        {% else %}
+                            {% assign version_label = version_name %}
+                        {% endif %}
+                        <a href="{{ version_url }}" target="_blank" rel="noopener noreferrer">{{ version_label }}</a>
                     {% else %}
                         {{ version_name }}
                     {% endif %}
@@ -99,8 +121,11 @@
             <strong>Repository</strong>
             <div>
                 {% if page.repository contains "github.com" %}
-                  {% assign _repo_path = page.repository | remove: "https://github.com/" | remove: "http://github.com/" | remove: "https://www.github.com/" %}
-                  <a href="{{ page.repository }}" class="sidebar-gh-link">
+                  {% assign _repo_path = github_repo_base | remove: "https://github.com/" %}
+                  {% if repository_path != "" %}
+                    {% assign _repo_path = _repo_path | append: "/" | append: repository_path %}
+                  {% endif %}
+                  <a href="{{ repository_page_url }}" class="sidebar-gh-link">
                     <svg class="gh-icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
                     <span class="sidebar-gh-link-path">{{ _repo_path }}</span>
                   </a>

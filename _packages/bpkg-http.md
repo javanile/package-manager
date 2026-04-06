@@ -6,6 +6,7 @@ license: MIT
 author: jakwings
 author_github: jakwings
 repository: https://github.com/jakwings/bpkg-http
+repository_path: /dir/subdir
 categories: networking
 keywords:
   - http
