@@ -91,6 +91,11 @@
     (function() {
         var btn = document.getElementById("theme-toggle");
         var body = document.body;
+        var darkThemeEnabled = {{ site.enable_dark_theme | default: true | jsonify }};
+        if (!darkThemeEnabled) {
+            body.classList.remove("dark-theme");
+            return;
+        }
         if (!btn) return;
 
         function setTheme(dark) {

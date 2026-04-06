@@ -7,6 +7,7 @@ url: https://javanile.org/package-manager/
 baseurl:
 logo: https://raw.githubusercontent.com/javanile/package-manager/main/assets/images/logo.png
 repository: javanile/package-manager
+enable_dark_theme: true
 
 alert:
   type: info
