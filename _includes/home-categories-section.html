@@ -79,7 +79,9 @@
                     <span class="cat-icon">{% include package-icon.html icon=package.type %}</span>
                     <div class="cat-pkg-text">
                         <h3>{{ package.title }}</h3>
+                        {% if package.description and package.description != "" %}
                         <p class="package-card__description">{{ package.description }}</p>
+                        {% endif %}
                     </div>
                 </a>
             </li>

@@ -50,15 +50,39 @@ header {
 	}
 
 	nav {
-		display: none;
+		display: flex;
+		flex-direction: column;
+		position: fixed;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		width: min(84vw, 320px);
+		padding: 1.2rem 1.1rem 1.25rem;
+		background: rgba(22, 24, 28, .98);
+		box-shadow: 0 18px 40px rgba(0, 0, 0, .28);
+		transform: translateX(-104%);
+		transition: transform .22s ease;
+		z-index: 40;
 		order: 3;
 		min-width: 0;
+		overflow-y: auto;
 
 		@media #{$mid-point} {
+			position: static;
+			top: auto;
+			left: auto;
+			bottom: auto;
+			width: auto;
+			padding: 0;
+			background: transparent;
+			box-shadow: none;
+			transform: none;
+			transition: none;
 			flex: 1;
 			margin: 0 0 0 24px;
 			display: flex;
 			align-items: center;
+			flex-direction: row;
 			order: 2;
 
 			form {
@@ -118,7 +142,7 @@ header {
 			color: rgba(255, 255, 255, 0.85);
 			text-decoration: none;
 			display: block;
-			padding: 18px 0;
+			padding: 12px 0;
 			font-size: .9em;
 			font-weight: 500;
 
@@ -169,6 +193,35 @@ header {
 	}
 }
 
+.nav-panel__header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: .8rem;
+	padding-bottom: .75rem;
+	border-bottom: 1px solid rgba(255, 255, 255, .1);
+
+	strong {
+		font-size: .95em;
+		letter-spacing: .02em;
+	}
+
+	@media #{$mid-point} {
+		display: none;
+	}
+}
+
+.nav-panel__close {
+	color: rgba(255, 255, 255, .72);
+	font-size: 2rem;
+	line-height: 1;
+	text-decoration: none;
+
+	&:hover {
+		color: #fff;
+	}
+}
+
 .top-bar-actions {
 	margin-left: auto;
 	display: flex;
@@ -183,8 +236,31 @@ header {
 	}
 }
 
+.nav-open {
+	overflow: hidden;
+}
+
 .nav-open header nav {
-	display: block;
+	transform: translateX(0);
+}
+
+.nav-overlay {
+	position: fixed;
+	inset: 0;
+	background: rgba(8, 10, 12, .42);
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity .22s ease;
+	z-index: 35;
+
+	@media #{$mid-point} {
+		display: none;
+	}
+}
+
+.nav-open .nav-overlay {
+	opacity: 1;
+	pointer-events: auto;
 }
 
 .theme-toggle {
@@ -211,6 +287,36 @@ header {
 		fill: currentColor;
 		width: 15px;
 		height: 15px;
+	}
+
+	span {
+		display: none;
+	}
+}
+
+.theme-toggle--desktop {
+	@media (max-width: 749px) {
+		display: none;
+	}
+}
+
+.theme-toggle--mobile {
+	width: 100%;
+	justify-content: flex-start;
+	gap: .55rem;
+	margin-top: .9rem;
+	padding: .75rem .85rem;
+	border-color: rgba(255, 255, 255, .14);
+	background: rgba(255, 255, 255, .04);
+
+	span {
+		display: inline;
+		font-size: .92em;
+		font-weight: 600;
+	}
+
+	@media #{$mid-point} {
+		display: none;
 	}
 }
 

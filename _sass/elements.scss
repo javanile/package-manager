@@ -149,7 +149,7 @@ body.page-packages header nav form {
 // ─── Dark theme ──────────────────────────────────────────────────────────────
 
 body.dark-theme {
-	background: darken($dark-theme-secondary-color, 3%);
+	background: $dark-theme-secondary-color;
 	color: #ccc;
 
 	.content {
@@ -202,13 +202,14 @@ body.dark-theme {
 	}
 
 	.card, .listing, .package-card {
-		background: lighten($dark-theme-secondary-color, 4%);
-		border-color: #333;
+		background: $dark-theme-secondary-color;
+		border: 1px solid #43474d;
 		color: #ccc;
+		box-shadow: rgba(0, 0, 0, .28) 0 1px 2px 0, rgba(0, 0, 0, .18) 0 2px 6px 0;
 	}
 
 	.package-main table {
-		background: lighten($dark-theme-secondary-color, 4%);
+		background: $dark-theme-secondary-color;
 		border-color: #333;
 
 		th {

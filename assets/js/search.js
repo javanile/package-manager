@@ -58,7 +58,9 @@
 				html += '<span class="align-items-center mr-2">' + PKG_ICON + '</span>';
 				html += '<div>';
 				html += '<h3 class="text-md mb-1">' + hl(item.title, query) + '</h3>';
-				html += '<p class="text-sm lh-1 m-0 package-card__description">' + hl(desc, query) + '</p>';
+				if (desc) {
+					html += '<p class="text-sm lh-1 m-0 package-card__description">' + hl(desc, query) + '</p>';
+				}
 				if (keywords.length) {
 					html += '<div class="package-keywords" style="margin-top:.2rem">';
 					keywords.slice(0, 4).forEach(function(kw) {

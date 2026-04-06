@@ -83,31 +83,76 @@
         });
     });
 
-    document.getElementById("open-nav").addEventListener("click", function (event) {
-        event.preventDefault();
-        document.body.classList.toggle("nav-open");
-    });
+    (function() {
+        var openNav = document.getElementById("open-nav");
+        var closeNav = document.getElementById("close-nav");
+        var navOverlay = document.getElementById("nav-overlay");
+        var siteNav = document.getElementById("site-nav");
+        var body = document.body;
+        if (!openNav || !siteNav) return;
+
+        function setNavOpen(isOpen) {
+            body.classList.toggle("nav-open", isOpen);
+            siteNav.setAttribute("aria-hidden", isOpen ? "false" : "true");
+        }
+
+        openNav.addEventListener("click", function (event) {
+            event.preventDefault();
+            setNavOpen(true);
+        });
+
+        if (closeNav) {
+            closeNav.addEventListener("click", function(event) {
+                event.preventDefault();
+                setNavOpen(false);
+            });
+        }
+
+        if (navOverlay) {
+            navOverlay.addEventListener("click", function(event) {
+                event.preventDefault();
+                setNavOpen(false);
+            });
+        }
+
+        siteNav.querySelectorAll("a").forEach(function(link) {
+            link.addEventListener("click", function() {
+                if (window.innerWidth < 750) {
+                    setNavOpen(false);
+                }
+            });
+        });
+
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Escape") {
+                setNavOpen(false);
+            }
+        });
+    })();
 
     (function() {
-        var btn = document.getElementById("theme-toggle");
+        var buttons = document.querySelectorAll("[data-theme-toggle]");
         var body = document.body;
         var darkThemeEnabled = {{ site.enable_dark_theme | default: true | jsonify }};
         if (!darkThemeEnabled) {
             body.classList.remove("dark-theme");
             return;
         }
-        if (!btn) return;
+        if (!buttons.length) return;
 
         function setTheme(dark) {
             if (dark) {
                 body.classList.add("dark-theme");
-                document.getElementById("theme-icon-moon").style.display = "none";
-                document.getElementById("theme-icon-sun").style.display = "block";
             } else {
                 body.classList.remove("dark-theme");
-                document.getElementById("theme-icon-moon").style.display = "block";
-                document.getElementById("theme-icon-sun").style.display = "none";
             }
+
+            buttons.forEach(function(btn) {
+                var moon = btn.querySelector(".theme-icon-moon");
+                var sun = btn.querySelector(".theme-icon-sun");
+                if (moon) moon.style.display = dark ? "none" : "block";
+                if (sun) sun.style.display = dark ? "block" : "none";
+            });
         }
 
         var saved = localStorage.getItem("theme");
@@ -117,10 +162,12 @@
             setTheme(true);
         }
 
-        btn.addEventListener("click", function() {
-            var isDark = body.classList.contains("dark-theme");
-            setTheme(!isDark);
-            localStorage.setItem("theme", isDark ? "light" : "dark");
+        buttons.forEach(function(btn) {
+            btn.addEventListener("click", function() {
+                var isDark = body.classList.contains("dark-theme");
+                setTheme(!isDark);
+                localStorage.setItem("theme", isDark ? "light" : "dark");
+            });
         });
     })();
 
