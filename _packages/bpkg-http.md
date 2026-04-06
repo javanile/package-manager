@@ -16,6 +16,12 @@ keywords:
 date: 2024-03-28
 dependencies:
   - bpkg-str
+versions:
+  - main
+  - dev
+  - 1.0.1
+  - 1.0.0
+  - 0.9.0
 ---
 
 # bpkg-http

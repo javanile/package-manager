@@ -86,6 +86,12 @@ code, pre, tt {
 	}
 }
 
+code.highlighter-rouge {
+	background: #f1f3f5;
+	color: #2f3437;
+	padding: 1px 4px;
+}
+
 // Table styles for package content
 .package-main table {
 	width: 100%;
@@ -179,6 +185,11 @@ body.dark-theme {
 	}
 
 	.highlighter-rouge pre.highlight code {
+		color: #d4d4d4;
+	}
+
+	code.highlighter-rouge {
+		background: #2b2d31;
 		color: #d4d4d4;
 	}
 

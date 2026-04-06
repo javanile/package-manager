@@ -37,6 +37,54 @@
         <div class="package-main margin-top-1">
             {{ content }}
         </div>
+
+        {% if page.versions and page.versions.size > 0 %}
+        <div class="package-main margin-top-1">
+            <h2>Versions</h2>
+            <ul>
+                {% for pkg_version in page.versions %}
+                {% assign version_name = pkg_version | append: "" %}
+                {% assign version_core = version_name %}
+                {% if version_core != "" %}
+                    {% assign version_head = version_core | slice: 0, 1 | downcase %}
+                    {% if version_head == "v" %}
+                        {% assign version_core = version_core | slice: 1, version_core.size %}
+                    {% endif %}
+                {% endif %}
+                {% assign version_tail = version_core
+                    | remove: "0"
+                    | remove: "1"
+                    | remove: "2"
+                    | remove: "3"
+                    | remove: "4"
+                    | remove: "5"
+                    | remove: "6"
+                    | remove: "7"
+                    | remove: "8"
+                    | remove: "9"
+                    | remove: "." %}
+                {% assign version_parts = version_core | split: "." %}
+                {% assign is_semver = false %}
+                {% if version_parts.size == 3 and version_tail == "" %}
+                    {% assign is_semver = true %}
+                {% endif %}
+                <li>
+                    {% if page.repository and page.repository contains "github.com" %}
+                        {% assign repo_base = page.repository | remove: ".git" | replace: "http://github.com/", "https://github.com/" | replace: "https://www.github.com/", "https://github.com/" %}
+                        {% if is_semver %}
+                            {% assign version_url = repo_base | append: "/releases/tag/" | append: version_name | url_encode %}
+                        {% else %}
+                            {% assign version_url = repo_base | append: "/tree/" | append: version_name | url_encode %}
+                        {% endif %}
+                        <a href="{{ version_url }}" target="_blank" rel="noopener noreferrer">{{ version_name }}</a>
+                    {% else %}
+                        {{ version_name }}
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
     </section>
 
     <section class="sidebar sticky">
