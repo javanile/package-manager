@@ -137,23 +137,33 @@ hr {
 }
 
 blockquote {
-	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-	margin: 1.75em 0 1.75em -2.2em;
-	padding: 0 0 0 1.75em;
-	border-left: #4A4A4A 0.4em solid
+	margin: 1.5em 0;
+	padding: .9em 1.1em;
+	background: #f4f6f8;
+	border: 0;
+	border-top: 1px solid rgba(80, 88, 96, .14);
+	border-bottom: 1px solid rgba(80, 88, 96, .14);
+	border-radius: 0;
 }
 
 blockquote p {
-	margin: 0.8em 0;
-	font-style: italic
+	margin: 0;
+	font-style: normal;
+	font-size: .95em;
+	line-height: 1.6;
+	color: #444;
+}
+
+blockquote p + p {
+	margin-top: .6em;
 }
 
 blockquote small {
 	display: inline-block;
-	margin: 0.8em 0 0.8em 1.5em;
-	font-size: 0.9em;
-	color: #CCC
+	margin: .5em 0 0;
+	font-size: .85em;
+	color: #888;
 }
 
 blockquote small:before {
@@ -166,6 +176,16 @@ blockquote cite {
 
 blockquote cite a {
 	font-weight: normal
+}
+
+body.dark-theme blockquote {
+	background: rgba(255, 255, 255, .04);
+	border-top-color: rgba(255, 255, 255, .1);
+	border-bottom-color: rgba(255, 255, 255, .1);
+}
+
+body.dark-theme blockquote p {
+	color: #bbb;
 }
 
 mark {
@@ -187,9 +207,7 @@ kbd {
 }
 
 @media only screen and (max-width: 900px) {
-	blockquote {
-		margin-left: 0
-	}
+
 	hr {
 		margin: 2.4em 0
 	}

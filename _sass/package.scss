@@ -915,35 +915,31 @@
 
 // ─── Install command copy button ─────────────────────────────────────────────
 .install-cmd {
-	position: relative;
-	display: flex;
-	align-items: center;
-	gap: .4rem;
 	margin: .2rem 0 0;
 
 	pre {
+		position: relative;
 		margin: 0;
-		flex: 1;
-		min-width: 0;
+		padding-right: 2.4rem;
 	}
 }
 
 .install-cmd__copy {
-	flex-shrink: 0;
+	position: absolute;
+	top: 50%;
+	right: .5rem;
+	transform: translateY(-50%);
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
 	background: none;
-	border: 1px solid rgba(80, 88, 96, .25);
-	border-radius: 4px;
-	padding: 5px 6px;
+	border: none;
+	padding: 3px;
 	cursor: pointer;
-	color: #767676;
+	color: #999;
 	line-height: 1;
-	position: relative;
 
 	&:hover {
-		border-color: rgba(80, 88, 96, .5);
 		color: #333;
 	}
 

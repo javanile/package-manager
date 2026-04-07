@@ -155,39 +155,13 @@ header {
 				font-size: .88em;
 			}
 
-			@media #{$mid-point} {
-				&::after {
-					content: "";
-					position: absolute;
-					left: 0;
-					right: 0;
-					bottom: 9px;
-					height: 2px;
-					border-radius: 999px;
-					background: transparent;
-					transition: background .18s ease;
-				}
-			}
-
 			&.active, &.active:hover {
 				color: #fff;
-
-				@media #{$mid-point} {
-					&::after {
-						background: rgba(255, 255, 255, 0.55);
-					}
-				}
 			}
 
 			&:hover {
 				text-decoration: none;
 				color: #fff;
-
-				@media #{$mid-point} {
-					&::after {
-						background: rgba(255, 255, 255, 0.22);
-					}
-				}
 			}
 		}
 	}
