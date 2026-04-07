@@ -172,10 +172,7 @@
         <div>
             <strong>Category</strong>
             {% if page.categories and page.categories.size > 0 %}
-            <div>
-                {% assign cat_slug = page.categories | join: "," | split: "," | first | default: "" | slugify %}
-                <a href="{{ site.baseurl }}/categories/{{ cat_slug }}/">{{ page.categories | join: ", " }}</a>
-            </div>
+            <div>{% assign _cats = page.categories | join: "," | split: "," %}{% for _cat in _cats %}{% assign _cat_slug = _cat | strip | slugify %}<a href="{{ site.baseurl }}/categories/{{ _cat_slug }}/">{{ _cat | strip }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}</div>
             {% else %}
             <p class="package-dependencies__none">Not categorized yet.</p>
             {% endif %}

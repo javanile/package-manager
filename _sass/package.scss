@@ -822,7 +822,7 @@ span.package-author__name {
 .package-dependencies {
 	&__none {
 		font-size: .82em;
-		color: $light-grey;
+		color: #ddd;
 		margin: .25rem 0 0;
 		font-style: italic;
 	}
@@ -901,6 +901,7 @@ span.package-author__name {
 
 	> div > div > a {
 		font-size: 1em;
+		display: inline;
 	}
 
 	ul {
