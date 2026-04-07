@@ -169,15 +169,17 @@
         </div>
         {% endif %}
 
-        {% if page.categories %}
         <div>
             <strong>Category</strong>
+            {% if page.categories and page.categories.size > 0 %}
             <div>
                 {% assign cat_slug = page.categories | join: "," | split: "," | first | default: "" | slugify %}
                 <a href="{{ site.baseurl }}/categories/{{ cat_slug }}/">{{ page.categories | join: ", " }}</a>
             </div>
+            {% else %}
+            <p class="package-dependencies__none">Not categorized yet.</p>
+            {% endif %}
         </div>
-        {% endif %}
 
         <div class="package-author">
             <strong>Author</strong>
