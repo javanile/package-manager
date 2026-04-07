@@ -126,7 +126,7 @@ header {
 			position: relative;
 		}
 
-		svg {
+		form svg {
 			position: absolute;
 			top: 50%;
 			right: 8px;
@@ -201,14 +201,36 @@ header {
 	padding-bottom: .75rem;
 	border-bottom: 1px solid rgba(255, 255, 255, .1);
 
-	strong {
-		font-size: .95em;
-		letter-spacing: .02em;
-	}
-
 	@media #{$mid-point} {
 		display: none;
 	}
+}
+
+.nav-panel__brand {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	text-decoration: none;
+
+	img, svg {
+		width: 32px;
+		height: 32px;
+		display: block;
+		object-fit: contain;
+		flex-shrink: 0;
+	}
+
+	svg {
+		fill: #fff;
+	}
+}
+
+.nav-panel__brand-name {
+	color: #fff;
+	font-size: .95em;
+	font-weight: 600;
+	letter-spacing: .01em;
+	white-space: nowrap;
 }
 
 .nav-panel__close {
@@ -301,23 +323,34 @@ header {
 }
 
 .theme-toggle--mobile {
+	margin-top: auto;
+	padding-top: 1rem;
 	width: 100%;
 	justify-content: flex-start;
-	gap: .55rem;
-	margin-top: .9rem;
-	padding: .75rem .85rem;
-	border-color: rgba(255, 255, 255, .14);
-	background: rgba(255, 255, 255, .04);
+	gap: .6rem;
+	border: none;
+	border-top: 1px solid rgba(255, 255, 255, .1);
+	border-radius: 0;
+	padding-left: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+	color: rgba(255, 255, 255, .7);
 
-	span {
-		display: inline;
-		font-size: .92em;
-		font-weight: 600;
+	&:hover {
+		background: none;
+		border-color: transparent;
+		border-top-color: rgba(255, 255, 255, .1);
+		color: #fff;
 	}
 
 	@media #{$mid-point} {
 		display: none;
 	}
+}
+
+.theme-toggle__label {
+	font-size: .88em;
+	font-weight: 500;
 }
 
 .nav-toggle {

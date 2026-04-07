@@ -152,6 +152,10 @@
                 var sun = btn.querySelector(".theme-icon-sun");
                 if (moon) moon.style.display = dark ? "none" : "block";
                 if (sun) sun.style.display = dark ? "block" : "none";
+                var labelDark = btn.querySelector(".theme-label-dark");
+                var labelLight = btn.querySelector(".theme-label-light");
+                if (labelDark) labelDark.style.display = dark ? "none" : "inline";
+                if (labelLight) labelLight.style.display = dark ? "inline" : "none";
             });
         }
 

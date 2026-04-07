@@ -25,25 +25,30 @@ header {
 		}
 
 		.logo {
+			width: 32px;
+			height: 32px;
+			flex-shrink: 0;
+
 			a {
 				display: flex;
 				align-items: center;
 				line-height: 1;
-				padding: 10px 0;
+				width: 32px;
+				height: 32px;
 				text-decoration: none;
 			}
 
 			img {
 				height: 32px;
-				width: auto;
+				width: 32px;
 				display: block;
+				object-fit: contain;
 			}
 
 			svg {
 				fill: #fff;
 				height: 32px;
-				width: auto;
-				min-width: 80px;
+				width: 32px;
 				display: block;
 			}
 		}

@@ -29,6 +29,8 @@ social:
   links:
     - https://github.com/Javanile/base-jekyll-template
 
+brand_font_url: "https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+brand_font_family: "'Ubuntu Mono', consolas, monaco, monospaced"
 #primary_color: "#000"
 #secondary_color: "#EEE"
 #dark_theme_primary_color: "#111"
