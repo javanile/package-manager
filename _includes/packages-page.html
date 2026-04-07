@@ -31,12 +31,12 @@
         </div>
     </aside>
 
-    <section class="packages-list">
+    <section class="packages-list" data-paginate data-page-size="{{ site.packages_per_page | default: 12 }}">
         <div class="packages-list__search">
             {% include search.html %}
         </div>
         <p class="packages-list__count">{{ packages.size }} packages available</p>
-        <ul>
+        <ul id="packages-list-items">
             {% assign packages_sorted = packages | sort: "date" | reverse %}
             {% for package in packages_sorted %}
             <li class="card card--list">
@@ -60,5 +60,6 @@
             </li>
             {% endfor %}
         </ul>
+        <nav class="pagination" id="packages-pagination" aria-label="Packages pagination"></nav>
     </section>
 </section>

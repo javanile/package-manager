@@ -138,7 +138,7 @@
 
 			&:hover {
 				color: #767676;
-				text-decoration: underline;
+				text-decoration: none;
 			}
 		}
 	}
@@ -585,6 +585,52 @@
 			margin: 0 0 1rem;
 		}
 
+		.pagination {
+			display: flex;
+			align-items: center;
+			gap: .3rem;
+			margin-top: 1.5rem;
+			flex-wrap: wrap;
+		}
+
+		.pagination__btn {
+			min-width: 3.2rem;
+			height: 3.2rem;
+			padding: 0 1rem;
+			border: 1px solid #d2d2d2;
+			border-radius: 5px;
+			background: #fff;
+			color: #444;
+			font-size: .88em;
+			cursor: pointer;
+			line-height: 1;
+			box-shadow: rgba(60, 64, 67, 0.2) 0px 1px 2px 0px, rgba(60, 64, 67, 0.1) 0px 1px 3px 1px;
+			transition: box-shadow .15s ease, border-color .15s ease;
+
+			&:hover:not(:disabled) {
+				border-color: #aaa;
+				box-shadow: rgba(60, 64, 67, 0.3) 0px 2px 8px 0px, rgba(60, 64, 67, 0.18) 0px 2px 10px 2px;
+			}
+
+			&--active {
+				background: $primary-color;
+				border-color: $primary-color;
+				color: #fff;
+				font-weight: 600;
+
+				&:hover {
+					background: $primary-color;
+					border-color: $primary-color;
+				}
+			}
+
+			&:disabled {
+				opacity: .35;
+				cursor: default;
+				box-shadow: none;
+			}
+		}
+
 		ul {
 			list-style: none;
 			padding: 0;
@@ -592,7 +638,7 @@
 		}
 
 		.card--list {
-			margin-bottom: 1.1rem;
+			margin-bottom: 1.6rem;
 			position: relative;
 
 			.card--list__link {
@@ -740,15 +786,9 @@
 	&__name {
 		font-size: .9em;
 		font-weight: 600;
-		color: $link-color;
-		text-decoration: none;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
-
-		&:hover {
-			text-decoration: underline;
-		}
 	}
 
 	&__email {
@@ -759,11 +799,30 @@
 	}
 }
 
+a.package-author__name {
+	color: $link-color;
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+span.package-author__name {
+	color: $dark-grey;
+	cursor: default;
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: none;
+	}
+}
+
 
 .package-dependencies {
 	&__none {
-		font-size: .85em;
-		color: $medium-grey;
+		font-size: .82em;
+		color: $light-grey;
 		margin: .25rem 0 0;
 		font-style: italic;
 	}
@@ -838,6 +897,10 @@
 		&:hover {
 			text-decoration: underline;
 		}
+	}
+
+	> div > div > a {
+		font-size: 1em;
 	}
 
 	ul {
