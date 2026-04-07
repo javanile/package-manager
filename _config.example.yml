@@ -2,6 +2,24 @@
 title: Package Manager
 remote_theme: javanile/package-manager@main
 
+# ──────────────────────────────────────────────────────────────────────────────
+# Navigation
+# By default the topnav shows: Get Started, Packages, Contribute.
+# Define `navigation` to replace those defaults with custom links.
+# Each item requires `name` (label) and `link` (URL).
+# Supports absolute URLs, root-relative paths, and anchor links.
+#
+# navigation:
+#   - name: Home
+#     link: /
+#   - name: Packages
+#     link: /packages/
+#   - name: Docs
+#     link: /docs/
+#   - name: GitHub
+#     link: https://github.com/your-org/your-repo
+# ──────────────────────────────────────────────────────────────────────────────
+
 logo: https://raw.githubusercontent.com/javanile/package-manager/main/assets/images/logo.png
 primary_color: "#000"
 secondary_color: "#EEE"

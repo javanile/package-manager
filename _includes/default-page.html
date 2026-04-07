@@ -220,14 +220,25 @@
     })();
 
     (function() {
-        document.querySelectorAll("[data-copy-target]").forEach(function(btn) {
+        document.querySelectorAll("[data-cmd]").forEach(function(btn) {
             btn.addEventListener("click", function() {
-                var target = document.getElementById(btn.getAttribute("data-copy-target"));
-                if (!target) return;
-                navigator.clipboard.writeText(target.textContent.trim()).then(function() {
+                var text = btn.getAttribute("data-cmd");
+                function onCopied() {
                     btn.classList.add("copied");
                     setTimeout(function() { btn.classList.remove("copied"); }, 1800);
-                });
+                }
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(text).then(onCopied);
+                } else {
+                    var ta = document.createElement("textarea");
+                    ta.value = text;
+                    ta.style.cssText = "position:fixed;opacity:0";
+                    document.body.appendChild(ta);
+                    ta.select();
+                    document.execCommand("copy");
+                    document.body.removeChild(ta);
+                    onCopied();
+                }
             });
         });
     })();
