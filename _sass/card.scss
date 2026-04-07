@@ -13,14 +13,22 @@
   }
 }
 
-// Category cards: tighter padding, hover lift
-.category > ul > li.card {
+// Category cards + list cards: shadow-only hover (no lift)
+.category > ul > li.card,
+li.card.card--list {
   padding: .7rem .85rem;
   box-shadow: rgba(60, 64, 67, 0.2) 0px 1px 2px 0px, rgba(60, 64, 67, 0.1) 0px 1px 3px 1px;
-  transition: box-shadow .15s ease, transform .15s ease;
+  transition: box-shadow .15s ease;
 
   &:hover {
-    box-shadow: rgba(60, 64, 67, 0.25) 0px 2px 6px 0px, rgba(60, 64, 67, 0.15) 0px 2px 8px 2px;
-    transform: translateY(-1px);
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 2px 8px 0px, rgba(60, 64, 67, 0.18) 0px 2px 10px 2px;
+  }
+}
+
+.cat-more a {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
   }
 }
