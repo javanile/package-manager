@@ -218,6 +218,19 @@
             });
         });
     })();
+
+    (function() {
+        document.querySelectorAll("[data-copy-target]").forEach(function(btn) {
+            btn.addEventListener("click", function() {
+                var target = document.getElementById(btn.getAttribute("data-copy-target"));
+                if (!target) return;
+                navigator.clipboard.writeText(target.textContent.trim()).then(function() {
+                    btn.classList.add("copied");
+                    setTimeout(function() { btn.classList.remove("copied"); }, 1800);
+                });
+            });
+        });
+    })();
 </script>
 </body>
 </html>

@@ -27,6 +27,8 @@ versions:
 
 # bpkg-http
 
+> Description long description
+
 A thin, ergonomic wrapper around `curl` for making HTTP requests from bash scripts. Supports JSON bodies, custom headers, timeouts and response parsing.
 
 ## Installation
