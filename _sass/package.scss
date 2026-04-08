@@ -293,6 +293,7 @@
 }
 
 .package-card__description {
+	padding-top: .5rem;
 	line-height: 1.2em;
 	max-height: 2.4em;
 	overflow: hidden;
@@ -822,7 +823,8 @@ span.package-author__name {
 .package-dependencies {
 	&__none {
 		font-size: .82em;
-		color: #ddd;
+		color: $medium-grey;
+		opacity: .45;
 		margin: .25rem 0 0;
 		font-style: italic;
 	}
