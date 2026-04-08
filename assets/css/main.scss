@@ -1,10 +1,10 @@
 ---
 ---
 
-$primary-color: unquote("{{ site.primary_color | default: '#000' }}");
-$secondary-color: unquote("{{ site.secondary_color | default: '#EEE' }}");
-$dark-theme-primary-color: unquote("{{ site.dark_theme_primary_color | default: site.primary_color | default: '#111' }}");
-$dark-theme-secondary-color: unquote("{{ site.dark_theme_secondary_color | default: '#1e1e1e' }}");
+$primary-color: {{ site.primary_color | default: '#000' }};
+$secondary-color: {{ site.secondary_color | default: '#EEE' }};
+$dark-theme-primary-color: {{ site.dark_theme_primary_color | default: site.primary_color | default: '#111' }};
+$dark-theme-secondary-color: {{ site.dark_theme_secondary_color | default: '#1e1e1e' }};
 
 @import "variables";
 @import "typography";
