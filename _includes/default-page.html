@@ -236,7 +236,15 @@
                 link.classList.toggle("active", link.getAttribute("data-nav-panel") === panelId);
             });
 
-            if (panelId === "packages") filterPackagesPanel(parsed.query);
+            if (panelId === "packages") {
+                filterPackagesPanel(parsed.query);
+                if (parsed.query) {
+                    if (packages) {
+                        var si = packages.querySelector("input[type=search], input[name=q]");
+                        if (si) si.value = parsed.query;
+                    }
+                }
+            }
         }
 
         // Intercept search forms when no search page exists
