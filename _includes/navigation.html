@@ -21,15 +21,15 @@
 			{% assign link = link | strip %}
 
 		{% elsif item == "Packages" %}
-			{% assign link = "/packages/" %}
+			{% assign link = site.baseurl | append: "/packages/" %}
 
 		{% elsif item == "Contribute" %}
 			{% assign _cp = site.pages | where: "url", "/contribute/" | first %}
 			{% unless _cp %}{% assign _cp = site.pages | where: "url", "/contribute.html" | first %}{% endunless %}
 			{% if _cp %}
-				{% assign link = "/contribute/" %}
+				{% assign link = site.baseurl | append: "/contribute/" %}
 			{% else %}
-				{% assign link = "/#contribute" %}
+				{% assign link = site.baseurl | append: "/#contribute" %}
 			{% endif %}
 
 		{% else %}
