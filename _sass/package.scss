@@ -156,7 +156,7 @@
 	}
 
 	h2 {
-		margin-top: 40px;
+		margin-top: 30px;
 	}
 
 	.sidebar {
@@ -760,7 +760,7 @@
 .package-author {
 	&__card {
 		display: flex;
-		align-items: center;
+		align-items: flex-start;
 		gap: .6rem;
 		margin-top: .4rem;
 	}
@@ -955,6 +955,15 @@ span.package-author__name {
 
 .package .package-main pre {
 	overflow-x: auto;
+}
+
+.package .package-main .highlighter-rouge {
+	border: 1px solid rgba(0, 0, 0, .08);
+	border-radius: 3px;
+}
+
+.package .package-main .highlighter-rouge pre.highlight {
+	padding: 1rem 1.2rem;
 }
 
 // ─── GitHub icon in sidebar links ───────────────────────────────────────────

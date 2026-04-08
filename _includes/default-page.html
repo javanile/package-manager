@@ -274,6 +274,37 @@
     })();
 
     (function() {
+        var copyBtnHTML = '<button class="code-copy" aria-label="Copia" title="Copia"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span class="code-copy__tooltip">Copied!</span></button>';
+        document.querySelectorAll(".highlighter-rouge").forEach(function(block) {
+            block.style.position = "relative";
+            var div = document.createElement("div");
+            div.innerHTML = copyBtnHTML;
+            var btn = div.firstChild;
+            btn.addEventListener("click", function() {
+                var code = block.querySelector("code");
+                var text = code ? code.textContent.trim() : "";
+                function onCopied() {
+                    btn.classList.add("copied");
+                    setTimeout(function() { btn.classList.remove("copied"); }, 1800);
+                }
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(text).then(onCopied);
+                } else {
+                    var ta = document.createElement("textarea");
+                    ta.value = text;
+                    ta.style.cssText = "position:fixed;opacity:0";
+                    document.body.appendChild(ta);
+                    ta.select();
+                    document.execCommand("copy");
+                    document.body.removeChild(ta);
+                    onCopied();
+                }
+            });
+            block.appendChild(btn);
+        });
+    })();
+
+    (function() {
         document.querySelectorAll("[data-cmd]").forEach(function(btn) {
             btn.addEventListener("click", function() {
                 var text = btn.getAttribute("data-cmd");
