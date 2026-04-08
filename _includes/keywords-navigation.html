@@ -15,9 +15,11 @@
 
 <strong>Keywords</strong>
 
-<ul>
+{% assign _sp = site.pages | where: "url", "/search/" | first %}
+{% unless _sp %}{% assign _sp = site.pages | where: "url", "/search.html" | first %}{% endunless %}
+<ul{% unless _sp %} data-inline-filter="packages-list-items"{% endunless %}>
     {% for keyword in keywords %}
-    <li{% if forloop.index > keywords_limit %} class="packages-sidebar__keyword-extra is-hidden"{% endif %}><a href="{{ site.baseurl }}/search/?q={{ keyword }}">{{ keyword }}</a></li>
+    <li{% if forloop.index > keywords_limit %} class="packages-sidebar__keyword-extra is-hidden"{% endif %}><a href="{{ site.baseurl }}/search/?q={{ keyword }}" data-keyword="{{ keyword }}">{{ keyword }}</a></li>
     {% endfor %}
 </ul>
 {% if keywords.size > keywords_limit %}

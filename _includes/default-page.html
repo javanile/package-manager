@@ -231,6 +231,38 @@
     })();
 
     (function() {
+        document.querySelectorAll("[data-inline-filter]").forEach(function(ul) {
+            var listId = ul.getAttribute("data-inline-filter");
+            var list = document.getElementById(listId);
+            if (!list) return;
+            var activeKeyword = null;
+
+            ul.addEventListener("click", function(e) {
+                var a = e.target.closest("a[data-keyword]");
+                if (!a) return;
+                e.preventDefault();
+                var kw = a.getAttribute("data-keyword").toLowerCase();
+
+                if (activeKeyword === kw) {
+                    activeKeyword = null;
+                    ul.querySelectorAll("a[data-keyword]").forEach(function(l) { l.classList.remove("active"); });
+                    list.querySelectorAll("li.card--list").forEach(function(li) { li.style.display = ""; });
+                    return;
+                }
+
+                activeKeyword = kw;
+                ul.querySelectorAll("a[data-keyword]").forEach(function(l) {
+                    l.classList.toggle("active", l.getAttribute("data-keyword").toLowerCase() === kw);
+                });
+                list.querySelectorAll("li.card--list").forEach(function(li) {
+                    var kws = (li.getAttribute("data-keywords") || "") + "," + (li.getAttribute("data-categories") || "");
+                    li.style.display = kws.split(",").indexOf(kw) !== -1 ? "" : "none";
+                });
+            });
+        });
+    })();
+
+    (function() {
         var list = document.getElementById("packages-list-items");
         var pagination = document.getElementById("packages-pagination");
         if (!list || !pagination) return;

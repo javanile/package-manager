@@ -39,7 +39,7 @@
         <ul id="packages-list-items">
             {% assign packages_sorted = packages | sort: "date" | reverse %}
             {% for package in packages_sorted %}
-            <li class="card card--list">
+            <li class="card card--list" data-keywords="{{ package.keywords | join: ',' | downcase }}" data-categories="{{ package.categories | join: ',' | downcase }}">
                 <a class="card--list__link" href="{{ site.baseurl }}{{ package.url }}" aria-label="Open {{ package.title }}"></a>
                 <div class="card--list__content">
                     <span class="align-items-center mr-2">{% include package-icon.html icon=package.type %}</span>
