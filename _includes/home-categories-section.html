@@ -47,6 +47,7 @@
 
 <h3 class="align-center mb-4">Explore and discover packages</h3>
 
+{% if _nonempty_cats > 0 %}
 <section class="categories">
 
     {% assign categories_shown = 0 %}
@@ -98,4 +99,38 @@
     </section>
     {% endfor %}
 </section>
+
+{% else %}
+
+{% comment %} No categories: show packages directly, max 3, then +N more link {% endcomment %}
+{% capture _pkgs_link %}{% include packages-link.html %}{% endcapture %}
+{% assign _pkgs_link = _pkgs_link | strip %}
+<section class="categories">
+    <section class="category">
+        <ul>
+            {% for package in packages_sorted limit: 3 %}
+            <li class="card">
+                <a href="{{ site.baseurl }}{{ package.url }}">
+                    <span class="cat-icon">{% include package-icon.html icon=package.type %}</span>
+                    <div class="cat-pkg-text">
+                        <h3>{{ package.title }}</h3>
+                        {% if package.description and package.description != "" %}
+                        <p class="package-card__description">{{ package.description }}</p>
+                        {% endif %}
+                    </div>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% if packages_sorted.size > 3 %}
+        <div class="cat-more">
+            <a href="{{ _pkgs_link }}">
+                +{{ packages_sorted.size | minus: 3 }} more packages
+            </a>
+        </div>
+        {% endif %}
+    </section>
+</section>
+
+{% endif %}
 </section>
