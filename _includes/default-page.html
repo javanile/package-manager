@@ -246,7 +246,7 @@
                 item.style.display = (i >= (page - 1) * pageSize && i < page * pageSize) ? "" : "none";
             });
             renderPagination();
-            list.scrollIntoView({ behavior: "smooth", block: "start" });
+            window.scrollTo({ top: 0, behavior: "smooth" });
         }
 
         function renderPagination() {
