@@ -34,7 +34,7 @@ ifdef demo
 		-v $$(pwd)/demo/$(demo):/site \
 		-v $$(pwd)/.bundle/root:/root/.bundle \
 		-v $$(pwd)/.bundle/local:/usr/local/bundle \
-		bretfisher/jekyll-serve --verbose
+		bretfisher/jekyll-serve bundle exec jekyll serve --force_polling -H 0.0.0.0 -P 4000
 else
 	@docker rm -f $(CONTAINER_NAME) 2>/dev/null || true
 	@docker run \
