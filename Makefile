@@ -25,7 +25,7 @@ push:
 
 serve:
 ifdef demo
-	$(MAKE) push
+	$(MAKE) push || true
 	@docker rm -f package-manager-demo-$(demo) 2>/dev/null || true
 	@docker pull bretfisher/jekyll-serve
 	@docker run \
