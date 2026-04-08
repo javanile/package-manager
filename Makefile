@@ -34,7 +34,7 @@ ifdef demo
 		-v $$(pwd)/demo/$(demo):/site \
 		-v $$(pwd)/.bundle/root:/root/.bundle \
 		-v $$(pwd)/.bundle/local:/usr/local/bundle \
-		bretfisher/jekyll-serve
+		bretfisher/jekyll-serve --verbose
 else
 	@docker rm -f $(CONTAINER_NAME) 2>/dev/null || true
 	@docker run \
