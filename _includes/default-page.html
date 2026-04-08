@@ -76,7 +76,10 @@
     </div>
 </section>
 {% include footer.html %}
+{% assign _sp = site.pages | where: "url", "/search/" | first %}
+{% unless _sp %}{% assign _sp = site.pages | where: "url", "/search.html" | first %}{% endunless %}
 <script>
+    window.hasSearchPage = {% if _sp %}true{% else %}false{% endif %};
     $(function() {
         $('a[href*=\\#]').not(".no-smooth").on('click', function(event){
             var el = $(this.hash);
@@ -192,16 +195,38 @@
         var navPanelLinks = document.querySelectorAll("[data-nav-panel]");
         if (!categories || !getStarted || !contribute) return;
 
+        function parseHash() {
+            var hash = window.location.hash; // e.g. #packages?q=bash
+            var panelId = null, query = "";
+            if (hash === "#get-started") panelId = "get-started";
+            else if (hash === "#contribute") panelId = "contribute";
+            else if (hash.indexOf("#packages") === 0) {
+                panelId = "packages";
+                var qi = hash.indexOf("?q=");
+                if (qi !== -1) query = decodeURIComponent(hash.slice(qi + 3));
+            }
+            return { panelId: panelId, query: query };
+        }
+
+        function filterPackagesPanel(query) {
+            if (!packages) return;
+            var list = packages.querySelector("#packages-list-items");
+            if (!list) return;
+            var q = query.toLowerCase().trim();
+            list.querySelectorAll("li.card--list").forEach(function(li) {
+                if (!q) { li.style.display = ""; return; }
+                var kws = (li.getAttribute("data-keywords") || "") + "," + (li.getAttribute("data-categories") || "");
+                var title = (li.querySelector("h3") || {}).textContent || "";
+                li.style.display = (kws.toLowerCase().indexOf(q) !== -1 || title.toLowerCase().indexOf(q) !== -1) ? "" : "none";
+            });
+        }
+
         function syncHomePanels() {
-            var panelId = null;
-            if (window.location.hash === "#get-started") panelId = "get-started";
-            if (window.location.hash === "#contribute") panelId = "contribute";
-            if (window.location.hash === "#packages") panelId = "packages";
+            var parsed = parseHash();
+            var panelId = parsed.panelId;
             var showAltPanel = panelId !== null;
 
-            if (heroSearch) {
-                heroSearch.classList.toggle("is-hidden", showAltPanel);
-            }
+            if (heroSearch) heroSearch.classList.toggle("is-hidden", showAltPanel);
             categories.classList.toggle("is-hidden", showAltPanel);
             getStarted.classList.toggle("is-hidden", panelId !== "get-started");
             contribute.classList.toggle("is-hidden", panelId !== "contribute");
@@ -209,6 +234,21 @@
 
             navPanelLinks.forEach(function(link) {
                 link.classList.toggle("active", link.getAttribute("data-nav-panel") === panelId);
+            });
+
+            if (panelId === "packages") filterPackagesPanel(parsed.query);
+        }
+
+        // Intercept search forms when no search page exists
+        if (!window.hasSearchPage) {
+            document.querySelectorAll(".hero_search form, .packages-list__search form").forEach(function(form) {
+                form.addEventListener("submit", function(e) {
+                    e.preventDefault();
+                    var input = form.querySelector("input[type=search], input[name=q]");
+                    var q = input ? input.value.trim() : "";
+                    var hash = q ? "#packages?q=" + encodeURIComponent(q) : "#packages";
+                    window.location.hash = hash;
+                });
             });
         }
 
