@@ -45,9 +45,15 @@
         <h1 class="margin-0">{{ page.title }}</h1>
 
         {% if page.keywords %}
+        {% assign _sp = site.pages | where: "url", "/search/" | first %}
+        {% unless _sp %}{% assign _sp = site.pages | where: "url", "/search.html" | first %}{% endunless %}
         <div class="package-keywords" style="margin: .5rem 0 1rem -4px; ">
             {% for keyword in page.keywords %}
+            {% if _sp %}
             <a href="{{ site.baseurl }}/search/?q={{ keyword | url_encode }}" class="keyword">{{ keyword }}</a>
+            {% else %}
+            <a href="{{ site.baseurl }}/#packages?q={{ keyword | url_encode }}" class="keyword">{{ keyword }}</a>
+            {% endif %}
             {% endfor %}
         </div>
         {% endif %}
@@ -198,7 +204,7 @@
             {% if page.dependencies and page.dependencies.size > 0 %}
             <ul>
                 {% for dep in page.dependencies %}
-                <li><a href="{{ site.baseurl }}/search/?q={{ dep | url_encode }}">{{ dep }}</a></li>
+                <li><a href="{% capture _dl %}{% include search-link.html q=dep %}{% endcapture %}{{ _dl | strip }}">{{ dep }}</a></li>
                 {% endfor %}
             </ul>
             {% else %}

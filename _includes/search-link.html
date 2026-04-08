@@ -1,0 +1,3 @@
+{% assign _sl_sp = site.pages | where: "url", "/search/" | first %}
+{% unless _sl_sp %}{% assign _sl_sp = site.pages | where: "url", "/search.html" | first %}{% endunless %}
+{% if _sl_sp %}{{ site.baseurl }}/search/?q={{ include.q | url_encode }}{% else %}{{ site.baseurl }}/#packages?q={{ include.q | url_encode }}{% endif %}

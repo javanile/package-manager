@@ -60,7 +60,7 @@
                         {% if package.keywords %}
                         <div class="package-keywords">
                             {% for kw in package.keywords limit: 4 %}
-                            <a href="{{ site.baseurl }}/search/?q={{ kw | url_encode }}" class="keyword">{{ kw }}</a>
+                            <a href="{% capture _sl %}{% include search-link.html q=kw %}{% endcapture %}{{ _sl | strip }}" class="keyword">{{ kw }}</a>
                             {% endfor %}
                         </div>
                         {% endif %}

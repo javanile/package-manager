@@ -17,7 +17,7 @@
                   {% endif %}
                 {% endfor %}
                 <li>
-                    <a href="{{ site.baseurl }}/search/?q={{ category.title | url_encode }}" class="{% if page.title == category.title %}active{% endif %}">
+                    <a href="{% capture _sl %}{% include search-link.html q=category.title %}{% endcapture %}{{ _sl | strip }}" class="{% if page.title == category.title %}active{% endif %}">
                         {{ category.title }} <span class="count">({{ cat_count }})</span>
                     </a>
                 </li>
@@ -51,7 +51,7 @@
                         {% if package.keywords %}
                         <div class="package-keywords">
                             {% for kw in package.keywords limit: 4 %}
-                            <a href="{{ site.baseurl }}/search/?q={{ kw | url_encode }}" class="keyword">{{ kw }}</a>
+                            <a href="{% capture _sl %}{% include search-link.html q=kw %}{% endcapture %}{{ _sl | strip }}" class="keyword">{{ kw }}</a>
                             {% endfor %}
                         </div>
                         {% endif %}
