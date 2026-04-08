@@ -32,6 +32,8 @@ ifdef demo
 		--name package-manager-demo-$(demo) \
 		-p $(call demo_port,$(demo)):4000 \
 		-v $$(pwd)/demo/$(demo):/site \
+		-v $$(pwd)/.bundle/root:/root/.bundle \
+		-v $$(pwd)/.bundle/local:/usr/local/bundle \
 		bretfisher/jekyll-serve
 else
 	@docker rm -f $(CONTAINER_NAME) 2>/dev/null || true
