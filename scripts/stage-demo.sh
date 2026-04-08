@@ -23,52 +23,14 @@ fi
 mkdir -p "$BUILD_ROOT"
 mkdir -p "$BUILD_DIR"
 
-copy_if_exists() {
-	local path="$1"
-	if [[ -e "$ROOT_DIR/$path" ]]; then
-		cp -R "$ROOT_DIR/$path" "$BUILD_DIR/$path"
-	fi
-}
-
-# Theme/runtime files from the current checkout.
-for path in _includes _layouts _sass assets _pages 404.html atom.xml rss.xml; do
-	copy_if_exists "$path"
-done
-
-# Demo-specific content and pages. Theme implementation dirs are intentionally
-# excluded so demos stay focused on _config.yml and content variations.
+# Copy demo content only — theme is fetched from remote_theme at build time.
+# Exclude build artifacts and bundle cache so the container always starts fresh.
 shopt -s dotglob nullglob
 for path in "$DEMO_DIR"/*; do
 	name="$(basename "$path")"
 	case "$name" in
-		.bundle|.jekyll-cache|_site|Gemfile.lock|_includes|_layouts|_sass|assets)
+		.bundle|.jekyll-cache|_site|Gemfile.lock)
 			continue
-			;;
-		_config.yml)
-			awk '
-				/^remote_theme:/ { next }
-				/^plugins:[[:space:]]*$/ { in_plugins=1; plugin_count=0; next }
-				in_plugins && /^[[:space:]]*-[[:space:]]+/ {
-					if ($0 ~ /jekyll-remote-theme/) next
-					plugins[++plugin_count] = $0
-					next
-				}
-				in_plugins {
-					if (plugin_count > 0) {
-						print "plugins:"
-						for (i = 1; i <= plugin_count; i++) print plugins[i]
-					}
-					in_plugins = 0
-					plugin_count = 0
-				}
-				{ print }
-				END {
-					if (in_plugins && plugin_count > 0) {
-						print "plugins:"
-						for (i = 1; i <= plugin_count; i++) print plugins[i]
-					}
-				}
-			' "$path" > "$BUILD_DIR/_config.yml"
 			;;
 		*)
 			cp -R "$path" "$BUILD_DIR/$name"
@@ -82,3 +44,4 @@ if [[ ! -f "$BUILD_DIR/_config.yml" ]]; then
 fi
 
 ln -sfn "$BUILD_DIR" "$CURRENT_LINK"
+echo "staged: $BUILD_DIR"

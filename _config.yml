@@ -142,6 +142,11 @@ jekyll-archives:
   permalinks:
     category: /cat/:name/
 
+sass:
+  silence_deprecations:
+    - import
+    - global-builtin
+
 markdown: kramdown
 kramdown:
   input: GFM
