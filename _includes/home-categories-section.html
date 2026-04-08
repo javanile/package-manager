@@ -105,7 +105,7 @@
 {% comment %} No categories: show packages directly, max 3, then +N more link {% endcomment %}
 {% capture _pkgs_link %}{% include packages-link.html %}{% endcapture %}
 {% assign _pkgs_link = _pkgs_link | strip %}
-<section class="categories">
+<section class="categories categories--no-cats">
     <section class="category">
         <ul>
             {% for package in packages_sorted limit: 3 %}

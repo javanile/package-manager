@@ -18,6 +18,32 @@
 	}
 }
 
+.categories--no-cats {
+	display: block;
+
+	.category {
+		align-items: center;
+	}
+
+	ul {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 1.25rem;
+		padding: 0;
+		list-style: none;
+
+		li.card {
+			width: clamp(180px, 28vw, 240px);
+		}
+	}
+
+	.cat-more {
+		text-align: center;
+		margin-top: 1.25rem;
+	}
+}
+
 .category {
 	display: flex;
 	flex-direction: column;
