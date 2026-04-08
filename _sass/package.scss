@@ -941,6 +941,13 @@ span.package-author__name {
 }
 
 .package .package-content,
+.package .package-main p,
+.package .package-main ul,
+.package .package-main ol,
+.package .package-main dl {
+	margin-bottom: .9em;
+}
+
 .package .package-main {
 	min-width: 0;
 	max-width: 100%;
