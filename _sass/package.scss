@@ -760,7 +760,7 @@
 .package-author {
 	&__card {
 		display: flex;
-		align-items: flex-start;
+		align-items: center;
 		gap: .6rem;
 		margin-top: .4rem;
 	}
@@ -794,6 +794,8 @@
 
 	&__email {
 		font-size: .75em;
+		line-height: 1.2;
+		margin-top: .15rem;
 		color: $medium-grey;
 		overflow: hidden;
 		text-overflow: ellipsis;
