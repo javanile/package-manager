@@ -18,30 +18,24 @@
 	}
 }
 
-.categories--no-cats {
-	display: block;
+.categories--no-cats .category > ul {
+	flex-direction: row !important;
+	flex-wrap: nowrap !important;
+	justify-content: center;
+	align-items: stretch;
+	gap: 1.25rem;
+}
 
-	.category {
-		align-items: center;
+.categories--no-cats .category > ul > li.card {
+	flex: 1 1 0 !important;
+	max-width: 240px !important;
+	min-width: 0;
+	margin: 0 !important;
+}
 
-		> ul {
-			flex-direction: row !important;
-			flex-wrap: nowrap !important;
-			justify-content: center;
-			gap: 1.25rem;
-
-			> li.card {
-				flex: 1 1 0 !important;
-				max-width: 240px;
-				min-width: 0;
-			}
-		}
-	}
-
-	.cat-more {
-		text-align: center;
-		margin-top: 1.25rem;
-	}
+.categories--no-cats .cat-more {
+	text-align: center;
+	margin-top: 1.25rem;
 }
 
 .category {
