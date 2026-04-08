@@ -1,32 +1,7 @@
 {% assign _packages_page = site.pages | where: "url", "/packages/" | first %}
 {% unless _packages_page %}{% assign _packages_page = site.pages | where: "url", "/packages.html" | first %}{% endunless %}
 {% unless _packages_page %}
-{% include packages-assign.html %}
-{% assign _home_pkgs = packages | sort: "date" | reverse %}
-
 <section id="packages" class="home-panel home-panel-packages is-hidden">
-    <ul class="home-packages-list">
-        {% for pkg in _home_pkgs %}
-        <li class="card card--list">
-            <a class="card--list__link" href="{{ site.baseurl }}{{ pkg.url }}" aria-label="Open {{ pkg.title }}"></a>
-            <div class="card--list__content">
-                <span class="align-items-center mr-2">{% include package-icon.html icon=pkg.type %}</span>
-                <div>
-                    <h3 class="text-md mb-1">{{ pkg.title }}</h3>
-                    {% if pkg.description and pkg.description != "" %}
-                    <p class="text-sm m-0 package-card__description">{{ pkg.description }}</p>
-                    {% endif %}
-                    {% if pkg.keywords %}
-                    <div class="package-keywords">
-                        {% for kw in pkg.keywords limit: 4 %}
-                        <a href="{{ site.baseurl }}/search/?q={{ kw | url_encode }}" class="keyword">{{ kw }}</a>
-                        {% endfor %}
-                    </div>
-                    {% endif %}
-                </div>
-            </div>
-        </li>
-        {% endfor %}
-    </ul>
+    {% include packages-page.html %}
 </section>
 {% endunless %}
