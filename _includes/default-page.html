@@ -249,7 +249,7 @@
 
         // Intercept search forms when no search page exists
         if (!window.hasSearchPage) {
-            document.querySelectorAll(".hero_search form, .packages-list__search form").forEach(function(form) {
+            document.querySelectorAll(".hero_search form, .packages-list__search form, header nav form, header .packages-list__search form").forEach(function(form) {
                 form.addEventListener("submit", function(e) {
                     e.preventDefault();
                     var input = form.querySelector("input[type=search], input[name=q]");
