@@ -2,3 +2,9 @@ remote_theme: javanile/package-manager@main
 
 plugins:
   - jekyll-remote-theme
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
