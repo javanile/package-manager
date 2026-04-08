@@ -27,14 +27,16 @@
 
 	ul {
 		display: flex;
-		flex-wrap: wrap;
+		flex-wrap: nowrap;
 		justify-content: center;
 		gap: 1.25rem;
 		padding: 0;
 		list-style: none;
 
 		li.card {
-			width: clamp(180px, 28vw, 240px);
+			flex: 1 1 0;
+			max-width: 240px;
+			min-width: 0;
 		}
 	}
 
