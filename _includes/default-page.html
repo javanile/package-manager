@@ -188,6 +188,7 @@
         var categories = document.getElementById("home-categories");
         var getStarted = document.getElementById("get-started");
         var contribute = document.getElementById("contribute");
+        var packages = document.getElementById("packages");
         var navPanelLinks = document.querySelectorAll("[data-nav-panel]");
         if (!categories || !getStarted || !contribute) return;
 
@@ -195,6 +196,7 @@
             var panelId = null;
             if (window.location.hash === "#get-started") panelId = "get-started";
             if (window.location.hash === "#contribute") panelId = "contribute";
+            if (window.location.hash === "#packages") panelId = "packages";
             var showAltPanel = panelId !== null;
 
             if (heroSearch) {
@@ -203,6 +205,7 @@
             categories.classList.toggle("is-hidden", showAltPanel);
             getStarted.classList.toggle("is-hidden", panelId !== "get-started");
             contribute.classList.toggle("is-hidden", panelId !== "contribute");
+            if (packages) packages.classList.toggle("is-hidden", panelId !== "packages");
 
             navPanelLinks.forEach(function(link) {
                 link.classList.toggle("active", link.getAttribute("data-nav-panel") === panelId);

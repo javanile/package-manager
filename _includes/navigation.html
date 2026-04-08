@@ -21,7 +21,13 @@
 			{% assign link = link | strip %}
 
 		{% elsif item == "Packages" %}
-			{% assign link = site.baseurl | append: "/packages/" %}
+			{% assign _pp = site.pages | where: "url", "/packages/" | first %}
+			{% unless _pp %}{% assign _pp = site.pages | where: "url", "/packages.html" | first %}{% endunless %}
+			{% if _pp %}
+				{% assign link = site.baseurl | append: "/packages/" %}
+			{% else %}
+				{% assign link = site.baseurl | append: "/#packages" %}
+			{% endif %}
 
 		{% elsif item == "Contribute" %}
 			{% assign _cp = site.pages | where: "url", "/contribute/" | first %}
@@ -52,6 +58,8 @@
 			{% assign nav_panel = "get-started" %}
 		{% elsif link == "/#contribute" %}
 			{% assign nav_panel = "contribute" %}
+		{% elsif link == "/#packages" %}
+			{% assign nav_panel = "packages" %}
 		{% endif %}
 
 		<a href="{% include relative-src.html src=link %}" class="{{ class }}"{% if nav_panel != "" %} data-nav-panel="{{ nav_panel }}"{% endif %}>{{ name }}</a>
