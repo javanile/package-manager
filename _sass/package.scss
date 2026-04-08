@@ -23,20 +23,18 @@
 
 	.category {
 		align-items: center;
-	}
 
-	ul {
-		display: flex;
-		flex-wrap: nowrap;
-		justify-content: center;
-		gap: 1.25rem;
-		padding: 0;
-		list-style: none;
+		> ul {
+			flex-direction: row !important;
+			flex-wrap: nowrap !important;
+			justify-content: center;
+			gap: 1.25rem;
 
-		li.card {
-			flex: 1 1 0;
-			max-width: 240px;
-			min-width: 0;
+			> li.card {
+				flex: 1 1 0 !important;
+				max-width: 240px;
+				min-width: 0;
+			}
 		}
 	}
 
