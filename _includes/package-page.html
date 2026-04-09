@@ -1,6 +1,75 @@
 {% assign install_cmd = site.suggested_command | default: "install {package}" %}
 {% assign install_cmd = install_cmd | replace: "{package}", page.title %}
-{% assign repository_url = page.repository | default: "" %}
+{% assign _links_section = "" %}
+{% assign _links_parts = content | split: '<h2 id="links">Links</h2>' %}
+{% if _links_parts.size > 1 %}
+  {% assign _links_section = _links_parts | last %}
+{% else %}
+  {% assign _links_parts = content | split: '<h2>Links</h2>' %}
+  {% if _links_parts.size > 1 %}
+    {% assign _links_section = _links_parts | last %}
+  {% endif %}
+{% endif %}
+{% assign _links_list = _links_section | split: '</ul>' | first %}
+{% assign _parsed_repository = "" %}
+{% assign _parsed_homepage = "" %}
+{% assign _parsed_author_name = "" %}
+{% assign _parsed_author_url = "" %}
+{% assign _parsed_author_github = "" %}
+{% assign _parsed_packager_name = "" %}
+{% assign _parsed_packager_url = "" %}
+{% assign _parsed_packager_github = "" %}
+{% if _links_list != "" %}
+  {% assign _link_items = _links_list | split: '<li>' %}
+  {% for _link_item in _link_items offset: 1 %}
+    {% assign _item_html = _link_item | split: '</li>' | first | strip %}
+    {% assign _item_lower = _item_html | downcase %}
+    {% assign _item_href = "" %}
+    {% assign _item_anchor_text = "" %}
+    {% assign _item_github = "" %}
+    {% if _item_html contains 'href="' %}
+      {% assign _item_href = _item_html | split: 'href="' | last | split: '"' | first %}
+      {% assign _item_anchor_text = _item_html | split: '</a>' | first | split: '>' | last | strip %}
+      {% assign _item_github = _item_href
+        | replace: 'http://github.com/', 'https://github.com/'
+        | replace: 'https://www.github.com/', 'https://github.com/'
+        | replace: 'http://www.github.com/', 'https://github.com/' %}
+      {% if _item_github contains 'https://github.com/' %}
+        {% assign _item_github = _item_github | remove: 'https://github.com/' | split: '/' | first %}
+      {% else %}
+        {% assign _item_github = '' %}
+      {% endif %}
+    {% endif %}
+    {% if _parsed_repository == '' and _item_lower contains 'source code' %}
+      {% assign _parsed_repository = _item_href %}
+    {% endif %}
+    {% if _parsed_repository == '' and _item_lower contains 'repository' %}
+      {% assign _parsed_repository = _item_href %}
+    {% endif %}
+    {% if _parsed_homepage == '' and _item_lower contains 'homepage' %}
+      {% assign _parsed_homepage = _item_href %}
+    {% endif %}
+    {% if _parsed_author_name == '' and _item_lower contains 'author:' %}
+      {% assign _parsed_author_name = _item_anchor_text %}
+      {% assign _parsed_author_url = _item_href %}
+      {% assign _parsed_author_github = _item_github %}
+    {% endif %}
+    {% if _parsed_packager_name == '' and _item_lower contains 'packager:' %}
+      {% assign _parsed_packager_name = _item_anchor_text %}
+      {% assign _parsed_packager_url = _item_href %}
+      {% assign _parsed_packager_github = _item_github %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+{% assign resolved_repository = page.repository | default: _parsed_repository %}
+{% assign resolved_homepage = page.homepage | default: _parsed_homepage %}
+{% assign resolved_author_name = page.author | default: _parsed_author_name %}
+{% assign resolved_author_url = page.author_url | default: _parsed_author_url %}
+{% assign resolved_author_github = page.author_github | default: _parsed_author_github %}
+{% assign resolved_packager_name = page.packager | default: _parsed_packager_name %}
+{% assign resolved_packager_url = page.packager_url | default: _parsed_packager_url %}
+{% assign resolved_packager_github = page.packager_github | default: _parsed_packager_github %}
+{% assign repository_url = resolved_repository | default: "" %}
 {% assign repository_path = page.repository_path | default: "" | append: "" %}
 {% assign repository_path = repository_path | remove_first: "/" %}
 {% assign repository_path = repository_path | remove_first: "./" %}
@@ -20,24 +89,46 @@
 {% endif %}
 
 {% comment %} Resolve author avatar {% endcomment %}
-{% if page.author_github %}
-  {% assign _avatar_url = "https://github.com/" | append: page.author_github | append: ".png?size=64" %}
-  {% assign _author_url = page.author_url | default: "https://github.com/" | append: page.author_github %}
-  {% assign _author_name = page.author | default: page.author_github %}
+{% if resolved_author_github %}
+  {% assign _avatar_url = "https://github.com/" | append: resolved_author_github | append: ".png?size=64" %}
+  {% if resolved_author_url != "" %}
+    {% assign _author_url = resolved_author_url %}
+  {% else %}
+    {% assign _author_url = "https://github.com/" | append: resolved_author_github %}
+  {% endif %}
+  {% assign _author_name = resolved_author_name | default: resolved_author_github %}
 {% elsif page.author_email %}
   {% assign _avatar_hash = page.author_email | downcase | sha256 %}
   {% assign _avatar_url = "https://www.gravatar.com/avatar/" | append: _avatar_hash | append: "?s=64&d=mp" %}
-  {% assign _author_url = page.author_url | default: "" %}
-  {% assign _author_name = page.author | default: "Anonymous" %}
+  {% assign _author_url = resolved_author_url | default: "" %}
+  {% assign _author_name = resolved_author_name | default: "Anonymous" %}
 {% else %}
   {% assign _avatar_url = "https://www.gravatar.com/avatar/?d=mp&s=64" %}
-  {% assign _author_url = page.author_url | default: "" %}
-  {% assign _author_name = page.author | default: "Anonymous" %}
+  {% assign _author_url = resolved_author_url | default: "" %}
+  {% assign _author_name = resolved_author_name | default: "Anonymous" %}
 {% endif %}
 {% assign _avatar_fallback = "https://www.gravatar.com/avatar/?d=mp&s=64" %}
 {% assign _avatar_class = "package-author__avatar" %}
-{% unless page.author_github or page.author_email %}
+{% unless resolved_author_github or page.author_email %}
   {% assign _avatar_class = _avatar_class | append: " package-author__avatar--fallback" %}
+{% endunless %}
+
+{% if resolved_packager_github %}
+  {% assign _packager_avatar_url = "https://github.com/" | append: resolved_packager_github | append: ".png?size=64" %}
+  {% if resolved_packager_url != "" %}
+    {% assign _packager_url = resolved_packager_url %}
+  {% else %}
+    {% assign _packager_url = "https://github.com/" | append: resolved_packager_github %}
+  {% endif %}
+  {% assign _packager_name = resolved_packager_name | default: resolved_packager_github %}
+{% else %}
+  {% assign _packager_avatar_url = "https://www.gravatar.com/avatar/?d=mp&s=64" %}
+  {% assign _packager_url = resolved_packager_url | default: "" %}
+  {% assign _packager_name = resolved_packager_name | default: "" %}
+{% endif %}
+{% assign _packager_avatar_class = "package-author__avatar" %}
+{% unless resolved_packager_github %}
+  {% assign _packager_avatar_class = _packager_avatar_class | append: " package-author__avatar--fallback" %}
 {% endunless %}
 
 <section class="package">
@@ -93,7 +184,7 @@
                     {% assign is_semver = true %}
                 {% endif %}
                 <li>
-                    {% if page.repository and page.repository contains "github.com" %}
+                    {% if resolved_repository and resolved_repository contains "github.com" %}
                         {% assign encoded_version_name = version_name | url_encode %}
                         {% assign version_url = github_repo_base | append: "/tree/" | append: encoded_version_name %}
                         {% if repository_path != "" %}
@@ -124,11 +215,11 @@
             </div>
         </div>
 
-        {% if page.repository %}
+        {% if resolved_repository %}
         <div>
             <strong>Repository</strong>
             <div>
-                {% if page.repository contains "github.com" %}
+                {% if resolved_repository contains "github.com" %}
                   {% assign _repo_path = github_repo_base | remove: "https://github.com/" %}
                   {% if repository_path != "" %}
                     {% assign _repo_path = _repo_path | append: "/" | append: repository_path %}
@@ -138,24 +229,24 @@
                     <span class="sidebar-gh-link-path">{{ _repo_path }}</span>
                   </a>
                 {% else %}
-                  <a href="{{ page.repository }}">{{ page.repository | remove: "https://" }}</a>
+                  <a href="{{ resolved_repository }}">{{ resolved_repository | remove: "https://" }}</a>
                 {% endif %}
             </div>
         </div>
         {% endif %}
 
-        {% if page.homepage %}
+        {% if resolved_homepage %}
         <div>
             <strong>Homepage</strong>
             <div>
-                {% if page.homepage contains "github.com" %}
-                  {% assign _hp_path = page.homepage | remove: "https://github.com/" | remove: "http://github.com/" | remove: "https://www.github.com/" %}
-                  <a href="{{ page.homepage }}" class="sidebar-gh-link">
+                {% if resolved_homepage contains "github.com" %}
+                  {% assign _hp_path = resolved_homepage | remove: "https://github.com/" | remove: "http://github.com/" | remove: "https://www.github.com/" %}
+                  <a href="{{ resolved_homepage }}" class="sidebar-gh-link">
                     <svg class="gh-icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
                     <span class="sidebar-gh-link-path">{{ _hp_path }}</span>
                   </a>
                 {% else %}
-                  <a href="{{ page.homepage }}">{{ page.homepage | remove: "https://" }}</a>
+                  <a href="{{ resolved_homepage }}">{{ resolved_homepage | remove: "https://" }}</a>
                 {% endif %}
             </div>
         </div>
@@ -198,6 +289,23 @@
                 </div>
             </div>
         </div>
+
+        {% if _packager_name != "" or _packager_url != "" %}
+        <div class="package-author">
+            <strong>Packager</strong>
+            <div class="package-author__card">
+                <img src="{{ _packager_avatar_url }}" alt="{{ _packager_name }}" class="{{ _packager_avatar_class }}" width="40" height="40" onerror="this.onerror=null;this.classList.add('package-author__avatar--fallback');this.src='{{ _avatar_fallback }}';">
+                <div class="package-author__info">
+                    {% if _packager_url != "" %}
+                    <a href="{{ _packager_url }}" class="package-author__name">{{ _packager_name }}</a>
+                    {% else %}
+                    <span class="package-author__name">{{ _packager_name }}</span>
+                    {% endif %}
+                    <small class="package-author__email">Package maintainer</small>
+                </div>
+            </div>
+        </div>
+        {% endif %}
 
         <div class="package-dependencies">
             <strong>Dependencies</strong>

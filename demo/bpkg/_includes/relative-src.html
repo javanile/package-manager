@@ -1,1 +1,0 @@
-{% assign _rs_prefix = include.src | slice: 0, 2 %}{% assign _rs_proto = include.src | slice: 0, 4 %}{% unless _rs_proto == 'http' or _rs_prefix == '//' %}{{ site.baseurl }}{% endunless %}{{ include.src }}
