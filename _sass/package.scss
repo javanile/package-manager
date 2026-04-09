@@ -183,7 +183,7 @@
 	align-items: start;
 
 	@media #{$mid-point} {
-		grid-template-columns: minmax(0, 1fr) clamp(17rem, 28vw, 20rem);
+		grid-template-columns: minmax(0, 1fr) clamp(17rem, 26vw, 18.75rem);
 		gap: clamp(1.5rem, 3vw, 2.5rem);
 	}
 
