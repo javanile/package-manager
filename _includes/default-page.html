@@ -99,9 +99,16 @@
 
         $(document).on('click', '.hero_search form svg, .hero_search form svg *, .packages-list__search form svg, .packages-list__search form svg *, header nav form svg, header nav form svg *', function(event) {
             event.preventDefault();
-            var $form = $(this).closest('form');
-            if ($form.length) {
-                $form.trigger('submit');
+            var form = $(this).closest('form').get(0);
+            if (form) {
+                if (typeof form.requestSubmit === "function") {
+                    form.requestSubmit();
+                } else {
+                    var submitEvent = new Event("submit", { bubbles: true, cancelable: true });
+                    if (form.dispatchEvent(submitEvent)) {
+                        form.submit();
+                    }
+                }
             }
         });
     });
