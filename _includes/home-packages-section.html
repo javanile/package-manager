@@ -1,7 +1,7 @@
 {% assign _packages_page = site.pages | where: "url", "/packages/" | first %}
 {% unless _packages_page %}{% assign _packages_page = site.pages | where: "url", "/packages.html" | first %}{% endunless %}
 {% unless _packages_page %}
-<section id="packages" class="home-panel home-panel-packages is-hidden">
+<section id="packages-panel" class="home-panel home-panel-packages is-hidden">
     {% include packages-page.html %}
 </section>
 {% endunless %}
