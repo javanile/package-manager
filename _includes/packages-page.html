@@ -7,7 +7,7 @@
         <div class="packages-sidebar__section">
             <strong>Categories</strong>
             <ul>
-                <li><a href="{{ site.baseurl }}/packages/">All packages <span class="count">({{ packages.size }})</span></a></li>
+                <li><a href="{% capture _pl %}{% include packages-link.html %}{% endcapture %}{{ _pl | strip }}">All packages <span class="count">({{ packages.size }})</span></a></li>
                 {% for category in site.categories %}
                 {% assign cat_title = category.title | append: "" | strip %}
                 {% if cat_title == "" %}{% continue %}{% endif %}
