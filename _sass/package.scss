@@ -350,15 +350,11 @@
 
 		&:hover {
 			color: $dark-grey;
-
-			svg {
-				fill: $dark-grey;
-			}
 		}
 	}
 
 	svg {
-		fill: $medium-grey;
+		fill: currentColor;
 		position: relative;
 		top: 5px;
 		width: 20px;
