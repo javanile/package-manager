@@ -69,6 +69,14 @@
 {% assign resolved_packager_name = page.packager | default: _parsed_packager_name %}
 {% assign resolved_packager_url = page.packager_url | default: _parsed_packager_url %}
 {% assign resolved_packager_github = page.packager_github | default: _parsed_packager_github %}
+{% assign resolved_repository = resolved_repository | strip %}
+{% assign resolved_homepage = resolved_homepage | strip %}
+{% assign resolved_author_name = resolved_author_name | strip %}
+{% assign resolved_author_url = resolved_author_url | strip %}
+{% assign resolved_author_github = resolved_author_github | strip %}
+{% assign resolved_packager_name = resolved_packager_name | strip %}
+{% assign resolved_packager_url = resolved_packager_url | strip %}
+{% assign resolved_packager_github = resolved_packager_github | strip %}
 {% assign repository_url = resolved_repository | default: "" %}
 {% assign repository_path = page.repository_path | default: "" | append: "" %}
 {% assign repository_path = repository_path | remove_first: "/" %}

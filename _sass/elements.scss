@@ -72,10 +72,12 @@ code, pre, tt {
 		color: #999;
 		line-height: 1;
 		opacity: 0;
-		transition: opacity .15s ease;
+		border-radius: 6px;
+		transition: opacity .15s ease, color .15s ease, background-color .15s ease;
 
 		&:hover {
 			color: #333;
+			background: rgba(255, 255, 255, .72);
 		}
 
 		svg {
@@ -253,6 +255,25 @@ body.dark-theme {
 
 	.highlighter-rouge pre.highlight code {
 		color: #d4d4d4;
+	}
+
+	.highlighter-rouge .code-copy {
+		color: rgba(255, 255, 255, .72);
+
+		&:hover {
+			color: #fff;
+			background: rgba(255, 255, 255, .12);
+		}
+	}
+
+	.highlighter-rouge .code-copy__tooltip {
+		background: #f4f6f8;
+		color: #1f2328;
+		box-shadow: 0 6px 18px rgba(0, 0, 0, .28);
+
+		&::after {
+			border-top-color: #f4f6f8;
+		}
 	}
 
 	code.highlighter-rouge {
