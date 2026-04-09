@@ -51,6 +51,18 @@
 	position: relative;
 }
 
+.hero_search form svg,
+.packages-list__search form svg,
+header nav form svg {
+	cursor: pointer;
+}
+
+.hero_search form svg *,
+.packages-list__search form svg *,
+header nav form svg * {
+	pointer-events: none;
+}
+
 .pkgac-dropdown {
 	display: none;
 	position: absolute;
