@@ -28,6 +28,7 @@ layout: default
 			<a class="modalOpen no-smooth" href="#share">{% include social-icon.html icon="Share" %} Share</a>
 		</div>
 	</section>
+	{% if page.show_sidebar %}
 	<section class="sidebar sticky">
 		<ul>
 			{% assign sub_navigation = content | extract_element: 'h2' %}
@@ -36,6 +37,7 @@ layout: default
 			{% endfor %}
 		</ul>
 	</section>
+	{% endif %}
 </section>
 
 {% if page.set %}
