@@ -23,9 +23,8 @@ push:
 #   make serve            → local dev (current checkout, port 4000)
 #   make serve demo=X     → push to main, restart demo X with fresh remote theme
 
-serve:
+serve: push
 ifdef demo
-	$(MAKE) push || true
 	@docker rm -f package-manager-demo-$(demo) 2>/dev/null || true
 	@docker pull bretfisher/jekyll-serve
 	@docker run \

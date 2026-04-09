@@ -1054,15 +1054,19 @@ span.package-author__name {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	background: none;
+	background: transparent;
+	background-color: inherit;
 	border: none;
 	padding: 3px;
 	cursor: pointer;
 	color: #999;
 	line-height: 1;
+	border-radius: 6px;
+	transition: color .15s ease;
 
 	&:hover {
 		color: #333;
+		background-color: inherit;
 	}
 
 	svg {
@@ -1097,5 +1101,16 @@ span.package-author__name {
 
 	.install-cmd__copy.copied & {
 		opacity: 1;
+	}
+}
+
+body.dark-theme {
+	.install-cmd__copy {
+		color: rgba(255, 255, 255, .72);
+
+		&:hover {
+			color: #fff;
+			background-color: inherit;
+		}
 	}
 }
