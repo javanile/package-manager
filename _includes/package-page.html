@@ -97,7 +97,7 @@
 {% endif %}
 
 {% comment %} Resolve author avatar {% endcomment %}
-{% if resolved_author_github %}
+{% if resolved_author_github != "" %}
   {% assign _avatar_url = "https://github.com/" | append: resolved_author_github | append: ".png?size=64" %}
   {% if resolved_author_url != "" %}
     {% assign _author_url = resolved_author_url %}
@@ -115,13 +115,20 @@
   {% assign _author_url = resolved_author_url | default: "" %}
   {% assign _author_name = resolved_author_name | default: "Anonymous" %}
 {% endif %}
+{% assign _author_name = _author_name | strip %}
+{% if _author_name == "" %}
+  {% assign _author_name = "Anonymous" %}
+{% endif %}
+{% if _author_url == "https://github.com/" %}
+  {% assign _author_url = "" %}
+{% endif %}
 {% assign _avatar_fallback = "https://www.gravatar.com/avatar/?d=mp&s=64" %}
 {% assign _avatar_class = "package-author__avatar" %}
-{% unless resolved_author_github or page.author_email %}
+{% unless resolved_author_github != "" or page.author_email %}
   {% assign _avatar_class = _avatar_class | append: " package-author__avatar--fallback" %}
 {% endunless %}
 
-{% if resolved_packager_github %}
+{% if resolved_packager_github != "" %}
   {% assign _packager_avatar_url = "https://github.com/" | append: resolved_packager_github | append: ".png?size=64" %}
   {% if resolved_packager_url != "" %}
     {% assign _packager_url = resolved_packager_url %}
@@ -134,8 +141,12 @@
   {% assign _packager_url = resolved_packager_url | default: "" %}
   {% assign _packager_name = resolved_packager_name | default: "" %}
 {% endif %}
+{% assign _packager_name = _packager_name | strip %}
+{% if _packager_url == "https://github.com/" %}
+  {% assign _packager_url = "" %}
+{% endif %}
 {% assign _packager_avatar_class = "package-author__avatar" %}
-{% unless resolved_packager_github %}
+{% unless resolved_packager_github != "" %}
   {% assign _packager_avatar_class = _packager_avatar_class | append: " package-author__avatar--fallback" %}
 {% endunless %}
 
@@ -298,7 +309,7 @@
             </div>
         </div>
 
-        {% if _packager_name != "" or _packager_url != "" %}
+        {% if _packager_name != "" %}
         <div class="package-author">
             <strong>Packager</strong>
             <div class="package-author__card">
