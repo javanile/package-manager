@@ -82,6 +82,11 @@
     window.hasSearchPage = {% if _sp %}true{% else %}false{% endif %};
     $(function() {
         $('a[href*=\\#]').not(".no-smooth").on('click', function(event){
+            var href = $(this).attr("href") || "";
+            if (href === "#packages" || href.indexOf("#packages?") === 0 || href === "#get-started" || href === "#contribute") {
+                $('html,body').stop(true).animate({scrollTop: 0}, 300);
+                return;
+            }
             var el = $(this.hash);
             if (el.length > 0) {
                 // event.preventDefault();
@@ -244,6 +249,10 @@
                         if (si) si.value = parsed.query;
                     }
                 }
+            }
+
+            if (panelId === "packages" || panelId === "get-started" || panelId === "contribute") {
+                window.scrollTo({ top: 0, behavior: "smooth" });
             }
         }
 
