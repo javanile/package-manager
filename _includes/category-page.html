@@ -18,17 +18,20 @@
             <ul>
                 <li><a href="{{ site.baseurl }}/packages/">All packages <span class="count">({{ packages.size }})</span></a></li>
                 {% for category in site.categories %}
-                {% assign cslug = category.title | slugify %}
+                {% assign ctitle = category.title | append: "" | strip %}
+                {% if ctitle == "" %}{% continue %}{% endif %}
+                {% assign cslug = ctitle | slugify %}
                 {% assign ccount = 0 %}
                 {% for pkg in packages %}
                   {% if pkg.categories == cslug or pkg.categories contains cslug %}
                     {% assign ccount = ccount | plus: 1 %}
                   {% endif %}
                 {% endfor %}
+                {% if ccount == 0 %}{% continue %}{% endif %}
                 <li>
                     <a href="{{ site.baseurl }}/categories/{{ cslug }}/"
                        class="{% if cslug == cat_slug %}active{% endif %}">
-                        {{ category.title }} <span class="count">({{ ccount }})</span>
+                        {{ ctitle }} <span class="count">({{ ccount }})</span>
                     </a>
                 </li>
                 {% endfor %}
