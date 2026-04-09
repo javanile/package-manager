@@ -963,10 +963,18 @@ span.package-author__name {
 	align-items: start;
 }
 
+.package--no-sidebar {
+	grid-template-columns: minmax(0, 1fr);
+}
+
 @media (min-width: 750px) {
 	.package {
 		grid-template-columns: minmax(0, 1fr) clamp(28rem, 38vw, 34rem);
 		gap: clamp(1.5rem, 3vw, 2.5rem);
+	}
+
+	.package--no-sidebar {
+		grid-template-columns: minmax(0, 1fr);
 	}
 }
 

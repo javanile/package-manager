@@ -2,7 +2,7 @@
 layout: default
 ---
 
-<section class="package">
+<section class="package{% unless page.show_sidebar %} package--no-sidebar{% endunless %}">
 	<section class="package-content">
 		<h1>{{ page.title }}</h1>
 
