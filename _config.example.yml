@@ -26,6 +26,13 @@ secondary_color: "#EEE"
 dark_theme_primary_color: "#111"
 dark_theme_secondary_color: "#1e1e1e"
 enable_dark_theme: true
+#
+# Optional brand font used by the hero title on the homepage.
+# Useful when the chosen family only renders correctly with a specific weight.
+# brand_font_url: "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap"
+# brand_font_family: "'IBM Plex Mono', monospace"
+# brand_font_weight: 700
+# brand_font_style: normal
 
 alert:
   type: info

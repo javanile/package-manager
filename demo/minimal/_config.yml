@@ -2,3 +2,8 @@ remote_theme: javanile/package-manager@main
 
 plugins:
   - jekyll-remote-theme
+
+brand_font_url: "https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+brand_font_family: "'Press Start 2P', system-ui"
+brand_font_weight: 400
+brand_font_style: normal
