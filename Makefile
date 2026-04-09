@@ -14,7 +14,7 @@ endef
 push:
 	@git config credential.helper 'cache --timeout=3600'
 	@git add .
-	@git commit -m "Update"
+	@git commit -m "Update" || true
 	@git push
 
 # -----
