@@ -310,6 +310,10 @@
 			padding: .8em 1em;
 		}
 
+		blockquote p:last-child {
+			margin-bottom: 0;
+		}
+
 		.highlighter-rouge,
 		pre {
 			margin-top: 1em;
