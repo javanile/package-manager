@@ -243,7 +243,7 @@
                   {% if repository_path != "" %}
                     {% assign _repo_path = _repo_path | append: "/" | append: repository_path %}
                   {% endif %}
-                  <a href="{{ repository_page_url }}" class="sidebar-gh-link">
+                  <a href="{{ repository_page_url }}" class="sidebar-gh-link" target="_blank" rel="noopener noreferrer">
                     <svg class="gh-icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
                     <span class="sidebar-gh-link-path">{{ _repo_path }}</span>
                   </a>
@@ -288,7 +288,9 @@
         <div>
             <strong>Category</strong>
             {% if page.categories and page.categories.size > 0 %}
-            <div>{% assign _cats = page.categories | join: "," | split: "," %}{% for _cat in _cats %}{% assign _cat_slug = _cat | strip | slugify %}<a href="{{ site.baseurl }}/categories/{{ _cat_slug }}/">{{ _cat | strip }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}</div>
+            {% assign _category_collection = site.collections | where: "label", "categories" | first %}
+            {% assign _category_docs = _category_collection.docs | default: "" | split: "" %}
+            <div>{% assign _cats = page.categories | join: "," | split: "," %}{% for _cat in _cats %}{% assign _cat_slug = _cat | strip | slugify %}{% assign _cat_label = _cat | strip %}{% for _category in _category_docs %}{% assign _category_title = _category.title | append: "" | strip %}{% if _category_title != "" and _category_title | slugify == _cat_slug %}{% assign _cat_label = _category_title %}{% break %}{% endif %}{% endfor %}<a href="{{ site.baseurl }}/categories/{{ _cat_slug }}/">{{ _cat_label }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}</div>
             {% else %}
             <p class="package-dependencies__none">Not categorized yet.</p>
             {% endif %}
@@ -300,7 +302,7 @@
                 <img src="{{ _avatar_url }}" alt="{{ _author_name }}" class="{{ _avatar_class }}" width="40" height="40" onerror="this.onerror=null;this.classList.add('package-author__avatar--fallback');this.src='{{ _avatar_fallback }}';">
                 <div class="package-author__info">
                     {% if _author_url != "" %}
-                    <a href="{{ _author_url }}" class="package-author__name">{{ _author_name }}</a>
+                    <a href="{{ _author_url }}" class="package-author__name" target="_blank" rel="noopener noreferrer">{{ _author_name }}</a>
                     {% else %}
                     <span class="package-author__name">{{ _author_name }}</span>
                     {% endif %}
@@ -316,7 +318,7 @@
                 <img src="{{ _packager_avatar_url }}" alt="{{ _packager_name }}" class="{{ _packager_avatar_class }}" width="40" height="40" onerror="this.onerror=null;this.classList.add('package-author__avatar--fallback');this.src='{{ _avatar_fallback }}';">
                 <div class="package-author__info">
                     {% if _packager_url != "" %}
-                    <a href="{{ _packager_url }}" class="package-author__name">{{ _packager_name }}</a>
+                    <a href="{{ _packager_url }}" class="package-author__name" target="_blank" rel="noopener noreferrer">{{ _packager_name }}</a>
                     {% else %}
                     <span class="package-author__name">{{ _packager_name }}</span>
                     {% endif %}

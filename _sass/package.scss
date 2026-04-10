@@ -239,6 +239,7 @@
 
 	.package-main {
 		min-width: 0;
+		line-height: 1.62;
 
 		pre,
 		code,
@@ -249,6 +250,106 @@
 
 		pre {
 			overflow-x: auto;
+		}
+
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			line-height: 1.2;
+			margin-bottom: .45em;
+		}
+
+		h2 {
+			margin-top: 1.7em;
+		}
+
+		h3 {
+			margin-top: 1.45em;
+		}
+
+		h4,
+		h5,
+		h6 {
+			margin-top: 1.2em;
+		}
+
+		p,
+		ul,
+		ol,
+		dl,
+		blockquote,
+		.highlighter-rouge,
+		pre,
+		table {
+			margin-top: 0;
+			margin-bottom: .95em;
+		}
+
+		ul,
+		ol {
+			padding-left: 1.35em;
+		}
+
+		li {
+			margin: .2em 0;
+		}
+
+		li > ul,
+		li > ol {
+			margin-top: .25em;
+			margin-bottom: .35em;
+		}
+
+		hr {
+			margin: 1.35em 0;
+		}
+
+		blockquote {
+			padding: .8em 1em;
+		}
+
+		.highlighter-rouge,
+		pre {
+			margin-top: 1em;
+			margin-bottom: 1.1em;
+		}
+
+		.highlighter-rouge + h2,
+		.highlighter-rouge + h3,
+		.highlighter-rouge + h4,
+		pre + h2,
+		pre + h3,
+		pre + h4,
+		table + h2,
+		table + h3,
+		table + h4,
+		blockquote + h2,
+		blockquote + h3,
+		blockquote + h4,
+		hr + h2,
+		hr + h3,
+		hr + h4 {
+			margin-top: 1.05em;
+		}
+
+		> :first-child {
+			margin-top: 0;
+		}
+
+		> :last-child {
+			margin-bottom: 0;
+		}
+
+		p,
+		li,
+		blockquote,
+		td,
+		th,
+		a {
+			overflow-wrap: anywhere;
+			word-break: break-word;
 		}
 	}
 }
