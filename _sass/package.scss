@@ -239,14 +239,32 @@
 
 	.package-flag-banner {
 		margin: .9rem 0 1.1rem;
-		justify-content: flex-start;
+		display: block;
 		text-align: left;
 		padding: .9em 1.1em;
 		border-radius: 10px;
+		border: 1px solid rgba(120, 12, 12, .35);
 		box-shadow: 0 12px 28px rgba(140, 18, 18, .16);
 	}
 
+	.package-flag-banner p {
+		margin: 0;
+	}
+
+	.package-flag-banner p:first-child span {
+		display: block;
+		margin-top: .3rem;
+	}
+
+	.package-flag-banner p + p {
+		margin-top: 1rem;
+		font-size: .92em;
+		line-height: 1.5;
+		opacity: .92;
+	}
+
 	.package-flag-banner strong {
+		display: inline-block;
 		margin-right: .35rem;
 		text-transform: uppercase;
 		letter-spacing: .04em;

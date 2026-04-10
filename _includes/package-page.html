@@ -150,6 +150,23 @@
   {% assign _packager_avatar_class = _packager_avatar_class | append: " package-author__avatar--fallback" %}
 {% endunless %}
 {% assign package_is_flagged = page.unsafe | default: false %}
+{% assign site_repository_nwo = site.github.repository_nwo | default: site.repository | append: "" | strip %}
+{% assign site_repository_url = site.github.repository_url | default: "" | append: "" | strip %}
+{% if site_repository_url == "" and site_repository_nwo != "" %}
+  {% assign site_repository_url = "https://github.com/" | append: site_repository_nwo %}
+{% endif %}
+{% assign site_repository_url = site_repository_url | remove: ".git" %}
+{% assign unsafe_issue_title = "Unsafe package review: " | append: page.title %}
+{% capture unsafe_issue_body %}Please review the unsafe status for this package.
+
+Package: {{ page.title }}
+Page: {{ page.url | absolute_url }}
+{% endcapture %}
+{% assign unsafe_issue_title_encoded = unsafe_issue_title | url_encode %}
+{% assign unsafe_issue_body_encoded = unsafe_issue_body | url_encode %}
+{% if site_repository_url != "" %}
+  {% assign unsafe_issue_url = site_repository_url | append: "/issues/new?title=" | append: unsafe_issue_title_encoded | append: "&body=" | append: unsafe_issue_body_encoded %}
+{% endif %}
 
 <section class="package{% if package_is_flagged %} package--flagged{% endif %}">
     <section class="package-content">
@@ -157,8 +174,8 @@
 
         {% if package_is_flagged %}
         <div class="package-flag-banner alert alert-danger" role="alert">
-            <strong>Security warning</strong>
-            <span>This package may put the security of its users at risk.</span>
+            <p><strong>Security warning</strong><span>This package may put the security of its users at risk.</span></p>
+            <p>We have determined that this package may be dangerous. If you believe this is a mistake, please report it by {% if unsafe_issue_url %}<a href="{{ unsafe_issue_url }}" target="_blank" rel="noopener noreferrer">opening an issue in our repository</a>{% else %}opening an issue in our repository{% endif %}.</p>
         </div>
         {% endif %}
 
