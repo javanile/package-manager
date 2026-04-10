@@ -206,6 +206,55 @@
     })();
 
     (function() {
+        function enhanceMarkdownCallouts(root) {
+            (root || document).querySelectorAll("blockquote").forEach(function(blockquote) {
+                if (blockquote.dataset.calloutEnhanced === "1") return;
+
+                var first = blockquote.firstElementChild;
+                if (!first) return;
+
+                var text = (first.textContent || "").trim();
+                var match = text.match(/^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION|ERROR|ALERT)\]\s*(.*)$/i);
+                if (!match) return;
+
+                var type = match[1].toUpperCase();
+                var remainder = match[2] || "";
+                var labels = {
+                    NOTE: "Note",
+                    TIP: "Tip",
+                    IMPORTANT: "Important",
+                    WARNING: "Warning",
+                    CAUTION: "Caution",
+                    ERROR: "Error",
+                    ALERT: "Alert"
+                };
+
+                blockquote.dataset.calloutEnhanced = "1";
+                blockquote.classList.add("md-callout", "md-callout--" + type.toLowerCase());
+
+                var title = document.createElement("div");
+                title.className = "md-callout__title";
+                title.textContent = labels[type] || type;
+                blockquote.insertBefore(title, blockquote.firstChild);
+
+                first.innerHTML = first.innerHTML.replace(/^\s*\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION|ERROR|ALERT)\]\s*/i, "");
+
+                if (!remainder && !(first.textContent || "").trim()) {
+                    first.remove();
+                }
+            });
+        }
+
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", function() {
+                enhanceMarkdownCallouts(document);
+            });
+        } else {
+            enhanceMarkdownCallouts(document);
+        }
+    })();
+
+    (function() {
         var heroSearch = document.getElementById("hero-search");
         var categories = document.getElementById("home-categories");
         var getStarted = document.getElementById("get-started");

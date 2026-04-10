@@ -178,6 +178,75 @@ blockquote cite a {
 	font-weight: normal
 }
 
+.md-callout {
+	--callout-accent: #4f7db3;
+	--callout-bg: #f4f6f8;
+	--callout-line: rgba(80, 88, 96, .14);
+	box-sizing: border-box;
+	margin: 1.5em 0;
+	padding: .9em 1.1em;
+	background: var(--callout-bg);
+	border: 0;
+	border-top: 1px solid var(--callout-line);
+	border-bottom: 1px solid var(--callout-line);
+	border-left: 4px solid var(--callout-accent);
+	border-radius: 0;
+}
+
+.md-callout__title {
+	margin: 0 0 .45em;
+	color: var(--callout-accent);
+	font-size: .78em;
+	font-weight: 700;
+	letter-spacing: .08em;
+	line-height: 1.2;
+	text-transform: uppercase;
+}
+
+.md-callout p {
+	margin: 0;
+	font-style: normal;
+	font-size: .95em;
+	line-height: 1.6;
+	color: #444;
+}
+
+.md-callout p + p {
+	margin-top: .6em;
+}
+
+.md-callout--note {
+	--callout-accent: #4f7db3;
+	--callout-bg: #f4f6f8;
+	--callout-line: rgba(80, 88, 96, .14);
+}
+
+.md-callout--tip {
+	--callout-accent: #2b8a5a;
+	--callout-bg: #f3f8f4;
+	--callout-line: rgba(43, 138, 90, .16);
+}
+
+.md-callout--important {
+	--callout-accent: #795e26;
+	--callout-bg: #f8f5ef;
+	--callout-line: rgba(121, 94, 38, .16);
+}
+
+.md-callout--warning,
+.md-callout--caution {
+	--callout-accent: #b5651d;
+	--callout-bg: #fbf5ee;
+	--callout-line: rgba(181, 101, 29, .18);
+}
+
+.md-callout--error,
+.md-callout--alert {
+	--callout-accent: #b33a2b;
+	--callout-bg: #fbf3f1;
+	--callout-line: rgba(179, 58, 43, .18);
+}
+
 body.dark-theme blockquote {
 	background: rgba(255, 255, 255, .04);
 	border-top-color: rgba(255, 255, 255, .1);
@@ -186,6 +255,37 @@ body.dark-theme blockquote {
 
 body.dark-theme hr {
 	border-top-color: rgba(255, 255, 255, .11);
+}
+
+body.dark-theme .md-callout {
+	--callout-bg: rgba(255, 255, 255, .04);
+	--callout-line: rgba(255, 255, 255, .1);
+}
+
+body.dark-theme .md-callout p {
+	color: #bbb;
+}
+
+body.dark-theme .md-callout--note {
+	--callout-accent: #7ea9d6;
+}
+
+body.dark-theme .md-callout--tip {
+	--callout-accent: #59b47f;
+}
+
+body.dark-theme .md-callout--important {
+	--callout-accent: #c89a68;
+}
+
+body.dark-theme .md-callout--warning,
+body.dark-theme .md-callout--caution {
+	--callout-accent: #d3914e;
+}
+
+body.dark-theme .md-callout--error,
+body.dark-theme .md-callout--alert {
+	--callout-accent: #d06a5e;
 }
 
 body.dark-theme blockquote p {
