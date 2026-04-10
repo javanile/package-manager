@@ -289,8 +289,26 @@
             <strong>Category</strong>
             {% if page.categories and page.categories.size > 0 %}
             {% assign _category_collection = site.collections | where: "label", "categories" | first %}
-            {% assign _category_docs = _category_collection.docs | default: "" | split: "" %}
-            <div>{% assign _cats = page.categories | join: "," | split: "," %}{% for _cat in _cats %}{% assign _cat_slug = _cat | strip | slugify %}{% assign _cat_label = _cat | strip %}{% for _category in _category_docs %}{% assign _category_title = _category.title | append: "" | strip %}{% if _category_title != "" and _category_title | slugify == _cat_slug %}{% assign _cat_label = _category_title %}{% break %}{% endif %}{% endfor %}<a href="{{ site.baseurl }}/categories/{{ _cat_slug }}/">{{ _cat_label }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}</div>
+            {% assign _category_docs = "" | split: "" %}
+            {% if _category_collection %}
+            {% assign _category_docs = _category_collection.docs %}
+            {% endif %}
+            {% assign _cats = page.categories | join: "," | split: "," %}
+            <div>
+                {% for _cat in _cats %}
+                {% assign _cat_slug = _cat | strip | slugify %}
+                {% assign _cat_label = _cat | strip %}
+                {% for _category in _category_docs %}
+                {% assign _category_title = _category.data.title | default: _category.title | append: "" | strip %}
+                {% assign _category_slug = _category_title | slugify %}
+                {% if _category_title != "" and _category_slug == _cat_slug %}
+                {% assign _cat_label = _category_title %}
+                {% break %}
+                {% endif %}
+                {% endfor %}
+                <a href="{{ site.baseurl }}/categories/{{ _cat_slug }}/">{{ _cat_label }}</a>{% unless forloop.last %}, {% endunless %}
+                {% endfor %}
+            </div>
             {% else %}
             <p class="package-dependencies__none">Not categorized yet.</p>
             {% endif %}

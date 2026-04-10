@@ -17,6 +17,8 @@ date: 2024-04-12
 
 # bpkg-json
 
+> Simple JSON parsing and querying in bash without external dependencies.
+
 Parse JSON from bash without requiring `jq`. Pure bash JSON query and extraction — lightweight and portable.
 
 ## Installation
