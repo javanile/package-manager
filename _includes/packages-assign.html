@@ -5,3 +5,10 @@
 {% endif %}
 {% if packages.size == 0 %}{% assign packages = site.posts %}{% endif %}
 {% unless packages %}{% assign packages = "" | split: "" %}{% endunless %}
+{% assign _visible_packages = "" | split: "" %}
+{% for _package in packages %}
+  {% unless _package.unsafe %}
+    {% assign _visible_packages = _visible_packages | push: _package %}
+  {% endunless %}
+{% endfor %}
+{% assign packages = _visible_packages %}

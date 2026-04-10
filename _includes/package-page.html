@@ -149,31 +149,43 @@
 {% unless resolved_packager_github != "" %}
   {% assign _packager_avatar_class = _packager_avatar_class | append: " package-author__avatar--fallback" %}
 {% endunless %}
+{% assign package_is_flagged = page.unsafe | default: false %}
 
-<section class="package">
+<section class="package{% if package_is_flagged %} package--flagged{% endif %}">
     <section class="package-content">
         <h1 class="margin-0">{{ page.title }}</h1>
+
+        {% if package_is_flagged %}
+        <div class="package-flag-banner alert alert-danger" role="alert">
+            <strong>Security warning</strong>
+            <span>This package may put the security of its users at risk.</span>
+        </div>
+        {% endif %}
 
         {% if page.keywords %}
         {% assign _sp = site.pages | where: "url", "/search/" | first %}
         {% unless _sp %}{% assign _sp = site.pages | where: "url", "/search.html" | first %}{% endunless %}
         <div class="package-keywords" style="margin: .5rem 0 1rem -4px; ">
             {% for keyword in page.keywords %}
+            {% if package_is_flagged %}
+            <span class="keyword keyword--disabled" aria-disabled="true">{{ keyword }}</span>
+            {% else %}
             {% if _sp %}
             <a href="{{ site.baseurl }}/search/?q={{ keyword | url_encode }}" class="keyword">{{ keyword }}</a>
             {% else %}
             <a href="{{ site.baseurl }}/#packages?q={{ keyword | url_encode }}" class="keyword">{{ keyword }}</a>
             {% endif %}
+            {% endif %}
             {% endfor %}
         </div>
         {% endif %}
 
-        <div class="package-main margin-top-1">
+        <div class="package-main margin-top-1"{% if package_is_flagged %} inert{% endif %}>
             {{ content }}
         </div>
 
         {% if page.versions and page.versions.size > 0 %}
-        <div class="package-main margin-top-1">
+        <div class="package-main margin-top-1"{% if package_is_flagged %} inert{% endif %}>
             <h2>Versions</h2>
             <ul>
                 {% for pkg_version in page.versions %}
@@ -203,7 +215,7 @@
                     {% assign is_semver = true %}
                 {% endif %}
                 <li>
-                    {% if resolved_repository and resolved_repository contains "github.com" %}
+                    {% if resolved_repository and resolved_repository contains "github.com" and package_is_flagged != true %}
                         {% assign encoded_version_name = version_name | url_encode %}
                         {% assign version_url = github_repo_base | append: "/tree/" | append: encoded_version_name %}
                         {% if repository_path != "" %}
@@ -225,7 +237,7 @@
         {% endif %}
     </section>
 
-    <section class="sidebar sticky">
+    <section class="sidebar sticky"{% if package_is_flagged %} inert{% endif %}>
 
         <div>
             <strong>Install</strong>

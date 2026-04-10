@@ -237,6 +237,45 @@
 		}
 	}
 
+	.package-flag-banner {
+		margin: .9rem 0 1.1rem;
+		justify-content: flex-start;
+		text-align: left;
+		padding: .9em 1.1em;
+		border-radius: 10px;
+		box-shadow: 0 12px 28px rgba(140, 18, 18, .16);
+	}
+
+	.package-flag-banner strong {
+		margin-right: .35rem;
+		text-transform: uppercase;
+		letter-spacing: .04em;
+		font-size: .82em;
+	}
+
+	&.package--flagged {
+		.package-keywords .keyword--disabled {
+			background: #f2d6d6;
+			color: #8b2e2e;
+		}
+
+		.package-main[inert],
+		.sidebar[inert] {
+			opacity: .68;
+			filter: saturate(.78);
+			user-select: text;
+		}
+
+		.package-main[inert] a,
+		.sidebar[inert] a,
+		.package-main[inert] button,
+		.sidebar[inert] button {
+			pointer-events: none;
+			cursor: not-allowed;
+			text-decoration: none;
+		}
+	}
+
 	.package-main {
 		min-width: 0;
 		line-height: 1.62;

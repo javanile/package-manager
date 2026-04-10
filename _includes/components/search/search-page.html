@@ -30,7 +30,7 @@
     {% include packages-assign.html %}
     {% for package in packages %}
     {% if package.title %}
-    {% unless package.excluded_in_search %}
+    {% unless package.excluded_in_search or package.unsafe %}
     {% if added %},{% endif %}
     {% assign added = false %}
     "{{ package.url | slugify }}": {
@@ -48,4 +48,3 @@
 </script>
 <script src="{{ site.baseurl }}/assets/js/lunr.min.js"></script>
 <script src="{{ site.baseurl }}/assets/js/search.js"></script>
-

@@ -14,6 +14,7 @@ keywords:
   - scheduling
   - system
 date: 2024-03-18
+unsafe: true
 ---
 
 # crontab-validate
