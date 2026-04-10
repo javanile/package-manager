@@ -1,5 +1,12 @@
-{% if site.repository %}
-  {{ "https://github.com/" | append: site.repository | append: "/blob/main/README.md" }}
+{% assign _repo_nwo = site.github.repository_nwo | default: site.repository | append: "" | strip %}
+{% assign _repo_url = site.github.repository_url | default: "" | append: "" | strip %}
+{% assign _repo_branch = site.github.source.branch | default: "main" | append: "" | strip %}
+{% if _repo_url == "" and _repo_nwo != "" %}
+  {% assign _repo_url = "https://github.com/" | append: _repo_nwo %}
+{% endif %}
+{% assign _repo_url = _repo_url | remove: ".git" %}
+{% if _repo_url != "" %}
+  {{ _repo_url | append: "/blob/" | append: _repo_branch | append: "/README.md" }}
 {% else %}
   {{ site.baseurl | append: "/" }}
 {% endif %}
