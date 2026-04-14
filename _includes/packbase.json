@@ -1,16 +1,99 @@
-{% include packages-assign.html %}
+{%- include packages-assign.html -%}
+{%- assign install_cmd_template = site.suggested_command | default: "install {package}" -%}
 {
   "protocol": "v1",
-  "packages": {
-    "package": [
-{% assign _first = true %}{% for pkg in packages %}{% if pkg.title %}{% unless pkg.excluded_in_search or pkg.unsafe %}{% unless _first %},
-{% endunless %}{% assign _first = false %}      {
-        "title": {{ pkg.title | jsonify }},
-        "description": {{ pkg.description | jsonify }},
-        "url": {{ pkg.url | jsonify }},
-        "keywords": {{ pkg.keywords | jsonify }},
-        "categories": {{ pkg.categories | jsonify }}
-      }{% endunless %}{% endif %}{% endfor %}
-    ]
-  }
+  "packages": [
+{%- assign _first = true -%}
+{%- for pkg in packages -%}
+  {%- if pkg.title -%}
+    {%- unless pkg.excluded_in_search or pkg.unsafe -%}
+      {%- assign repository_url = pkg.repository | default: "" | append: "" | strip -%}
+      {%- assign repository_path = pkg.repository_path | default: "" | append: "" | strip -%}
+      {%- assign repository_path = repository_path | remove_first: "/" | remove_first: "./" | replace: "//", "/" -%}
+      {%- assign github_repo_base = repository_url | remove: ".git" | replace: "http://github.com/", "https://github.com/" | replace: "https://www.github.com/", "https://github.com/" | replace: "http://www.github.com/", "https://github.com/" -%}
+      {%- unless github_repo_base contains "https://github.com/" -%}
+        {%- assign github_repo_base = "" -%}
+      {%- endunless -%}
+      {%- assign repository_default_ref = "main" -%}
+      {%- if pkg.versions contains "main" -%}
+        {%- assign repository_default_ref = "main" -%}
+      {%- elsif pkg.versions contains "master" -%}
+        {%- assign repository_default_ref = "master" -%}
+      {%- endif -%}
+      {%- assign github_repo_slug = github_repo_base | remove: "https://github.com/" -%}
+      {%- assign github_repo_owner = github_repo_slug | split: "/" | first -%}
+      {%- assign github_repo_name = github_repo_slug | split: "/" | last -%}
+      {%- assign repository_tree_base = github_repo_base | append: "/tree/" | append: repository_default_ref -%}
+      {%- if repository_path != "" and github_repo_base != "" -%}
+        {%- assign repository_page_url = repository_tree_base | append: "/" | append: repository_path -%}
+      {%- else -%}
+        {%- assign repository_page_url = repository_url -%}
+      {%- endif -%}
+      {%- assign author_name = pkg.author | default: "" | append: "" | strip -%}
+      {%- assign author_github = pkg.author_github | default: "" | append: "" | strip -%}
+      {%- assign author_url = pkg.author_url | default: "" | append: "" | strip -%}
+      {%- assign packager_name = pkg.packager | default: "" | append: "" | strip -%}
+      {%- assign packager_github = pkg.packager_github | default: "" | append: "" | strip -%}
+      {%- assign packager_url = pkg.packager_url | default: "" | append: "" | strip -%}
+      {%- assign author_github_url = "" -%}
+      {%- if author_github != "" -%}
+        {%- assign author_github_url = "https://github.com/" | append: author_github -%}
+      {%- endif -%}
+      {%- assign packager_github_url = "" -%}
+      {%- if packager_github != "" -%}
+        {%- assign packager_github_url = "https://github.com/" | append: packager_github -%}
+      {%- endif -%}
+      {%- assign install_command = install_cmd_template | replace: "{package}", pkg.title -%}
+      {%- unless _first -%},
+{%- endunless -%}
+      {%- assign _first = false -%}
+    {
+      "id": {{ pkg.slug | default: pkg.title | jsonify }},
+      "title": {{ pkg.title | jsonify }},
+      "description": {{ pkg.description | jsonify }},
+      "url": {{ pkg.url | jsonify }},
+      "path": {{ pkg.path | jsonify }},
+      "date": {{ pkg.date | date_to_xmlschema | jsonify }},
+      "version": {{ pkg.version | jsonify }},
+      "license": {{ pkg.license | jsonify }},
+      "keywords": {{ pkg.keywords | jsonify }},
+      "categories": {{ pkg.categories | jsonify }},
+      "dependencies": {{ pkg.dependencies | jsonify }},
+      "versions": {{ pkg.versions | jsonify }},
+      "install_command": {{ install_command | jsonify }},
+      "homepage": {{ pkg.homepage | jsonify }},
+      "repository": {
+        "url": {{ repository_url | jsonify }},
+        "path": {{ repository_path | jsonify }},
+        "default_ref": {{ repository_default_ref | jsonify }},
+        "browse_url": {{ repository_page_url | jsonify }}
+      },
+      "github": {
+        "owner": {{ github_repo_owner | jsonify }},
+        "name": {{ github_repo_name | jsonify }},
+        "slug": {{ github_repo_slug | jsonify }},
+        "url": {{ github_repo_base | jsonify }}
+      },
+      "author": {
+        "name": {{ author_name | jsonify }},
+        "url": {{ author_url | jsonify }},
+        "github": {{ author_github | jsonify }},
+        "github_url": {{ author_github_url | jsonify }},
+        "email": {{ pkg.author_email | jsonify }}
+      },
+      "packager": {
+        "name": {{ packager_name | jsonify }},
+        "url": {{ packager_url | jsonify }},
+        "github": {{ packager_github | jsonify }},
+        "github_url": {{ packager_github_url | jsonify }}
+      },
+      "flags": {
+        "unsafe": {{ pkg.unsafe | default: false | jsonify }},
+        "excluded_in_search": {{ pkg.excluded_in_search | default: false | jsonify }}
+      }
+    }
+    {%- endunless -%}
+  {%- endif -%}
+{%- endfor -%}
+  ]
 }
