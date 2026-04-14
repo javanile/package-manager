@@ -2,6 +2,8 @@
 
 if page.url == "/packages.json"     %}{%
     include packages.json           %}{%
+elsif page.url == "/packbase.json"  %}{%
+    include packbase.json           %}{%
 elsif page.url == "/atom.xml"       %}{%
     include feed/atom.xml           %}{%
 elsif page.url == "/rss.xml"        %}{%
