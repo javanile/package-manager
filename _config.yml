@@ -8,6 +8,7 @@ baseurl:
 logo: https://raw.githubusercontent.com/javanile/package-manager/main/assets/images/logo.png
 repository: javanile/package-manager
 enable_dark_theme: true
+default_package_language: shell
 
 alert:
   type: info
