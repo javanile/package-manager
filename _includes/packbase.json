@@ -44,6 +44,10 @@
         {%- assign packager_github_url = "https://github.com/" | append: packager_github -%}
       {%- endif -%}
       {%- assign install_command = install_cmd_template | replace: "{package}", pkg.title -%}
+      {%- assign package_language = pkg.package_language | default: site.default_package_language | default: "shell" | append: "" | strip | downcase -%}
+      {%- if package_language == "" -%}
+        {%- assign package_language = "shell" -%}
+      {%- endif -%}
       {%- assign updated_at_value = "1970-01-01T00:00:00+00:00" -%}
       {%- if pkg.updated_at -%}
         {%- assign now_ts = "now" | date: "%s" | plus: 0 -%}
@@ -64,6 +68,7 @@
       "date": {{ pkg.date | date_to_xmlschema | jsonify }},
       "updated_at": {{ updated_at_value | jsonify }},
       "version": {{ pkg.version | jsonify }},
+      "language": {{ package_language | jsonify }},
       "license": {{ pkg.license | jsonify }},
       "keywords": {{ pkg.keywords | jsonify }},
       "categories": {{ pkg.categories | jsonify }},
