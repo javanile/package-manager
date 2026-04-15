@@ -48,6 +48,10 @@
       {%- if package_language == "" -%}
         {%- assign package_language = "shell" -%}
       {%- endif -%}
+      {%- assign package_format = pkg.package_format | default: site.default_package_format | default: "source" | append: "" | strip | downcase | slugify -%}
+      {%- if package_format == "" -%}
+        {%- assign package_format = "source" -%}
+      {%- endif -%}
       {%- assign updated_at_value = "1970-01-01T00:00:00+00:00" -%}
       {%- if pkg.updated_at -%}
         {%- assign now_ts = "now" | date: "%s" | plus: 0 -%}
@@ -69,6 +73,7 @@
       "updated_at": {{ updated_at_value | jsonify }},
       "version": {{ pkg.version | jsonify }},
       "language": {{ package_language | jsonify }},
+      "format": {{ package_format | jsonify }},
       "license": {{ pkg.license | jsonify }},
       "keywords": {{ pkg.keywords | jsonify }},
       "categories": {{ pkg.categories | jsonify }},
