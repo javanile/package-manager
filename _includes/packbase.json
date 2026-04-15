@@ -65,9 +65,6 @@
       {%- unless _first -%},
 {%- endunless -%}
       {%- assign _first = false -%}
-    {
-      "name": {{ pkg.title | jsonify }},
-      "description": {{ pkg.description | jsonify }},
       {%- assign package_url = site.url | default: "" -%}
       {%- if pkg.url != "" -%}
         {%- assign _url_is_absolute = pkg.url | slice: 0, 4 | downcase -%}
@@ -76,18 +73,33 @@
         {%- else -%}
           {%- assign site_url = site.url | default: "" -%}
           {%- if site_url != "" -%}
-            {%- assign site_url = site_url | strip_trailing_slash -%}
-            {%- assign pkg_url = pkg.url | strip_prefix: "/" -%}
-            {%- assign package_url = site_url | append: "/" | append: pkg_url -%}
+            {%- assign site_url = site_url | rstrip -%}
+            {%- assign leading_slash = pkg.url | slice: 0 -%}
+            {%- if leading_slash == "/" -%}
+              {%- assign package_url = site_url | append: pkg.url -%}
+            {%- else -%}
+              {%- assign package_url = site_url | append: "/" | append: pkg.url -%}
+            {%- endif -%}
           {%- endif -%}
         {%- endif -%}
       {%- endif -%}
+    {%- assign package_version = pkg.version | default: "" | strip -%}
+      {%- if package_version == "" or package_version == nil -%}
+        {%- assign package_version = "0.0.0" -%}
+      {%- endif -%}
+    {%- assign package_license = pkg.license | default: "" | strip -%}
+      {%- if package_license == "" or package_license == nil -%}
+        {%- assign package_license = "UNLICENSED" -%}
+      {%- endif -%}
+    {
+      "name": {{ pkg.title | jsonify }},
+      "description": {{ pkg.description | jsonify }},
       "url": {{ package_url | jsonify }},
       "updated_at": {{ updated_at_value | jsonify }},
-      "version": {{ pkg.version | jsonify }},
+      "version": {{ package_version | jsonify }},
       "language": {{ package_language | jsonify }},
       "format": {{ package_format | jsonify }},
-      "license": {{ pkg.license | jsonify }},
+      "license": {{ package_license | jsonify }},
       "keywords": {{ pkg.keywords | jsonify }},
       "categories": {{ pkg.categories | jsonify }},
       "dependencies": {{ pkg.dependencies | jsonify }},
