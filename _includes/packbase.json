@@ -1,6 +1,8 @@
 {%- include packages-assign.html -%}
 {%- assign install_cmd_template = site.suggested_command | default: "install {package}" -%}
 {
+  "filename": "packbase.json",
+  "manifest": "https://yafb.net/s/packbase-v1.schema.json",
   "protocol": "v1",
   "packages": [
 {%- assign _first = true -%}
