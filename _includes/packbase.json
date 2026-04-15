@@ -68,7 +68,21 @@
     {
       "name": {{ pkg.title | jsonify }},
       "description": {{ pkg.description | jsonify }},
-      "url": {{ pkg.url | jsonify }},
+      {%- assign package_url = site.url | default: "" -%}
+      {%- if pkg.url != "" -%}
+        {%- assign _url_is_absolute = pkg.url | slice: 0, 4 | downcase -%}
+        {%- if _url_is_absolute == "http" -%}
+          {%- assign package_url = pkg.url -%}
+        {%- else -%}
+          {%- assign site_url = site.url | default: "" -%}
+          {%- if site_url != "" -%}
+            {%- assign site_url = site_url | strip_trailing_slash -%}
+            {%- assign pkg_url = pkg.url | strip_prefix: "/" -%}
+            {%- assign package_url = site_url | append: "/" | append: pkg_url -%}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endif -%}
+      "url": {{ package_url | jsonify }},
       "updated_at": {{ updated_at_value | jsonify }},
       "version": {{ pkg.version | jsonify }},
       "language": {{ package_language | jsonify }},
