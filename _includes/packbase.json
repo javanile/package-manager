@@ -78,7 +78,7 @@
       "categories": {{ pkg.categories | jsonify }},
       "dependencies": {{ pkg.dependencies | jsonify }},
       "versions": {{ pkg.versions | jsonify }},
-      "install_command": {{ install_command | jsonify }},
+      "install": {{ install_command | jsonify }},
       "homepage": {{ pkg.homepage | jsonify }},
       "repository": {
         "url": {{ repository_url | jsonify }},
