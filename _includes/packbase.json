@@ -91,6 +91,18 @@
       {%- if package_license == "" or package_license == nil -%}
         {%- assign package_license = "UNLICENSED" -%}
       {%- endif -%}
+      {%- assign package_homepage = pkg.homepage | default: "" | strip -%}
+      {%- if package_homepage == "" or package_homepage == nil -%}
+        {%- assign package_homepage = package_url -%}
+      {%- endif -%}
+      {%- assign package_dependencies = pkg.dependencies -%}
+      {%- if package_dependencies == nil -%}
+        {%- assign package_dependencies = "" | split: "" -%}
+      {%- endif -%}
+      {%- assign package_versions = pkg.versions -%}
+      {%- if package_versions == nil -%}
+        {%- assign package_versions = "" | split: "" -%}
+      {%- endif -%}
     {
       "name": {{ pkg.title | jsonify }},
       "description": {{ pkg.description | jsonify }},
@@ -102,10 +114,10 @@
       "license": {{ package_license | jsonify }},
       "keywords": {{ pkg.keywords | jsonify }},
       "categories": {{ pkg.categories | jsonify }},
-      "dependencies": {{ pkg.dependencies | jsonify }},
-      "versions": {{ pkg.versions | jsonify }},
+      "dependencies": {{ package_dependencies | jsonify }},
+      "versions": {{ package_versions | jsonify }},
       "install": {{ install_command | jsonify }},
-      "homepage": {{ pkg.homepage | jsonify }},
+      "homepage": {{ package_homepage | jsonify }},
       "repository": {
         "url": {{ repository_url | jsonify }},
         "path": {{ repository_path | jsonify }},
