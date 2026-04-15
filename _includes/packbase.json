@@ -66,12 +66,9 @@
 {%- endunless -%}
       {%- assign _first = false -%}
     {
-      "id": {{ pkg.slug | default: pkg.title | jsonify }},
-      "title": {{ pkg.title | jsonify }},
+      "name": {{ pkg.title | jsonify }},
       "description": {{ pkg.description | jsonify }},
       "url": {{ pkg.url | jsonify }},
-      "path": {{ pkg.path | jsonify }},
-      "date": {{ pkg.date | date_to_xmlschema | jsonify }},
       "updated_at": {{ updated_at_value | jsonify }},
       "version": {{ pkg.version | jsonify }},
       "language": {{ package_language | jsonify }},
