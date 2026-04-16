@@ -143,9 +143,16 @@
         "github": {{ packager_github | jsonify }},
         "github_url": {{ packager_github_url | jsonify }}
       },
+      {%- assign has_binary_value = pkg.has_binary -%}
+      {%- if has_binary_value == nil or has_binary_value == "" or has_binary_value == false or has_binary_value == "false" -%}
+        {%- assign has_binary = false -%}
+      {%- else -%}
+        {%- assign has_binary = true -%}
+      {%- endif -%}
       "flags": {
         "unsafe": {{ pkg.unsafe | default: false | jsonify }},
-        "excluded_in_search": {{ pkg.excluded_in_search | default: false | jsonify }}
+        "excluded_in_search": {{ pkg.excluded_in_search | default: false | jsonify }},
+        "has_binary": {{ has_binary | jsonify }}
       }
     }
     {%- endunless -%}

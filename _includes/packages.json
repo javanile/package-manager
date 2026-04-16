@@ -1,4 +1,5 @@
 {% include packages-assign.html %}
 {% assign _first = true %}[{% for pkg in packages %}{% if pkg.title %}{% unless pkg.excluded_in_search or pkg.unsafe %}{% unless _first %},{% endunless %}{% assign _first = false %}
-{"title":{{ pkg.title | jsonify }},"description":{{ pkg.description | jsonify }},"url":{{ pkg.url | jsonify }},"keywords":{{ pkg.keywords | jsonify }},"categories":{{ pkg.categories | jsonify }}}{% endunless %}{% endif %}{% endfor %}
+{% assign has_binary_value = pkg.has_binary %}{% if has_binary_value == nil or has_binary_value == "" or has_binary_value == false or has_binary_value == "false" %}{% assign has_binary = false %}{% else %}{% assign has_binary = true %}{% endif %}
+{"title":{{ pkg.title | jsonify }},"description":{{ pkg.description | jsonify }},"url":{{ pkg.url | jsonify }},"keywords":{{ pkg.keywords | jsonify }},"categories":{{ pkg.categories | jsonify }},"has_binary":{{ has_binary | jsonify }}}{% endunless %}{% endif %}{% endfor %}
 ]
